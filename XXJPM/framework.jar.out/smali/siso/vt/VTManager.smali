@@ -383,7 +383,7 @@
 
     .prologue
     .line 310
-    const-string v0, "setStackStateListener"
+    const-string/jumbo v0, "setStackStateListener"
 
     const-string v1, "Setting mStackStateListener"
 

@@ -444,7 +444,7 @@
     .line 98
     new-instance v3, Ljava/lang/RuntimeException;
 
-    const-string v4, "setView must have been called"
+    const-string/jumbo v4, "setView must have been called"
 
     invoke-direct {v3, v4}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
 

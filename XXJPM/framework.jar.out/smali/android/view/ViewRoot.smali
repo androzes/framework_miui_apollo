@@ -147,6 +147,8 @@
 
 .field mDirty:Landroid/graphics/Rect;
 
+.field private mDisableClearBackgroundForTransparent:Z
+
 .field mEgl:Ljavax/microedition/khronos/egl/EGL10;
 
 .field mEglContext:Ljavax/microedition/khronos/egl/EGLContext;
@@ -423,7 +425,10 @@
 
     iput-object v0, p0, Landroid/view/ViewRoot;->mPendingConfiguration:Landroid/content/res/Configuration;
 
-    .line 294
+    .line 214
+    iput-boolean v2, p0, Landroid/view/ViewRoot;->mDisableClearBackgroundForTransparent:Z
+
+    .line 296
     iput-boolean v2, p0, Landroid/view/ViewRoot;->mProfile:Z
 
     .line 3223
@@ -7640,6 +7645,18 @@
 
 
 # virtual methods
+.method public DisableClearBackgroundForTransparent(Z)V
+    .locals 0
+    .parameter "isDisable"
+
+    .prologue
+    .line 1242
+    iput-boolean p1, p0, Landroid/view/ViewRoot;->mDisableClearBackgroundForTransparent:Z
+
+    .line 1243
+    return-void
+.end method
+
 .method public bringChildToFront(Landroid/view/View;)V
     .locals 0
     .parameter "child"

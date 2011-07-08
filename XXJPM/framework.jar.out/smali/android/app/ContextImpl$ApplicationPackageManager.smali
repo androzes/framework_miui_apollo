@@ -910,6 +910,30 @@
     goto :goto_0
 .end method
 
+.method public clearCustomizedIcons(Ljava/lang/String;)V
+    .locals 1
+    .parameter "packageName"
+
+    .prologue
+    .line 2739
+    :try_start_0
+    iget-object v0, p0, Landroid/app/ContextImpl$ApplicationPackageManager;->mPM:Landroid/content/pm/IPackageManager;
+
+    invoke-interface {v0, p1}, Landroid/content/pm/IPackageManager;->clearCustomizedIcons(Ljava/lang/String;)V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 2743
+    :goto_0
+    return-void
+
+    .line 2740
+    :catch_0
+    move-exception v0
+
+    goto :goto_0
+.end method
+
 .method public clearPackagePreferredActivities(Ljava/lang/String;)V
     .locals 1
     .parameter "packageName"
@@ -1564,6 +1588,22 @@
     .line 2306
     :cond_1
     :try_start_1
+    iget v4, p3, Landroid/content/pm/ApplicationInfo;->icon:I
+
+    if-ne p2, v4, :cond_2
+
+    .line 2182
+    iget-object v4, p3, Landroid/content/pm/ApplicationInfo;->packageName:Ljava/lang/String;
+
+    invoke-static {v4}, Landroid/app/IconCustomizer;->getBuiltInIconDrawable(Ljava/lang/String;)Landroid/graphics/drawable/BitmapDrawable;
+
+    move-result-object v0
+
+    .line 2185
+    :cond_2
+    if-nez v0, :cond_3
+
+    .line 2186
     invoke-virtual {p0, p3}, Landroid/app/ContextImpl$ApplicationPackageManager;->getResourcesForApplication(Landroid/content/pm/ApplicationInfo;)Landroid/content/res/Resources;
 
     move-result-object v3
@@ -1574,7 +1614,9 @@
 
     move-result-object v0
 
-    .line 2320
+    .line 2202
+    .end local v3           #r:Landroid/content/res/Resources;
+    :cond_3
     invoke-direct {p0, v2, v0}, Landroid/app/ContextImpl$ApplicationPackageManager;->putCachedIcon(Landroid/app/ContextImpl$ApplicationPackageManager$ResourceName;Landroid/graphics/drawable/Drawable;)V
     :try_end_1
     .catch Landroid/content/pm/PackageManager$NameNotFoundException; {:try_start_1 .. :try_end_1} :catch_1
@@ -1585,8 +1627,7 @@
     .line 2321
     goto :goto_0
 
-    .line 2301
-    .end local v3           #r:Landroid/content/res/Resources;
+    .line 2176
     :catch_0
     move-exception v1
 
@@ -1680,6 +1721,144 @@
 
     invoke-static {v7, v4, v1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
+    goto :goto_1
+.end method
+
+.method public getDrawable(Ljava/lang/String;ILandroid/content/pm/ApplicationInfo;Ljava/lang/String;)Landroid/graphics/drawable/Drawable;
+    .locals 8
+    .parameter "packageName"
+    .parameter "resid"
+    .parameter "appInfo"
+    .parameter "activityName"
+
+    .prologue
+    const/4 v6, 0x1
+
+    .line 2219
+    const-string/jumbo v5, "sys.ui.app-icon-background"
+
+    invoke-static {v5, v6}, Landroid/os/SystemProperties;->getInt(Ljava/lang/String;I)I
+
+    move-result v5
+
+    if-ne v5, v6, :cond_0
+
+    move v1, v6
+
+    .line 2220
+    .local v1, coustomizeIcon:Z
+    :goto_0
+    if-nez v1, :cond_1
+
+    .line 2221
+    invoke-virtual {p0, p1, p2, p3}, Landroid/app/ContextImpl$ApplicationPackageManager;->getDrawable(Ljava/lang/String;ILandroid/content/pm/ApplicationInfo;)Landroid/graphics/drawable/Drawable;
+
+    move-result-object v5
+
+    .line 2252
+    :goto_1
+    return-object v5
+
+    .line 2219
+    .end local v1           #coustomizeIcon:Z
+    :cond_0
+    const/4 v5, 0x0
+
+    move v1, v5
+
+    goto :goto_0
+
+    .line 2225
+    .restart local v1       #coustomizeIcon:Z
+    :cond_1
+    invoke-static {p1, p4}, Landroid/app/IconCustomizer;->getFileName(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v3
+
+    .line 2228
+    .local v3, fileName:Ljava/lang/String;
+    new-instance v4, Landroid/app/ContextImpl$ApplicationPackageManager$ResourceName;
+
+    invoke-direct {v4, v3, p2}, Landroid/app/ContextImpl$ApplicationPackageManager$ResourceName;-><init>(Ljava/lang/String;I)V
+
+    .line 2229
+    .local v4, name:Landroid/app/ContextImpl$ApplicationPackageManager$ResourceName;
+    invoke-direct {p0, v4}, Landroid/app/ContextImpl$ApplicationPackageManager;->getCachedIcon(Landroid/app/ContextImpl$ApplicationPackageManager$ResourceName;)Landroid/graphics/drawable/Drawable;
+
+    move-result-object v2
+
+    .line 2230
+    .local v2, dr:Landroid/graphics/drawable/Drawable;
+    if-eqz v2, :cond_2
+
+    move-object v5, v2
+
+    .line 2231
+    goto :goto_1
+
+    .line 2235
+    :cond_2
+    invoke-static {v3}, Landroid/app/IconCustomizer;->getCustomizedIconDrawable(Ljava/lang/String;)Landroid/graphics/drawable/BitmapDrawable;
+
+    move-result-object v2
+
+    .line 2236
+    if-nez v2, :cond_3
+
+    .line 2241
+    invoke-virtual {p0, p1, p2, p3}, Landroid/app/ContextImpl$ApplicationPackageManager;->getDrawable(Ljava/lang/String;ILandroid/content/pm/ApplicationInfo;)Landroid/graphics/drawable/Drawable;
+
+    move-result-object v2
+
+    .line 2242
+    if-eqz v2, :cond_3
+
+    .line 2243
+    const-string v5, "ApplicationContext"
+
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v7, "Generate customized icon for "
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v5, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 2244
+    invoke-static {v2}, Landroid/app/IconCustomizer;->generateIconDrawable(Landroid/graphics/drawable/Drawable;)Landroid/graphics/drawable/BitmapDrawable;
+
+    move-result-object v2
+
+    .line 2245
+    move-object v0, v2
+
+    check-cast v0, Landroid/graphics/drawable/BitmapDrawable;
+
+    move-object v5, v0
+
+    invoke-virtual {v5}, Landroid/graphics/drawable/BitmapDrawable;->getBitmap()Landroid/graphics/Bitmap;
+
+    move-result-object v5
+
+    .line 2250
+    :cond_3
+    invoke-direct {p0, v4, v2}, Landroid/app/ContextImpl$ApplicationPackageManager;->putCachedIcon(Landroid/app/ContextImpl$ApplicationPackageManager$ResourceName;Landroid/graphics/drawable/Drawable;)V
+
+    move-object v5, v2
+
+    .line 2252
     goto :goto_1
 .end method
 
@@ -2098,6 +2277,35 @@
     invoke-direct {v2, p1}, Landroid/content/pm/PackageManager$NameNotFoundException;-><init>(Ljava/lang/String;)V
 
     throw v2
+.end method
+
+.method public getPackageInstallPath(Ljava/lang/String;)Ljava/lang/String;
+    .locals 1
+    .parameter "packageName"
+
+    .prologue
+    .line 2757
+    :try_start_0
+    iget-object v0, p0, Landroid/app/ContextImpl$ApplicationPackageManager;->mPM:Landroid/content/pm/IPackageManager;
+
+    invoke-interface {v0, p1}, Landroid/content/pm/IPackageManager;->getPackageInstallPath(Ljava/lang/String;)Ljava/lang/String;
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v0
+
+    .line 2761
+    :goto_0
+    return-object v0
+
+    .line 2758
+    :catch_0
+    move-exception v0
+
+    .line 2761
+    const/4 v0, 0x0
+
+    goto :goto_0
 .end method
 
 .method public getPackageSizeInfo(Ljava/lang/String;Landroid/content/pm/IPackageStatsObserver;)V
@@ -2577,7 +2785,9 @@
 
     iget-object v3, v3, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/ActivityThread$PackageInfo;
 
-    invoke-virtual {v1, v2, v3}, Landroid/app/ActivityThread;->getTopLevelResources(Ljava/lang/String;Landroid/app/ActivityThread$PackageInfo;)Landroid/content/res/Resources;
+    iget-object p0, p1, Landroid/content/pm/ApplicationInfo;->packageName:Ljava/lang/String;
+
+    invoke-virtual {v1, v2, v3, p0}, Landroid/app/ActivityThread;->getTopLevelResources(Ljava/lang/String;Landroid/app/ActivityThread$PackageInfo;Ljava/lang/String;)Landroid/content/res/Resources;
 
     move-result-object v0
 
@@ -3911,6 +4121,33 @@
     throw v1
 .end method
 
+.method public resolveActivityCheckHidden(Landroid/content/Intent;I)Landroid/content/pm/ResolveInfo;
+    .locals 1
+    .parameter "intent"
+    .parameter "flags"
+
+    .prologue
+    .line 1991
+    invoke-direct {p0, p1}, Landroid/app/ContextImpl$ApplicationPackageManager;->checkIntentForHidden(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x0
+
+    .line 1993
+    :goto_0
+    return-object v0
+
+    :cond_0
+    invoke-virtual {p0, p1, p2}, Landroid/app/ContextImpl$ApplicationPackageManager;->resolveActivity(Landroid/content/Intent;I)Landroid/content/pm/ResolveInfo;
+
+    move-result-object v0
+
+    goto :goto_0
+.end method
+
 .method public resolveContentProvider(Ljava/lang/String;I)Landroid/content/pm/ProviderInfo;
     .locals 3
     .parameter "name"
@@ -3989,6 +4226,31 @@
     invoke-direct {v1, v2, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw v1
+.end method
+
+.method public saveCustomizedIconBitmap(Ljava/lang/String;Landroid/graphics/Bitmap;)V
+    .locals 1
+    .parameter "pathName"
+    .parameter "base"
+
+    .prologue
+    .line 2748
+    :try_start_0
+    iget-object v0, p0, Landroid/app/ContextImpl$ApplicationPackageManager;->mPM:Landroid/content/pm/IPackageManager;
+
+    invoke-interface {v0, p1, p2}, Landroid/content/pm/IPackageManager;->saveCustomizedIconBitmap(Ljava/lang/String;Landroid/graphics/Bitmap;)V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 2752
+    :goto_0
+    return-void
+
+    .line 2749
+    :catch_0
+    move-exception v0
+
+    goto :goto_0
 .end method
 
 .method public setApplicationEnabledSetting(Ljava/lang/String;II)V

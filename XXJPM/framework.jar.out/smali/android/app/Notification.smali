@@ -543,7 +543,7 @@
     .line 524
     const v1, 0x102005b
 
-    const-string v2, "setTime"
+    const-string/jumbo v2, "setTime"
 
     iget-wide v3, p0, Landroid/app/Notification;->when:J
 

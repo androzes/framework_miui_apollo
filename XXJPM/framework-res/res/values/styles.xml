@@ -920,7 +920,9 @@
     <style name="Preference.CheckBoxPreference" parent="@style/Preference">
         <item name="widgetLayout">@layout/preference_widget_checkbox</item>
     </style>
-    <style name="Preference.PreferenceScreen" parent="@style/Preference" />
+    <style name="Preference.PreferenceScreen" parent="@style/Preference">
+        <item name="widgetLayout">@layout/preference_widget_next</item>
+    </style>
     <style name="Preference.DialogPreference" parent="@style/Preference">
         <item name="widgetLayout">@layout/preference_dialog</item>
         <item name="positiveButtonText">@string/ok</item>
@@ -997,5 +999,59 @@
         <item name="windowAnimationStyle">@style/Animation.InputMethod</item>
         <item name="background">@null</item>
         <item name="backgroundDimEnabled">false</item>
+    </style>
+    <style name="DeleteButton">
+        <item name="textSize">22.0sp</item>
+        <item name="textColor">@color/white</item>
+        <item name="layout_gravity">center_vertical</item>
+        <item name="background">@drawable/delete_button</item>
+        <item name="paddingLeft">8.0dip</item>
+        <item name="paddingRight">8.0dip</item>
+        <item name="visibility">gone</item>
+        <item name="layout_width">wrap_content</item>
+        <item name="layout_height">wrap_content</item>
+        <item name="layout_marginRight">15.0dip</item>
+        <item name="text">@string/menu_delete_shortcut_label</item>
+    </style>
+    <style name="BottomButtonBar">
+        <item name="gravity">center_vertical</item>
+        <item name="layout_gravity">bottom</item>
+        <item name="background">@drawable/bottom_button_bar</item>
+        <item name="paddingLeft">7.0dip</item>
+        <item name="paddingRight">7.0dip</item>
+        <item name="layout_width">fill_parent</item>
+        <item name="layout_height">wrap_content</item>
+    </style>
+    <style name="BottomButton.Left" parent="@style/BottomButton">
+        <item name="background">@drawable/bottom_button_left</item>
+    </style>
+    <style name="BottomButton.Middle" parent="@style/BottomButton">
+        <item name="background">@drawable/bottom_button_middle</item>
+    </style>
+    <style name="BottomButton.Right" parent="@style/BottomButton">
+        <item name="background">@drawable/bottom_button_right</item>
+    </style>
+    <style name="Theme.Preference" parent="@style/Theme">
+        <item name="windowBackground">@color/preference_background</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="BottomButton">
+        <item name="textSize">20.0sp</item>
+        <item name="layout_width">0.0dip</item>
+        <item name="layout_height">wrap_content</item>
+        <item name="layout_weight">1.0</item>
+    </style>
+    <style name="StatusBarQuickSetting">
+        <item name="textColor">#55000000</item>
+        <item name="gravity">center_horizontal</item>
+        <item name="background">@drawable/status_bar_switch_background</item>
+        <item name="paddingTop">4.299988dip</item>
+        <item name="paddingBottom">4.299988dip</item>
+        <item name="layout_width">64.0dip</item>
+        <item name="layout_height">wrap_content</item>
+    </style>
+    <style name="Theme.ListMenu" parent="@style/Theme">
+        <item name="windowAnimationStyle">@style/Animation.OptionsPanel</item>
+        <item name="background">@null</item>
     </style>
 </resources>

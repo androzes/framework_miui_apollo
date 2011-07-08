@@ -26,6 +26,8 @@
 
 .field private static final LOCK_PASSWORD_FILE:Ljava/lang/String; = "/system/password.key"
 
+.field private static final LOCK_PASSWORD_LENGTH_FILE:Ljava/lang/String; = "/system/password_len.key"
+
 .field private static final LOCK_PASSWORD_SALT_KEY:Ljava/lang/String; = "lockscreen.password_salt"
 
 .field private static final LOCK_PATTERN_FILE:Ljava/lang/String; = "/system/gesture.key"
@@ -47,6 +49,8 @@
 .field private static mSimLockPrepared:Z
 
 .field private static sLockPasswordFilename:Ljava/lang/String;
+
+.field private static sLockPasswordLengthFilename:Ljava/lang/String;
 
 .field private static sLockPatternFilename:Ljava/lang/String;
 
@@ -2026,6 +2030,20 @@
     move-result v1
 
     return v1
+.end method
+
+.method public isPrivacyModeEnabled()Z
+    .locals 1
+
+    .prologue
+    .line 638
+    const-string v0, "privacy_mode_enabled"
+
+    invoke-direct {p0, v0}, Lcom/android/internal/widget/LockPatternUtils;->getBoolean(Ljava/lang/String;)Z
+
+    move-result v0
+
+    return v0
 .end method
 
 .method public isSecure()Z

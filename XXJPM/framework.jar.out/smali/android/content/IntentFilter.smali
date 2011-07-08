@@ -3274,7 +3274,7 @@
 
     .line 1248
     :cond_9
-    const-string v7, "sglob"
+    const-string/jumbo v7, "sglob"
 
     invoke-interface {p1, v10, v7}, Lorg/xmlpull/v1/XmlPullParser;->getAttributeValue(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
@@ -3943,7 +3943,7 @@
 
     .line 1193
     :pswitch_2
-    const-string v5, "sglob"
+    const-string/jumbo v5, "sglob"
 
     invoke-virtual {v3}, Landroid/os/PatternMatcher;->getPath()Ljava/lang/String;
 
@@ -3959,6 +3959,8 @@
     return-void
 
     .line 1185
+    nop
+
     :pswitch_data_0
     .packed-switch 0x0
         :pswitch_0

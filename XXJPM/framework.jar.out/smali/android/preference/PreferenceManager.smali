@@ -810,7 +810,7 @@
     goto :goto_0
 .end method
 
-.method getActivity()Landroid/app/Activity;
+.method public getActivity()Landroid/app/Activity;
     .locals 1
 
     .prologue
@@ -907,7 +907,7 @@
     throw v0
 .end method
 
-.method getNextRequestCode()I
+.method public getNextRequestCode()I
     .locals 2
 
     .prologue
@@ -1320,7 +1320,7 @@
     throw v0
 .end method
 
-.method registerOnActivityResultListener(Landroid/preference/PreferenceManager$OnActivityResultListener;)V
+.method public registerOnActivityResultListener(Landroid/preference/PreferenceManager$OnActivityResultListener;)V
     .locals 1
     .parameter "listener"
 
@@ -1599,7 +1599,7 @@
     throw v0
 .end method
 
-.method unregisterOnActivityResultListener(Landroid/preference/PreferenceManager$OnActivityResultListener;)V
+.method public unregisterOnActivityResultListener(Landroid/preference/PreferenceManager$OnActivityResultListener;)V
     .locals 1
     .parameter "listener"
 

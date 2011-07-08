@@ -1652,7 +1652,7 @@
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "setupInitialStateStack: E mInitialState="
+    const-string/jumbo v3, "setupInitialStateStack: E mInitialState="
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1782,7 +1782,7 @@
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "setupTempStateStackWithStatesToEnter: X mTempStateStackCount="
+    const-string/jumbo v3, "setupTempStateStackWithStatesToEnter: X mTempStateStackCount="
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

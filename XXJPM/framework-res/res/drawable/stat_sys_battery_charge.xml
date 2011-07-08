@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <level-list
   xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:maxLevel="4">
+        <animation-list android:oneshot="false"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim4" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim5" />
+        </animation-list>
+    </item>
     <item android:maxLevel="19">
         <animation-list android:oneshot="false"
           xmlns:android="http://schemas.android.com/apk/res/android">
-            <item android:duration="2000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
@@ -15,7 +26,8 @@
     <item android:maxLevel="34">
         <animation-list android:oneshot="false"
           xmlns:android="http://schemas.android.com/apk/res/android">
-            <item android:duration="2000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim4" />
@@ -25,7 +37,9 @@
     <item android:maxLevel="49">
         <animation-list android:oneshot="false"
           xmlns:android="http://schemas.android.com/apk/res/android">
-            <item android:duration="2000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim4" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim5" />
@@ -34,7 +48,10 @@
     <item android:maxLevel="64">
         <animation-list android:oneshot="false"
           xmlns:android="http://schemas.android.com/apk/res/android">
-            <item android:duration="2000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim4" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim5" />
         </animation-list>
@@ -42,9 +59,24 @@
     <item android:maxLevel="79">
         <animation-list android:oneshot="false"
           xmlns:android="http://schemas.android.com/apk/res/android">
-            <item android:duration="2000" android:drawable="@drawable/stat_sys_battery_charge_anim4" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim4" />
             <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim5" />
         </animation-list>
     </item>
-    <item android:drawable="@drawable/stat_sys_battery_charge_anim5" android:maxLevel="101" />
+    <item android:maxLevel="100">
+        <animation-list android:oneshot="false"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim0" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim1" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim2" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim3" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim4" />
+            <item android:duration="1000" android:drawable="@drawable/stat_sys_battery_charge_anim5" />
+        </animation-list>
+    </item>
+    <item android:drawable="@drawable/stat_sys_battery_100" android:maxLevel="101" />
 </level-list>

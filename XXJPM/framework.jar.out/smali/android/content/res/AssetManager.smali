@@ -69,6 +69,8 @@
 
 .field private mStringBlocks:[Landroid/content/res/StringBlock;
 
+.field private mThemeResource:Landroid/app/ThemeResource;
+
 .field private final mValue:Landroid/util/TypedValue;
 
 
@@ -93,9 +95,11 @@
 .end method
 
 .method public constructor <init>()V
-    .locals 2
+    .locals 3
 
     .prologue
+    const/4 v2, 0x0
+
     const/4 v1, 0x1
 
     .line 87
@@ -115,10 +119,8 @@
 
     iput-object v0, p0, Landroid/content/res/AssetManager;->mOffsets:[J
 
-    .line 74
-    const/4 v0, 0x0
-
-    iput-object v0, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
+    .line 75
+    iput-object v2, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
 
     .line 76
     iput v1, p0, Landroid/content/res/AssetManager;->mNumRefs:I
@@ -126,7 +128,10 @@
     .line 77
     iput-boolean v1, p0, Landroid/content/res/AssetManager;->mOpen:Z
 
-    .line 88
+    .line 81
+    iput-object v2, p0, Landroid/content/res/AssetManager;->mThemeResource:Landroid/app/ThemeResource;
+
+    .line 97
     monitor-enter p0
 
     .line 93
@@ -154,10 +159,12 @@
 .end method
 
 .method private constructor <init>(Z)V
-    .locals 2
+    .locals 3
     .parameter "isSystem"
 
     .prologue
+    const/4 v2, 0x0
+
     const/4 v1, 0x1
 
     .line 109
@@ -177,18 +184,19 @@
 
     iput-object v0, p0, Landroid/content/res/AssetManager;->mOffsets:[J
 
-    .line 74
-    const/4 v0, 0x0
+    .line 75
+    iput-object v2, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
 
-    iput-object v0, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
-
-    .line 76
+    .line 77
     iput v1, p0, Landroid/content/res/AssetManager;->mNumRefs:I
 
     .line 77
     iput-boolean v1, p0, Landroid/content/res/AssetManager;->mOpen:Z
 
-    .line 116
+    .line 81
+    iput-object v2, p0, Landroid/content/res/AssetManager;->mThemeResource:Landroid/app/ThemeResource;
+
+    .line 125
     invoke-direct {p0}, Landroid/content/res/AssetManager;->init()V
 
     .line 118
@@ -960,7 +968,7 @@
 .end method
 
 .method final getResourceText(I)Ljava/lang/CharSequence;
-    .locals 4
+    .locals 5
     .parameter "ident"
 
     .prologue
@@ -969,49 +977,63 @@
 
     .line 150
     :try_start_0
-    iget-object v1, p0, Landroid/content/res/AssetManager;->mValue:Landroid/util/TypedValue;
+    iget-object v2, p0, Landroid/content/res/AssetManager;->mValue:Landroid/util/TypedValue;
 
-    .line 151
-    .local v1, tmpValue:Landroid/util/TypedValue;
-    const/4 v2, 0x1
+    .line 160
+    .local v2, tmpValue:Landroid/util/TypedValue;
+    const/4 v3, 0x1
 
-    invoke-direct {p0, p1, v1, v2}, Landroid/content/res/AssetManager;->loadResourceValue(ILandroid/util/TypedValue;Z)I
+    invoke-direct {p0, p1, v2, v3}, Landroid/content/res/AssetManager;->loadResourceValue(ILandroid/util/TypedValue;Z)I
 
     move-result v0
 
     .line 152
     .local v0, block:I
-    if-ltz v0, :cond_1
+    if-ltz v0, :cond_2
 
-    .line 153
-    iget v2, v1, Landroid/util/TypedValue;->type:I
+    .line 162
+    iget v3, v2, Landroid/util/TypedValue;->type:I
 
-    const/4 v3, 0x3
+    const/4 v4, 0x3
 
-    if-ne v2, v3, :cond_0
+    if-ne v3, v4, :cond_1
 
-    .line 154
-    iget-object v2, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
+    .line 163
+    iget-object v3, p0, Landroid/content/res/AssetManager;->mThemeResource:Landroid/app/ThemeResource;
 
-    aget-object v2, v2, v0
+    if-eqz v3, :cond_0
 
-    iget v3, v1, Landroid/util/TypedValue;->data:I
+    .line 164
+    iget-object v3, p0, Landroid/content/res/AssetManager;->mThemeResource:Landroid/app/ThemeResource;
 
-    invoke-virtual {v2, v3}, Landroid/content/res/StringBlock;->get(I)Ljava/lang/CharSequence;
+    invoke-virtual {v3, p1}, Landroid/app/ThemeResource;->getThemeCharSequence(I)Ljava/lang/CharSequence;
 
-    move-result-object v2
+    move-result-object v1
+
+    .line 165
+    .local v1, cs:Ljava/lang/CharSequence;
+    if-eqz v1, :cond_0
 
     monitor-exit p0
 
-    .line 159
+    move-object v3, v1
+
+    .line 174
+    .end local v1           #cs:Ljava/lang/CharSequence;
     :goto_0
-    return-object v2
+    return-object v3
 
     .line 156
     :cond_0
-    invoke-virtual {v1}, Landroid/util/TypedValue;->coerceToString()Ljava/lang/CharSequence;
+    iget-object v3, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
 
-    move-result-object v2
+    aget-object v3, v3, v0
+
+    iget v4, v2, Landroid/util/TypedValue;->data:I
+
+    invoke-virtual {v3, v4}, Landroid/content/res/StringBlock;->get(I)Ljava/lang/CharSequence;
+
+    move-result-object v3
 
     monitor-exit p0
 
@@ -1019,26 +1041,36 @@
 
     .line 158
     .end local v0           #block:I
-    .end local v1           #tmpValue:Landroid/util/TypedValue;
+    .end local v2           #tmpValue:Landroid/util/TypedValue;
     :catchall_0
-    move-exception v2
+    move-exception v3
 
     monitor-exit p0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    throw v2
+    throw v3
 
     .restart local v0       #block:I
-    .restart local v1       #tmpValue:Landroid/util/TypedValue;
+    .restart local v2       #tmpValue:Landroid/util/TypedValue;
     :cond_1
     :try_start_1
+    invoke-virtual {v2}, Landroid/util/TypedValue;->coerceToString()Ljava/lang/CharSequence;
+
+    move-result-object v3
+
+    monitor-exit p0
+
+    goto :goto_0
+
+    .line 173
+    :cond_2
     monitor-exit p0
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 159
-    const/4 v2, 0x0
+    .line 174
+    const/4 v3, 0x0
 
     goto :goto_0
 .end method
@@ -1124,13 +1156,13 @@
 .end method
 
 .method final getResourceValue(ILandroid/util/TypedValue;Z)Z
-    .locals 4
+    .locals 5
     .parameter "ident"
     .parameter "outValue"
     .parameter "resolveRefs"
 
     .prologue
-    const/4 v3, 0x1
+    const/4 v4, 0x1
 
     .line 195
     invoke-direct {p0, p1, p2, p3}, Landroid/content/res/AssetManager;->loadResourceValue(ILandroid/util/TypedValue;Z)I
@@ -1139,43 +1171,80 @@
 
     .line 196
     .local v0, block:I
-    if-ltz v0, :cond_1
+    if-ltz v0, :cond_2
 
-    .line 197
-    iget v1, p2, Landroid/util/TypedValue;->type:I
+    .line 212
+    iget v2, p2, Landroid/util/TypedValue;->type:I
 
-    const/4 v2, 0x3
+    const/4 v3, 0x3
 
-    if-eq v1, v2, :cond_0
+    if-eq v2, v3, :cond_1
 
-    move v1, v3
+    .line 213
+    iget-object v2, p0, Landroid/content/res/AssetManager;->mThemeResource:Landroid/app/ThemeResource;
 
-    .line 203
-    :goto_0
-    return v1
+    if-eqz v2, :cond_0
 
-    .line 200
-    :cond_0
-    iget-object v1, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
+    iget v2, p2, Landroid/util/TypedValue;->type:I
 
-    aget-object v1, v1, v0
+    const/16 v3, 0x10
 
-    iget v2, p2, Landroid/util/TypedValue;->data:I
+    if-lt v2, v3, :cond_0
 
-    invoke-virtual {v1, v2}, Landroid/content/res/StringBlock;->get(I)Ljava/lang/CharSequence;
+    iget v2, p2, Landroid/util/TypedValue;->type:I
+
+    const/16 v3, 0x1f
+
+    if-gt v2, v3, :cond_0
+
+    .line 216
+    iget-object v2, p0, Landroid/content/res/AssetManager;->mThemeResource:Landroid/app/ThemeResource;
+
+    invoke-virtual {v2, p1}, Landroid/app/ThemeResource;->getThemeInt(I)Ljava/lang/Integer;
 
     move-result-object v1
 
-    iput-object v1, p2, Landroid/util/TypedValue;->string:Ljava/lang/CharSequence;
+    .line 217
+    .local v1, themeInteger:Ljava/lang/Integer;
+    if-eqz v1, :cond_0
 
-    move v1, v3
+    .line 218
+    invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
+
+    move-result v2
+
+    iput v2, p2, Landroid/util/TypedValue;->data:I
+
+    .end local v1           #themeInteger:Ljava/lang/Integer;
+    :cond_0
+    move v2, v4
+
+    .line 203
+    :goto_0
+    return v2
+
+    .line 223
+    :cond_1
+    iget-object v2, p0, Landroid/content/res/AssetManager;->mStringBlocks:[Landroid/content/res/StringBlock;
+
+    aget-object v2, v2, v0
+
+    iget v3, p2, Landroid/util/TypedValue;->data:I
+
+    invoke-virtual {v2, v3}, Landroid/content/res/StringBlock;->get(I)Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    iput-object v2, p2, Landroid/util/TypedValue;->string:Ljava/lang/CharSequence;
+
+    move v2, v4
 
     .line 201
     goto :goto_0
 
-    .line 203
-    :cond_1
-    const/4 v1, 0x0
+    .line 226
+    :cond_2
+    const/4 v2, 0x0
 
     goto :goto_0
 .end method
@@ -1992,6 +2061,18 @@
 .end method
 
 .method public final native setLocale(Ljava/lang/String;)V
+.end method
+
+.method public setThemeResource(Landroid/app/ThemeResource;)V
+    .locals 0
+    .parameter "themeResource"
+
+    .prologue
+    .line 86
+    iput-object p1, p0, Landroid/content/res/AssetManager;->mThemeResource:Landroid/app/ThemeResource;
+
+    .line 87
+    return-void
 .end method
 
 .method xmlBlockGone(I)V

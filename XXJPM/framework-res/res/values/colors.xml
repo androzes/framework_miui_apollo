@@ -42,4 +42,5 @@
     <color name="keyguard_text_color_soundon">#ffe69310</color>
     <color name="keyguard_text_color_decline">#fffe0a5a</color>
     <color name="config_defaultNotificationColor">#ff00ff00</color>
+    <color name="preference_background">#ffeeeeee</color>
 </resources>

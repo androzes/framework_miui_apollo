@@ -7213,7 +7213,7 @@
     .line 659
     new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v1, "setTransactionSuccessful may only be called once per call to beginTransaction"
+    const-string/jumbo v1, "setTransactionSuccessful may only be called once per call to beginTransaction"
 
     invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 

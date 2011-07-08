@@ -53,6 +53,128 @@
 
 
 # virtual methods
+.method public getView(Landroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
+    .locals 7
+    .parameter "convertView"
+    .parameter "parent"
+
+    .prologue
+    const/4 v6, 0x0
+
+    const/16 v5, 0x8
+
+    .line 62
+    invoke-super {p0, p1, p2}, Landroid/preference/PreferenceGroup;->getView(Landroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
+
+    move-result-object v2
+
+    .line 63
+    .local v2, view:Landroid/view/View;
+    const v3, 0x1020016
+
+    invoke-virtual {v2, v3}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/TextView;
+
+    .line 64
+    .local v1, textView:Landroid/widget/TextView;
+    const v3, 0x1020004
+
+    invoke-virtual {v2, v3}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    .line 66
+    .local v0, emptyView:Landroid/view/View;
+    if-eqz v1, :cond_0
+
+    .line 67
+    invoke-virtual {p0}, Landroid/preference/PreferenceCategory;->getContext()Landroid/content/Context;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    move-result-object v3
+
+    const v4, 0x1060040
+
+    invoke-virtual {v3, v4}, Landroid/content/res/Resources;->getColorStateList(I)Landroid/content/res/ColorStateList;
+
+    move-result-object v3
+
+    invoke-virtual {v1, v3}, Landroid/widget/TextView;->setTextColor(Landroid/content/res/ColorStateList;)V
+
+    .line 70
+    :cond_0
+    if-eqz v1, :cond_2
+
+    if-eqz v0, :cond_2
+
+    .line 71
+    invoke-virtual {p0}, Landroid/preference/PreferenceCategory;->getTitle()Ljava/lang/CharSequence;
+
+    move-result-object v3
+
+    invoke-static {v3}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_3
+
+    .line 72
+    invoke-virtual {v1}, Landroid/widget/TextView;->getVisibility()I
+
+    move-result v3
+
+    if-eqz v3, :cond_1
+
+    .line 73
+    invoke-virtual {v1, v6}, Landroid/widget/TextView;->setVisibility(I)V
+
+    .line 75
+    :cond_1
+    invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
+
+    move-result v3
+
+    if-eq v3, v5, :cond_2
+
+    .line 76
+    invoke-virtual {v0, v5}, Landroid/view/View;->setVisibility(I)V
+
+    .line 88
+    :cond_2
+    :goto_0
+    return-object v2
+
+    .line 79
+    :cond_3
+    invoke-virtual {v1}, Landroid/widget/TextView;->getVisibility()I
+
+    move-result v3
+
+    if-eq v3, v5, :cond_4
+
+    .line 80
+    invoke-virtual {v1, v5}, Landroid/widget/TextView;->setVisibility(I)V
+
+    .line 82
+    :cond_4
+    invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
+
+    move-result v3
+
+    if-eqz v3, :cond_2
+
+    .line 83
+    invoke-virtual {v0, v6}, Landroid/view/View;->setVisibility(I)V
+
+    goto :goto_0
+.end method
+
 .method public isEnabled()Z
     .locals 1
 

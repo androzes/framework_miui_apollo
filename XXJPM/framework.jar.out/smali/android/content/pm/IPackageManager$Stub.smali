@@ -46,6 +46,8 @@
 
 .field static final TRANSACTION_clearApplicationUserData:I = 0x38
 
+.field static final TRANSACTION_clearCustomizedIcons:I = 0x4a
+
 .field static final TRANSACTION_clearPackagePreferredActivities:I = 0x2f
 
 .field static final TRANSACTION_currentToCanonicalPackageNames:I = 0x4
@@ -89,6 +91,8 @@
 .field static final TRANSACTION_getPackageGids:I = 0x3
 
 .field static final TRANSACTION_getPackageInfo:I = 0x1
+
+.field static final TRANSACTION_getPackageInstallPath:I = 0x4b
 
 .field static final TRANSACTION_getPackageSizeInfo:I = 0x39
 
@@ -161,6 +165,8 @@
 .field static final TRANSACTION_resolveIntent:I = 0x18
 
 .field static final TRANSACTION_resolveService:I = 0x1c
+
+.field static final TRANSACTION_saveCustomizedIconBitmap:I = 0x4c
 
 .field static final TRANSACTION_setApplicationEnabledSetting:I = 0x33
 
@@ -4683,7 +4689,137 @@
 
     goto/16 :goto_0
 
+    :sswitch_4a
+    const-string v5, "android.content.pm.IPackageManager"
+
+    move-object/from16 v0, p2
+
+    move-object v1, v5
+
+    invoke-virtual {v0, v1}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    .line 1021
+    invoke-virtual/range {p2 .. p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
+
+    move-result-object v6
+
+    .line 1022
+    .local v6, _arg0:Ljava/lang/String;
+    move-object/from16 v0, p0
+
+    move-object v1, v6
+
+    .line 1023
+    invoke-virtual/range {p3 .. p3}, Landroid/os/Parcel;->writeNoException()V
+
+    .line 1024
+    const/4 v5, 0x1
+
+    goto/16 :goto_0
+
+    .line 1028
+    .end local v6           #_arg0:Ljava/lang/String;
+    :sswitch_4b
+    const-string v5, "android.content.pm.IPackageManager"
+
+    move-object/from16 v0, p2
+
+    move-object v1, v5
+
+    invoke-virtual {v0, v1}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    .line 1047
+    invoke-virtual/range {p2 .. p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
+
+    move-result-object v6
+
+    .line 1048
+    .restart local v6       #_arg0:Ljava/lang/String;
+    move-object/from16 v0, p0
+
+    move-object v1, v6
+
+    invoke-virtual {v0, v1}, Landroid/content/pm/IPackageManager$Stub;->getPackageInstallPath(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v18
+
+    .line 1059
+    .local v18, _result:Ljava/lang/String;
+    invoke-virtual/range {p3 .. p3}, Landroid/os/Parcel;->writeNoException()V
+
+    .line 1060
+    move-object/from16 v0, p3
+
+    move-object/from16 v1, v18
+
+    invoke-virtual {v0, v1}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+
+    :sswitch_4c
+    const-string v5, "android.content.pm.IPackageManager"
+
+    move-object/from16 v0, p2
+
+    move-object v1, v5
+
+    invoke-virtual {v0, v1}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    .line 1030
+    invoke-virtual/range {p2 .. p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
+
+    move-result-object v6
+
+    .line 1032
+    .restart local v6       #_arg0:Ljava/lang/String;
+    invoke-virtual/range {p2 .. p2}, Landroid/os/Parcel;->readInt()I
+
+    move-result v5
+
+    if-eqz v5, :cond_2a
+
+    .line 1033
+    sget-object v5, Landroid/graphics/Bitmap;->CREATOR:Landroid/os/Parcelable$Creator;
+
+    move-object v0, v5
+
+    move-object/from16 v1, p2
+
+    invoke-interface {v0, v1}, Landroid/os/Parcelable$Creator;->createFromParcel(Landroid/os/Parcel;)Ljava/lang/Object;
+
+    move-result-object v7
+
+    check-cast v7, Landroid/graphics/Bitmap;
+
+    .line 1038
+    .local v7, _arg1:Landroid/graphics/Bitmap;
+    :goto_2b
+    move-object/from16 v0, p0
+
+    move-object v1, v6
+
+    move-object v2, v7
+
+    invoke-virtual {v0, v1, v2}, Landroid/content/pm/IPackageManager$Stub;->saveCustomizedIconBitmap(Ljava/lang/String;Landroid/graphics/Bitmap;)V
+
+    .line 1039
+    invoke-virtual/range {p3 .. p3}, Landroid/os/Parcel;->writeNoException()V
+
+    .line 1040
+    const/4 v5, 0x1
+
+    goto/16 :goto_0
+
+    .line 1036
+    .end local v7           #_arg1:Landroid/graphics/Bitmap;
+    :cond_2a
+    const/4 v7, 0x0
+
+    .restart local v7       #_arg1:Landroid/graphics/Bitmap;
+    goto :goto_2b
+
+    .line 1045
     .line 44
+    .end local v6           #_arg0:Ljava/lang/String;
+    .end local v7           #_arg1:Landroid/graphics/Bitmap;
     :sswitch_data_0
     .sparse-switch
         0x1 -> :sswitch_1
@@ -4759,6 +4895,9 @@
         0x47 -> :sswitch_47
         0x48 -> :sswitch_48
         0x49 -> :sswitch_49
+        0x4a -> :sswitch_4a
+        0x4b -> :sswitch_4b
+        0x4c -> :sswitch_4c
         0x5f4e5446 -> :sswitch_0
     .end sparse-switch
 .end method

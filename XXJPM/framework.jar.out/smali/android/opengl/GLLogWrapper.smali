@@ -4930,7 +4930,7 @@
     invoke-direct {p0, v0}, Landroid/opengl/GLLogWrapper;->begin(Ljava/lang/String;)V
 
     .line 1214
-    const-string v0, "sfactor"
+    const-string/jumbo v0, "sfactor"
 
     invoke-direct {p0, p1}, Landroid/opengl/GLLogWrapper;->getFactor(I)Ljava/lang/String;
 

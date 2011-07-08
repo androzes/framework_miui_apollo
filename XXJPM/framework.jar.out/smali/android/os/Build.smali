@@ -35,6 +35,10 @@
 
 .field public static final ID:Ljava/lang/String; = null
 
+.field public static final IS_HTC_HD2:Z = false
+
+.field public static final IS_MILESTONE:Z = false
+
 .field public static final MANUFACTURER:Ljava/lang/String; = null
 
 .field public static final MODEL:Ljava/lang/String; = null

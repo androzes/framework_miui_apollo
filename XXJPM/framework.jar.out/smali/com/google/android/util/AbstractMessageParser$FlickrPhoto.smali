@@ -571,7 +571,7 @@
 
     .prologue
     .line 1091
-    const-string v0, "sets"
+    const-string/jumbo v0, "sets"
 
     iget-object v1, p0, Lcom/google/android/util/AbstractMessageParser$FlickrPhoto;->grouping:Ljava/lang/String;
 

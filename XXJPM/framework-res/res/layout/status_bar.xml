@@ -15,6 +15,6 @@
             <TextView android:textColor="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" />
         </com.android.server.status.TickerView>
     </LinearLayout>
-    <com.android.server.status.DateView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="left|center" android:id="@id/date" android:background="@drawable/statusbar_background" android:paddingLeft="6.0px" android:paddingRight="6.0px" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true" />
+    <com.android.server.status.DateView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:gravity="left|center" android:id="@id/date" android:background="@drawable/statusbar_background_expanded" android:paddingLeft="6.0px" android:paddingRight="6.0px" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true" />
     <SeekBar android:id="@id/zzz_statusbar_brightness" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:indeterminateDrawable="@null" android:progressDrawable="@null" android:thumb="@null" />
 </com.android.server.status.StatusBarView>

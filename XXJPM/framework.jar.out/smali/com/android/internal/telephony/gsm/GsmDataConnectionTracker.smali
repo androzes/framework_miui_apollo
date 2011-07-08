@@ -4376,7 +4376,7 @@
     if-nez v2, :cond_1
 
     .line 674
-    const-string v3, "setupData: No free GsmDataConnection found!"
+    const-string/jumbo v3, "setupData: No free GsmDataConnection found!"
 
     invoke-virtual {p0, v3}, Lcom/android/internal/telephony/gsm/GsmDataConnectionTracker;->log(Ljava/lang/String;)V
 
@@ -7128,7 +7128,7 @@
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "setState: "
+    const-string/jumbo v1, "setState: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

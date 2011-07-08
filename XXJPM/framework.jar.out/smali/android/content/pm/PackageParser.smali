@@ -14469,12 +14469,16 @@
     move-object v4, v11
 
     invoke-direct {v0, v1, v2, v3, v4}, Landroid/content/pm/PackageParser;->parsePackage(Landroid/content/res/Resources;Landroid/content/res/XmlResourceParser;I[Ljava/lang/String;)Landroid/content/pm/PackageParser$Package;
-    :try_end_3
-    .catch Ljava/lang/Exception; {:try_start_3 .. :try_end_3} :catch_1
 
     move-result-object v13
 
-    .line 423
+    .line 417
+    iget-object v15, v13, Landroid/content/pm/PackageParser$Package;->packageName:Ljava/lang/String;
+
+    invoke-virtual {v14, v15}, Landroid/content/res/Resources;->setThemePath(Ljava/lang/String;)V
+    :try_end_3
+    .catch Ljava/lang/Exception; {:try_start_3 .. :try_end_3} :catch_1
+
     .end local v14           #res:Landroid/content/res/Resources;
     :goto_4
     if-nez v13, :cond_9

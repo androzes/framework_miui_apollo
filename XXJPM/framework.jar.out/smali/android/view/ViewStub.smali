@@ -446,7 +446,7 @@
     :cond_1
     new-instance v1, Ljava/lang/IllegalStateException;
 
-    const-string v2, "setVisibility called on un-referenced view"
+    const-string/jumbo v2, "setVisibility called on un-referenced view"
 
     invoke-direct {v1, v2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 

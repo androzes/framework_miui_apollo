@@ -1342,7 +1342,7 @@
     :try_start_1
     const-string v1, "BluetoothDataGatewayService"
 
-    const-string v2, "setSerialPortStatusNative Failed"
+    const-string/jumbo v2, "setSerialPortStatusNative Failed"
 
     invoke-static {v1, v2, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_1

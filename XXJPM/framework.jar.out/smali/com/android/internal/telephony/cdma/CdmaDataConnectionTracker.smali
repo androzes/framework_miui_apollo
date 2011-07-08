@@ -1767,7 +1767,7 @@
     if-nez v17, :cond_0
 
     .line 423
-    const-string v3, "setupData: No free CdmaDataConnectionfound!"
+    const-string/jumbo v3, "setupData: No free CdmaDataConnectionfound!"
 
     move-object/from16 v0, p0
 
@@ -3876,7 +3876,7 @@
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v1, "setState: "
+    const-string/jumbo v1, "setState: "
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

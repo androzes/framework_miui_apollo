@@ -252,6 +252,9 @@
 .method public abstract clearApplicationUserData(Ljava/lang/String;Landroid/content/pm/IPackageDataObserver;)V
 .end method
 
+.method public abstract clearCustomizedIcons(Ljava/lang/String;)V
+.end method
+
 .method public abstract clearPackagePreferredActivities(Ljava/lang/String;)V
 .end method
 
@@ -350,6 +353,9 @@
 .end method
 
 .method public abstract getDrawable(Ljava/lang/String;ILandroid/content/pm/ApplicationInfo;)Landroid/graphics/drawable/Drawable;
+.end method
+
+.method public abstract getDrawable(Ljava/lang/String;ILandroid/content/pm/ApplicationInfo;Ljava/lang/String;)Landroid/graphics/drawable/Drawable;
 .end method
 
 .method public abstract getInstalledApplications(I)Ljava/util/List;
@@ -461,6 +467,9 @@
             Landroid/content/pm/PackageManager$NameNotFoundException;
         }
     .end annotation
+.end method
+
+.method public abstract getPackageInstallPath(Ljava/lang/String;)Ljava/lang/String;
 .end method
 
 .method public abstract getPackageSizeInfo(Ljava/lang/String;Landroid/content/pm/IPackageStatsObserver;)V
@@ -722,10 +731,16 @@
 .method public abstract resolveActivity(Landroid/content/Intent;I)Landroid/content/pm/ResolveInfo;
 .end method
 
+.method public abstract resolveActivityCheckHidden(Landroid/content/Intent;I)Landroid/content/pm/ResolveInfo;
+.end method
+
 .method public abstract resolveContentProvider(Ljava/lang/String;I)Landroid/content/pm/ProviderInfo;
 .end method
 
 .method public abstract resolveService(Landroid/content/Intent;I)Landroid/content/pm/ResolveInfo;
+.end method
+
+.method public abstract saveCustomizedIconBitmap(Ljava/lang/String;Landroid/graphics/Bitmap;)V
 .end method
 
 .method public abstract setApplicationEnabledSetting(Ljava/lang/String;II)V

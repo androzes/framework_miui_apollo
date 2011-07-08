@@ -1181,6 +1181,14 @@
 
 .field public static final screen_progress_inner:I = 0x1080270
 
+.field public static final screen_view_arrow_left:I = 0x1080451
+
+.field public static final screen_view_arrow_left_gray:I = 0x1080452
+
+.field public static final screen_view_arrow_right:I = 0x1080453
+
+.field public static final screen_view_arrow_right_gray:I = 0x1080454
+
 .field public static final scrollbar_handle_accelerated_anim2:I = 0x1080271
 
 .field public static final scrollbar_handle_horizontal:I = 0x1080272
@@ -1210,6 +1218,10 @@
 .field public static final settings_header:I = 0x108027c
 
 .field public static final settings_header_raw:I = 0x108027d
+
+.field public static final slide_bar:I = 0x1080408
+
+.field public static final slide_bar_bg:I = 0x1080409
 
 .field public static final spinner_background:I = 0x1080070
 

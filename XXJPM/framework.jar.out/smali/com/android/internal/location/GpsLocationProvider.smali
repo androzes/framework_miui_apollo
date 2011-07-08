@@ -8181,7 +8181,7 @@
 
     .line 1076
     :cond_3
-    const-string v0, "set_basic_parameters"
+    const-string/jumbo v0, "set_basic_parameters"
 
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -8204,7 +8204,7 @@
 
     .line 1083
     :cond_4
-    const-string v0, "set_fix_parameters"
+    const-string/jumbo v0, "set_fix_parameters"
 
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -8224,7 +8224,7 @@
 
     .line 1088
     :cond_5
-    const-string v0, "set_xtra"
+    const-string/jumbo v0, "set_xtra"
 
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -8247,7 +8247,7 @@
 
     .line 1094
     :cond_6
-    const-string v0, "set_nmea"
+    const-string/jumbo v0, "set_nmea"
 
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -8267,7 +8267,7 @@
 
     .line 1099
     :cond_7
-    const-string v0, "set_csc_parameters"
+    const-string/jumbo v0, "set_csc_parameters"
 
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 

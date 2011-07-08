@@ -107,6 +107,8 @@
     .end annotation
 .end field
 
+.field private mDoingAnimationWhenWholeAnimationCacheEnabled:Z
+
 .field private mFocused:Landroid/view/View;
 
 .field protected mGroupFlags:I
@@ -121,7 +123,13 @@
 
 .field protected mPersistentDrawingCache:I
 
+.field private mPreviousAnimationCacheStatus:Z
+
+.field private mPreviousDrawingCacheStatus:Z
+
 .field private final mTempRect:Landroid/graphics/Rect;
+
+.field private mWholeAnimationCacheEnabled:Z
 
 
 # direct methods
@@ -151,11 +159,13 @@
 .end method
 
 .method public constructor <init>(Landroid/content/Context;)V
-    .locals 1
+    .locals 2
     .parameter "context"
 
     .prologue
-    .line 280
+    const/4 v1, 0x0
+
+    .line 286
     invoke-direct {p0, p1}, Landroid/view/View;-><init>(Landroid/content/Context;)V
 
     .line 95
@@ -172,7 +182,13 @@
 
     iput-object v0, p0, Landroid/view/ViewGroup;->mCachePaint:Landroid/graphics/Paint;
 
-    .line 281
+    .line 282
+    iput-boolean v1, p0, Landroid/view/ViewGroup;->mWholeAnimationCacheEnabled:Z
+
+    .line 283
+    iput-boolean v1, p0, Landroid/view/ViewGroup;->mDoingAnimationWhenWholeAnimationCacheEnabled:Z
+
+    .line 287
     invoke-direct {p0}, Landroid/view/ViewGroup;->initViewGroup()V
 
     .line 282
@@ -180,11 +196,13 @@
 .end method
 
 .method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
-    .locals 1
+    .locals 2
     .parameter "context"
     .parameter "attrs"
 
     .prologue
+    const/4 v1, 0x0
+
     .line 285
     invoke-direct {p0, p1, p2}, Landroid/view/View;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
 
@@ -202,7 +220,13 @@
 
     iput-object v0, p0, Landroid/view/ViewGroup;->mCachePaint:Landroid/graphics/Paint;
 
-    .line 286
+    .line 282
+    iput-boolean v1, p0, Landroid/view/ViewGroup;->mWholeAnimationCacheEnabled:Z
+
+    .line 283
+    iput-boolean v1, p0, Landroid/view/ViewGroup;->mDoingAnimationWhenWholeAnimationCacheEnabled:Z
+
+    .line 292
     invoke-direct {p0}, Landroid/view/ViewGroup;->initViewGroup()V
 
     .line 287
@@ -213,13 +237,15 @@
 .end method
 
 .method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
-    .locals 1
+    .locals 2
     .parameter "context"
     .parameter "attrs"
     .parameter "defStyle"
 
     .prologue
-    .line 291
+    const/4 v1, 0x0
+
+    .line 297
     invoke-direct {p0, p1, p2, p3}, Landroid/view/View;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
 
     .line 95
@@ -236,7 +262,13 @@
 
     iput-object v0, p0, Landroid/view/ViewGroup;->mCachePaint:Landroid/graphics/Paint;
 
-    .line 292
+    .line 282
+    iput-boolean v1, p0, Landroid/view/ViewGroup;->mWholeAnimationCacheEnabled:Z
+
+    .line 283
+    iput-boolean v1, p0, Landroid/view/ViewGroup;->mDoingAnimationWhenWholeAnimationCacheEnabled:Z
+
+    .line 298
     invoke-direct {p0}, Landroid/view/ViewGroup;->initViewGroup()V
 
     .line 293
@@ -2958,19 +2990,11 @@
 .end method
 
 .method protected dispatchDraw(Landroid/graphics/Canvas;)V
-    .locals 26
+    .locals 25
     .parameter "canvas"
 
     .prologue
-    .line 1307
-    move-object/from16 v0, p0
-
-    iget v0, v0, Landroid/view/ViewGroup;->mChildrenCount:I
-
-    move v10, v0
-
-    .line 1308
-    .local v10, count:I
+    .line 1327
     move-object/from16 v0, p0
 
     iget-object v0, v0, Landroid/view/ViewGroup;->mChildren:[Landroid/view/View;
@@ -2983,56 +3007,62 @@
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v16, v0
+    move v15, v0
 
-    .line 1311
-    .local v16, flags:I
-    and-int/lit8 v21, v16, 0x8
+    .line 1330
+    .local v15, flags:I
+    and-int/lit8 v20, v15, 0x8
 
-    if-eqz v21, :cond_5
+    if-eqz v20, :cond_5
 
     invoke-virtual/range {p0 .. p0}, Landroid/view/ViewGroup;->canAnimate()Z
 
-    move-result v21
+    move-result v20
 
-    if-eqz v21, :cond_5
+    if-eqz v20, :cond_5
 
-    .line 1312
+    .line 1331
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, 0x40
+    and-int/lit8 v20, v20, 0x40
 
-    const/16 v22, 0x40
+    const/16 v21, 0x40
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
-    move/from16 v1, v22
+    move/from16 v1, v21
 
     if-ne v0, v1, :cond_1
 
-    const/16 v21, 0x1
+    const/16 v20, 0x1
 
-    move/from16 v5, v21
+    move/from16 v5, v20
 
-    .line 1314
+    .line 1333
     .local v5, cache:Z
     :goto_0
-    const/16 v17, 0x0
+    const/16 v16, 0x0
 
-    .local v17, i:I
+    .local v16, i:I
     :goto_1
-    move/from16 v0, v17
+    move-object/from16 v0, p0
 
-    move v1, v10
+    iget v0, v0, Landroid/view/ViewGroup;->mChildrenCount:I
+
+    move/from16 v20, v0
+
+    move/from16 v0, v16
+
+    move/from16 v1, v20
 
     if-ge v0, v1, :cond_2
 
-    .line 1315
-    aget-object v6, v7, v17
+    .line 1334
+    aget-object v6, v7, v16
 
     .line 1316
     .local v6, child:Landroid/view/View;
@@ -3040,28 +3070,34 @@
 
     iget v0, v0, Landroid/view/View;->mViewFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, 0xc
+    and-int/lit8 v20, v20, 0xc
 
-    if-nez v21, :cond_0
+    if-nez v20, :cond_0
 
     .line 1317
     invoke-virtual {v6}, Landroid/view/View;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
 
-    move-result-object v19
+    move-result-object v18
 
-    .line 1318
-    .local v19, params:Landroid/view/ViewGroup$LayoutParams;
+    .line 1337
+    .local v18, params:Landroid/view/ViewGroup$LayoutParams;
+    move-object/from16 v0, p0
+
+    iget v0, v0, Landroid/view/ViewGroup;->mChildrenCount:I
+
+    move/from16 v20, v0
+
     move-object/from16 v0, p0
 
     move-object v1, v6
 
-    move-object/from16 v2, v19
+    move-object/from16 v2, v18
 
-    move/from16 v3, v17
+    move/from16 v3, v16
 
-    move v4, v10
+    move/from16 v4, v20
 
     invoke-virtual {v0, v1, v2, v3, v4}, Landroid/view/ViewGroup;->attachLayoutAnimationParameters(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;II)V
 
@@ -3075,45 +3111,45 @@
     .line 1320
     if-eqz v5, :cond_0
 
-    .line 1321
-    const/16 v21, 0x1
+    .line 1340
+    const/16 v20, 0x1
 
     move-object v0, v6
 
-    move/from16 v1, v21
+    move/from16 v1, v20
 
     invoke-virtual {v0, v1}, Landroid/view/View;->setDrawingCacheEnabled(Z)V
 
-    .line 1322
-    const/16 v21, 0x1
+    .line 1341
+    const/16 v20, 0x1
 
     move-object v0, v6
 
-    move/from16 v1, v21
+    move/from16 v1, v20
 
     invoke-virtual {v0, v1}, Landroid/view/View;->buildDrawingCache(Z)V
 
-    .line 1314
-    .end local v19           #params:Landroid/view/ViewGroup$LayoutParams;
+    .line 1333
+    .end local v18           #params:Landroid/view/ViewGroup$LayoutParams;
     :cond_0
-    add-int/lit8 v17, v17, 0x1
+    add-int/lit8 v16, v16, 0x1
 
     goto :goto_1
 
     .line 1312
     .end local v5           #cache:Z
     .end local v6           #child:Landroid/view/View;
-    .end local v17           #i:I
+    .end local v16           #i:I
     :cond_1
-    const/16 v21, 0x0
+    const/16 v20, 0x0
 
-    move/from16 v5, v21
+    move/from16 v5, v20
 
     goto :goto_0
 
-    .line 1327
+    .line 1346
     .restart local v5       #cache:Z
-    .restart local v17       #i:I
+    .restart local v16       #i:I
     :cond_2
     move-object/from16 v0, p0
 
@@ -3121,153 +3157,167 @@
 
     move-object v9, v0
 
-    .line 1328
+    .line 1347
     .local v9, controller:Landroid/view/animation/LayoutAnimationController;
     invoke-virtual {v9}, Landroid/view/animation/LayoutAnimationController;->willOverlap()Z
 
-    move-result v21
+    move-result v20
 
-    if-eqz v21, :cond_3
+    if-eqz v20, :cond_3
 
-    .line 1329
+    .line 1348
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     or-int/lit16 v0, v0, 0x80
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     move-object/from16 v1, p0
 
     iput v0, v1, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    .line 1332
+    .line 1351
     :cond_3
     invoke-virtual {v9}, Landroid/view/animation/LayoutAnimationController;->start()V
 
-    .line 1334
+    .line 1353
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, -0x9
+    and-int/lit8 v20, v20, -0x9
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     move-object/from16 v1, p0
 
     iput v0, v1, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    .line 1335
+    .line 1354
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, -0x11
+    and-int/lit8 v20, v20, -0x11
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     move-object/from16 v1, p0
 
     iput v0, v1, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    .line 1337
+    .line 1356
     if-eqz v5, :cond_4
 
-    .line 1338
+    .line 1357
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    const v22, 0x8000
+    const v21, 0x8000
 
-    or-int v21, v21, v22
+    or-int v20, v20, v21
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     move-object/from16 v1, p0
 
     iput v0, v1, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    .line 1341
+    .line 1360
     :cond_4
     move-object/from16 v0, p0
 
     iget-object v0, v0, Landroid/view/ViewGroup;->mAnimationListener:Landroid/view/animation/Animation$AnimationListener;
 
-    move-object/from16 v21, v0
+    move-object/from16 v20, v0
 
-    if-eqz v21, :cond_5
+    if-eqz v20, :cond_5
 
-    .line 1342
+    .line 1361
     move-object/from16 v0, p0
 
     iget-object v0, v0, Landroid/view/ViewGroup;->mAnimationListener:Landroid/view/animation/Animation$AnimationListener;
 
-    move-object/from16 v21, v0
+    move-object/from16 v20, v0
 
     invoke-virtual {v9}, Landroid/view/animation/LayoutAnimationController;->getAnimation()Landroid/view/animation/Animation;
 
-    move-result-object v22
+    move-result-object v21
 
-    invoke-interface/range {v21 .. v22}, Landroid/view/animation/Animation$AnimationListener;->onAnimationStart(Landroid/view/animation/Animation;)V
+    invoke-interface/range {v20 .. v21}, Landroid/view/animation/Animation$AnimationListener;->onAnimationStart(Landroid/view/animation/Animation;)V
 
-    .line 1346
+    .line 1365
     .end local v5           #cache:Z
     .end local v9           #controller:Landroid/view/animation/LayoutAnimationController;
-    .end local v17           #i:I
+    .end local v16           #i:I
     :cond_5
-    const/16 v20, 0x0
+    const/16 v19, 0x0
 
-    .line 1347
-    .local v20, saveCount:I
-    and-int/lit8 v21, v16, 0x22
+    .line 1366
+    .local v19, saveCount:I
+    and-int/lit8 v20, v15, 0x22
 
-    const/16 v22, 0x22
+    const/16 v21, 0x22
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
-    move/from16 v1, v22
+    move/from16 v1, v21
 
     if-ne v0, v1, :cond_9
 
-    const/16 v21, 0x1
+    const/16 v20, 0x1
 
-    move/from16 v8, v21
+    move/from16 v8, v20
 
-    .line 1348
+    .line 1367
     .local v8, clipToPadding:Z
     :goto_2
     if-eqz v8, :cond_6
 
-    .line 1349
+    .line 1368
     invoke-virtual/range {p1 .. p1}, Landroid/graphics/Canvas;->save()I
 
-    move-result v20
+    move-result v19
 
-    .line 1350
+    .line 1369
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mScrollX:I
+
+    move/from16 v20, v0
+
+    move-object/from16 v0, p0
+
+    iget v0, v0, Landroid/view/ViewGroup;->mPaddingLeft:I
+
+    move/from16 v21, v0
+
+    add-int v20, v20, v21
+
+    move-object/from16 v0, p0
+
+    iget v0, v0, Landroid/view/ViewGroup;->mScrollY:I
 
     move/from16 v21, v0
 
     move-object/from16 v0, p0
 
-    iget v0, v0, Landroid/view/ViewGroup;->mPaddingLeft:I
+    iget v0, v0, Landroid/view/ViewGroup;->mPaddingTop:I
 
     move/from16 v22, v0
 
@@ -3275,13 +3325,13 @@
 
     move-object/from16 v0, p0
 
-    iget v0, v0, Landroid/view/ViewGroup;->mScrollY:I
+    iget v0, v0, Landroid/view/ViewGroup;->mScrollX:I
 
     move/from16 v22, v0
 
     move-object/from16 v0, p0
 
-    iget v0, v0, Landroid/view/ViewGroup;->mPaddingTop:I
+    iget v0, v0, Landroid/view/ViewGroup;->mRight:I
 
     move/from16 v23, v0
 
@@ -3289,13 +3339,29 @@
 
     move-object/from16 v0, p0
 
-    iget v0, v0, Landroid/view/ViewGroup;->mScrollX:I
+    iget v0, v0, Landroid/view/ViewGroup;->mLeft:I
+
+    move/from16 v23, v0
+
+    sub-int v22, v22, v23
+
+    move-object/from16 v0, p0
+
+    iget v0, v0, Landroid/view/ViewGroup;->mPaddingRight:I
+
+    move/from16 v23, v0
+
+    sub-int v22, v22, v23
+
+    move-object/from16 v0, p0
+
+    iget v0, v0, Landroid/view/ViewGroup;->mScrollY:I
 
     move/from16 v23, v0
 
     move-object/from16 v0, p0
 
-    iget v0, v0, Landroid/view/ViewGroup;->mRight:I
+    iget v0, v0, Landroid/view/ViewGroup;->mBottom:I
 
     move/from16 v24, v0
 
@@ -3303,145 +3369,121 @@
 
     move-object/from16 v0, p0
 
-    iget v0, v0, Landroid/view/ViewGroup;->mLeft:I
-
-    move/from16 v24, v0
-
-    sub-int v23, v23, v24
-
-    move-object/from16 v0, p0
-
-    iget v0, v0, Landroid/view/ViewGroup;->mPaddingRight:I
-
-    move/from16 v24, v0
-
-    sub-int v23, v23, v24
-
-    move-object/from16 v0, p0
-
-    iget v0, v0, Landroid/view/ViewGroup;->mScrollY:I
-
-    move/from16 v24, v0
-
-    move-object/from16 v0, p0
-
-    iget v0, v0, Landroid/view/ViewGroup;->mBottom:I
-
-    move/from16 v25, v0
-
-    add-int v24, v24, v25
-
-    move-object/from16 v0, p0
-
     iget v0, v0, Landroid/view/ViewGroup;->mTop:I
 
-    move/from16 v25, v0
+    move/from16 v24, v0
 
-    sub-int v24, v24, v25
+    sub-int v23, v23, v24
 
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mPaddingBottom:I
 
-    move/from16 v25, v0
+    move/from16 v24, v0
 
-    sub-int v24, v24, v25
+    sub-int v23, v23, v24
 
     move-object/from16 v0, p1
 
-    move/from16 v1, v21
+    move/from16 v1, v20
 
-    move/from16 v2, v22
+    move/from16 v2, v21
 
-    move/from16 v3, v23
+    move/from16 v3, v22
 
-    move/from16 v4, v24
+    move/from16 v4, v23
 
     invoke-virtual {v0, v1, v2, v3, v4}, Landroid/graphics/Canvas;->clipRect(IIII)Z
 
-    .line 1357
+    .line 1376
     :cond_6
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mPrivateFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, -0x41
+    and-int/lit8 v20, v20, -0x41
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     move-object/from16 v1, p0
 
     iput v0, v1, Landroid/view/ViewGroup;->mPrivateFlags:I
 
-    .line 1358
+    .line 1377
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, -0x5
+    and-int/lit8 v20, v20, -0x5
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     move-object/from16 v1, p0
 
     iput v0, v1, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    .line 1360
-    const/16 v18, 0x0
+    .line 1379
+    const/16 v17, 0x0
 
-    .line 1361
-    .local v18, more:Z
+    .line 1380
+    .local v17, more:Z
     invoke-virtual/range {p0 .. p0}, Landroid/view/ViewGroup;->getDrawingTime()J
 
-    move-result-wide v13
+    move-result-wide v12
 
-    .line 1363
-    .local v13, drawingTime:J
-    move/from16 v0, v16
+    .line 1382
+    .local v12, drawingTime:J
+    move v0, v15
 
     and-int/lit16 v0, v0, 0x400
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    if-nez v21, :cond_a
+    if-nez v20, :cond_a
 
-    .line 1364
-    const/16 v17, 0x0
+    .line 1383
+    const/16 v16, 0x0
 
-    .restart local v17       #i:I
+    .restart local v16       #i:I
     :goto_3
-    move/from16 v0, v17
+    move-object/from16 v0, p0
 
-    move v1, v10
+    iget v0, v0, Landroid/view/ViewGroup;->mChildrenCount:I
+
+    move/from16 v20, v0
+
+    move/from16 v0, v16
+
+    move/from16 v1, v20
 
     if-ge v0, v1, :cond_d
 
-    .line 1365
-    aget-object v6, v7, v17
+    .line 1384
+    aget-object v6, v7, v16
 
-    .line 1366
+    .line 1385
     .restart local v6       #child:Landroid/view/View;
     move-object v0, v6
 
     iget v0, v0, Landroid/view/View;->mViewFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, 0xc
+    and-int/lit8 v20, v20, 0xc
 
-    if-eqz v21, :cond_7
+    if-eqz v20, :cond_7
 
     invoke-virtual {v6}, Landroid/view/View;->getAnimation()Landroid/view/animation/Animation;
 
-    move-result-object v21
+    move-result-object v20
 
-    if-eqz v21, :cond_8
+    if-eqz v20, :cond_8
 
-    .line 1367
+    .line 1386
     :cond_7
     move-object/from16 v0, p0
 
@@ -3449,80 +3491,92 @@
 
     move-object v2, v6
 
-    move-wide v3, v13
+    move-wide v3, v12
 
     invoke-virtual {v0, v1, v2, v3, v4}, Landroid/view/ViewGroup;->drawChild(Landroid/graphics/Canvas;Landroid/view/View;J)Z
 
-    move-result v21
+    move-result v20
 
-    or-int v18, v18, v21
+    or-int v17, v17, v20
 
-    .line 1364
+    .line 1383
     :cond_8
-    add-int/lit8 v17, v17, 0x1
+    add-int/lit8 v16, v16, 0x1
 
     goto :goto_3
 
-    .line 1347
+    .line 1366
     .end local v6           #child:Landroid/view/View;
     .end local v8           #clipToPadding:Z
-    .end local v13           #drawingTime:J
-    .end local v17           #i:I
-    .end local v18           #more:Z
+    .end local v12           #drawingTime:J
+    .end local v16           #i:I
+    .end local v17           #more:Z
     :cond_9
-    const/16 v21, 0x0
+    const/16 v20, 0x0
 
-    move/from16 v8, v21
+    move/from16 v8, v20
 
     goto/16 :goto_2
 
-    .line 1371
+    .line 1390
     .restart local v8       #clipToPadding:Z
-    .restart local v13       #drawingTime:J
-    .restart local v18       #more:Z
+    .restart local v12       #drawingTime:J
+    .restart local v17       #more:Z
     :cond_a
-    const/16 v17, 0x0
+    const/16 v16, 0x0
 
-    .restart local v17       #i:I
+    .restart local v16       #i:I
     :goto_4
-    move/from16 v0, v17
+    move-object/from16 v0, p0
 
-    move v1, v10
+    iget v0, v0, Landroid/view/ViewGroup;->mChildrenCount:I
+
+    move/from16 v20, v0
+
+    move/from16 v0, v16
+
+    move/from16 v1, v20
 
     if-ge v0, v1, :cond_d
 
-    .line 1372
+    .line 1391
     move-object/from16 v0, p0
 
-    move v1, v10
+    iget v0, v0, Landroid/view/ViewGroup;->mChildrenCount:I
 
-    move/from16 v2, v17
+    move/from16 v20, v0
+
+    move-object/from16 v0, p0
+
+    move/from16 v1, v20
+
+    move/from16 v2, v16
 
     invoke-virtual {v0, v1, v2}, Landroid/view/ViewGroup;->getChildDrawingOrder(II)I
 
-    move-result v21
+    move-result v20
 
-    aget-object v6, v7, v21
+    aget-object v6, v7, v20
 
-    .line 1373
+    .line 1392
     .restart local v6       #child:Landroid/view/View;
     move-object v0, v6
 
     iget v0, v0, Landroid/view/View;->mViewFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    and-int/lit8 v21, v21, 0xc
+    and-int/lit8 v20, v20, 0xc
 
-    if-eqz v21, :cond_b
+    if-eqz v20, :cond_b
 
     invoke-virtual {v6}, Landroid/view/View;->getAnimation()Landroid/view/animation/Animation;
 
-    move-result-object v21
+    move-result-object v20
 
-    if-eqz v21, :cond_c
+    if-eqz v20, :cond_c
 
-    .line 1374
+    .line 1393
     :cond_b
     move-object/from16 v0, p0
 
@@ -3530,59 +3584,59 @@
 
     move-object v2, v6
 
-    move-wide v3, v13
+    move-wide v3, v12
 
     invoke-virtual {v0, v1, v2, v3, v4}, Landroid/view/ViewGroup;->drawChild(Landroid/graphics/Canvas;Landroid/view/View;J)Z
 
-    move-result v21
+    move-result v20
 
-    or-int v18, v18, v21
+    or-int v17, v17, v20
 
-    .line 1371
+    .line 1390
     :cond_c
-    add-int/lit8 v17, v17, 0x1
+    add-int/lit8 v16, v16, 0x1
 
     goto :goto_4
 
-    .line 1380
+    .line 1399
     .end local v6           #child:Landroid/view/View;
     :cond_d
     move-object/from16 v0, p0
 
     iget-object v0, v0, Landroid/view/ViewGroup;->mDisappearingChildren:Ljava/util/ArrayList;
 
-    move-object/from16 v21, v0
+    move-object/from16 v20, v0
 
-    if-eqz v21, :cond_e
+    if-eqz v20, :cond_e
 
-    .line 1381
+    .line 1400
     move-object/from16 v0, p0
 
     iget-object v0, v0, Landroid/view/ViewGroup;->mDisappearingChildren:Ljava/util/ArrayList;
 
-    move-object v11, v0
+    move-object v10, v0
 
-    .line 1382
-    .local v11, disappearingChildren:Ljava/util/ArrayList;,"Ljava/util/ArrayList<Landroid/view/View;>;"
-    invoke-virtual {v11}, Ljava/util/ArrayList;->size()I
+    .line 1401
+    .local v10, disappearingChildren:Ljava/util/ArrayList;,"Ljava/util/ArrayList<Landroid/view/View;>;"
+    invoke-virtual {v10}, Ljava/util/ArrayList;->size()I
 
-    move-result v21
+    move-result v20
 
-    const/16 v22, 0x1
+    const/16 v21, 0x1
 
-    sub-int v12, v21, v22
+    sub-int v11, v20, v21
 
-    .line 1384
-    .local v12, disappearingCount:I
-    move/from16 v17, v12
+    .line 1403
+    .local v11, disappearingCount:I
+    move/from16 v16, v11
 
     :goto_5
-    if-ltz v17, :cond_e
+    if-ltz v16, :cond_e
 
-    .line 1385
-    move-object v0, v11
+    .line 1404
+    move-object v0, v10
 
-    move/from16 v1, v17
+    move/from16 v1, v16
 
     invoke-virtual {v0, v1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
 
@@ -3590,7 +3644,7 @@
 
     check-cast v6, Landroid/view/View;
 
-    .line 1386
+    .line 1405
     .restart local v6       #child:Landroid/view/View;
     move-object/from16 v0, p0
 
@@ -3598,121 +3652,121 @@
 
     move-object v2, v6
 
-    move-wide v3, v13
+    move-wide v3, v12
 
     invoke-virtual {v0, v1, v2, v3, v4}, Landroid/view/ViewGroup;->drawChild(Landroid/graphics/Canvas;Landroid/view/View;J)Z
 
-    move-result v21
+    move-result v20
 
-    or-int v18, v18, v21
+    or-int v17, v17, v20
 
-    .line 1384
-    add-int/lit8 v17, v17, -0x1
+    .line 1403
+    add-int/lit8 v16, v16, -0x1
 
     goto :goto_5
 
-    .line 1390
+    .line 1409
     .end local v6           #child:Landroid/view/View;
-    .end local v11           #disappearingChildren:Ljava/util/ArrayList;,"Ljava/util/ArrayList<Landroid/view/View;>;"
-    .end local v12           #disappearingCount:I
+    .end local v10           #disappearingChildren:Ljava/util/ArrayList;,"Ljava/util/ArrayList<Landroid/view/View;>;"
+    .end local v11           #disappearingCount:I
     :cond_e
     if-eqz v8, :cond_f
 
-    .line 1391
+    .line 1410
     move-object/from16 v0, p1
 
-    move/from16 v1, v20
+    move/from16 v1, v19
 
     invoke-virtual {v0, v1}, Landroid/graphics/Canvas;->restoreToCount(I)V
 
-    .line 1395
+    .line 1414
     :cond_f
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v16, v0
+    move v15, v0
 
-    .line 1397
-    and-int/lit8 v21, v16, 0x4
+    .line 1416
+    and-int/lit8 v20, v15, 0x4
 
-    const/16 v22, 0x4
+    const/16 v21, 0x4
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
-    move/from16 v1, v22
+    move/from16 v1, v21
 
     if-ne v0, v1, :cond_10
 
-    .line 1398
+    .line 1417
     invoke-virtual/range {p0 .. p0}, Landroid/view/ViewGroup;->invalidate()V
 
-    .line 1401
+    .line 1420
     :cond_10
-    and-int/lit8 v21, v16, 0x10
+    and-int/lit8 v20, v15, 0x10
 
-    if-nez v21, :cond_11
+    if-nez v20, :cond_11
 
-    move/from16 v0, v16
+    move v0, v15
 
     and-int/lit16 v0, v0, 0x200
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    if-nez v21, :cond_11
+    if-nez v20, :cond_11
 
     move-object/from16 v0, p0
 
     iget-object v0, v0, Landroid/view/ViewGroup;->mLayoutAnimationController:Landroid/view/animation/LayoutAnimationController;
 
-    move-object/from16 v21, v0
+    move-object/from16 v20, v0
 
-    invoke-virtual/range {v21 .. v21}, Landroid/view/animation/LayoutAnimationController;->isDone()Z
+    invoke-virtual/range {v20 .. v20}, Landroid/view/animation/LayoutAnimationController;->isDone()Z
 
-    move-result v21
+    move-result v20
 
-    if-eqz v21, :cond_11
+    if-eqz v20, :cond_11
 
-    if-nez v18, :cond_11
+    if-nez v17, :cond_11
 
-    .line 1406
+    .line 1425
     move-object/from16 v0, p0
 
     iget v0, v0, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     or-int/lit16 v0, v0, 0x200
 
-    move/from16 v21, v0
+    move/from16 v20, v0
 
-    move/from16 v0, v21
+    move/from16 v0, v20
 
     move-object/from16 v1, p0
 
     iput v0, v1, Landroid/view/ViewGroup;->mGroupFlags:I
 
-    .line 1407
-    new-instance v15, Landroid/view/ViewGroup$1;
+    .line 1426
+    new-instance v14, Landroid/view/ViewGroup$1;
 
-    move-object v0, v15
+    move-object v0, v14
 
     move-object/from16 v1, p0
 
     invoke-direct {v0, v1}, Landroid/view/ViewGroup$1;-><init>(Landroid/view/ViewGroup;)V
 
-    .line 1412
-    .local v15, end:Ljava/lang/Runnable;
+    .line 1431
+    .local v14, end:Ljava/lang/Runnable;
     move-object/from16 v0, p0
 
-    move-object v1, v15
+    move-object v1, v14
 
     invoke-virtual {v0, v1}, Landroid/view/ViewGroup;->post(Ljava/lang/Runnable;)Z
 
-    .line 1414
-    .end local v15           #end:Ljava/lang/Runnable;
+    .line 1433
+    .end local v14           #end:Ljava/lang/Runnable;
     :cond_11
     return-void
 .end method
@@ -8233,10 +8287,12 @@
 .end method
 
 .method protected onAnimationEnd()V
-    .locals 2
+    .locals 3
 
     .prologue
-    .line 1263
+    const/4 v2, 0x0
+
+    .line 1269
     invoke-super {p0}, Landroid/view/View;->onAnimationEnd()V
 
     .line 1266
@@ -8264,13 +8320,39 @@
 
     if-nez v0, :cond_0
 
-    .line 1270
-    const/4 v0, 0x0
+    .line 1276
+    invoke-virtual {p0, v2}, Landroid/view/ViewGroup;->setChildrenDrawingCacheEnabled(Z)V
 
-    invoke-virtual {p0, v0}, Landroid/view/ViewGroup;->setChildrenDrawingCacheEnabled(Z)V
-
-    .line 1273
+    .line 1280
     :cond_0
+    iget-boolean v0, p0, Landroid/view/ViewGroup;->mWholeAnimationCacheEnabled:Z
+
+    if-eqz v0, :cond_2
+
+    .line 1281
+    iget-boolean v0, p0, Landroid/view/ViewGroup;->mPreviousAnimationCacheStatus:Z
+
+    invoke-virtual {p0, v0}, Landroid/view/ViewGroup;->setAnimationCacheEnabled(Z)V
+
+    .line 1282
+    iget-boolean v0, p0, Landroid/view/ViewGroup;->mPreviousDrawingCacheStatus:Z
+
+    invoke-virtual {p0, v0}, Landroid/view/ViewGroup;->setDrawingCacheEnabled(Z)V
+
+    .line 1283
+    iget-boolean v0, p0, Landroid/view/ViewGroup;->mPreviousDrawingCacheStatus:Z
+
+    if-nez v0, :cond_1
+
+    .line 1284
+    invoke-virtual {p0}, Landroid/view/ViewGroup;->destroyDrawingCache()V
+
+    .line 1286
+    :cond_1
+    iput-boolean v2, p0, Landroid/view/ViewGroup;->mDoingAnimationWhenWholeAnimationCacheEnabled:Z
+
+    .line 1288
+    :cond_2
     return-void
 .end method
 
@@ -8283,7 +8365,13 @@
     .line 1242
     invoke-super {p0}, Landroid/view/View;->onAnimationStart()V
 
-    .line 1245
+    .line 1251
+    invoke-virtual {p0}, Landroid/view/ViewGroup;->isDrawingCacheEnabled()Z
+
+    move-result v4
+
+    if-nez v4, :cond_2
+
     iget v4, p0, Landroid/view/ViewGroup;->mGroupFlags:I
 
     and-int/lit8 v4, v4, 0x40
@@ -9740,6 +9828,27 @@
     return-void
 .end method
 
+.method public setWholeAnimationCacheEnabled(Z)V
+    .locals 1
+    .parameter "isEnable"
+
+    .prologue
+    .line 3476
+    iget-boolean v0, p0, Landroid/view/ViewGroup;->mDoingAnimationWhenWholeAnimationCacheEnabled:Z
+
+    if-eqz v0, :cond_0
+
+    .line 3480
+    :goto_0
+    return-void
+
+    .line 3479
+    :cond_0
+    iput-boolean p1, p0, Landroid/view/ViewGroup;->mWholeAnimationCacheEnabled:Z
+
+    goto :goto_0
+.end method
+
 .method public showContextMenuForChild(Landroid/view/View;)Z
     .locals 1
     .parameter "originalView"
@@ -9767,6 +9876,54 @@
     const/4 v0, 0x0
 
     goto :goto_0
+.end method
+
+.method public startAnimation(Landroid/view/animation/Animation;)V
+    .locals 2
+    .parameter "animation"
+
+    .prologue
+    const/4 v1, 0x1
+
+    .line 3484
+    iget-boolean v0, p0, Landroid/view/ViewGroup;->mWholeAnimationCacheEnabled:Z
+
+    if-eqz v0, :cond_0
+
+    .line 3485
+    iput-boolean v1, p0, Landroid/view/ViewGroup;->mDoingAnimationWhenWholeAnimationCacheEnabled:Z
+
+    .line 3486
+    invoke-virtual {p0}, Landroid/view/ViewGroup;->isAnimationCacheEnabled()Z
+
+    move-result v0
+
+    iput-boolean v0, p0, Landroid/view/ViewGroup;->mPreviousAnimationCacheStatus:Z
+
+    .line 3487
+    invoke-virtual {p0}, Landroid/view/ViewGroup;->isDrawingCacheEnabled()Z
+
+    move-result v0
+
+    iput-boolean v0, p0, Landroid/view/ViewGroup;->mPreviousDrawingCacheStatus:Z
+
+    .line 3488
+    const/4 v0, 0x0
+
+    invoke-virtual {p0, v0}, Landroid/view/ViewGroup;->setAnimationCacheEnabled(Z)V
+
+    .line 3489
+    invoke-virtual {p0, v1}, Landroid/view/ViewGroup;->setDrawingCacheEnabled(Z)V
+
+    .line 3490
+    invoke-virtual {p0, v1}, Landroid/view/ViewGroup;->buildDrawingCache(Z)V
+
+    .line 3492
+    :cond_0
+    invoke-super {p0, p1}, Landroid/view/View;->startAnimation(Landroid/view/animation/Animation;)V
+
+    .line 3493
+    return-void
 .end method
 
 .method public startLayoutAnimation()V

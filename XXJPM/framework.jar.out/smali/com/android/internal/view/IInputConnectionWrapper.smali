@@ -730,7 +730,7 @@
     :cond_b
     const-string v8, "IInputConnectionWrapper"
 
-    const-string v8, "setSelection on inactive InputConnection"
+    const-string/jumbo v8, "setSelection on inactive InputConnection"
 
     invoke-static {v11, v8}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
@@ -1390,6 +1390,8 @@
     goto :goto_5
 
     .line 186
+    nop
+
     :sswitch_data_0
     .sparse-switch
         0xa -> :sswitch_0

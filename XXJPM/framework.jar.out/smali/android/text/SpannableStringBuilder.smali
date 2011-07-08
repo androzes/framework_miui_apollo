@@ -2325,7 +2325,7 @@
 
     .line 522
     .local v10, nend:I
-    const-string v5, "setSpan"
+    const-string/jumbo v5, "setSpan"
 
     move-object/from16 v0, p0
 

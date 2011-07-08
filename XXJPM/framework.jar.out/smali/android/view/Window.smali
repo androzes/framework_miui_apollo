@@ -404,6 +404,35 @@
     return v0
 .end method
 
+.method public isFeatureSet(I)Z
+    .locals 3
+    .parameter "featureId"
+
+    .prologue
+    const/4 v2, 0x1
+
+    .line 990
+    shl-int v0, v2, p1
+
+    .line 991
+    .local v0, flag:I
+    iget v1, p0, Landroid/view/Window;->mFeatures:I
+
+    and-int/2addr v1, v0
+
+    if-eqz v1, :cond_0
+
+    move v1, v2
+
+    :goto_0
+    return v1
+
+    :cond_0
+    const/4 v1, 0x0
+
+    goto :goto_0
+.end method
+
 .method public abstract isFloating()Z
 .end method
 

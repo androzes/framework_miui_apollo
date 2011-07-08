@@ -441,7 +441,7 @@
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v5, "setScanMode is called "
+    const-string/jumbo v5, "setScanMode is called "
 
     invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -622,6 +622,8 @@
     throw v3
 
     .line 1391
+    nop
+
     :pswitch_data_0
     .packed-switch 0x14
         :pswitch_1

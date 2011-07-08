@@ -928,7 +928,7 @@
     :try_start_1
     const-string v2, "FmReceiver"
 
-    const-string v3, "setStepSize() failed"
+    const-string/jumbo v3, "setStepSize() failed"
 
     invoke-static {v2, v3, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_1
@@ -986,7 +986,7 @@
     :try_start_1
     const-string v2, "FmReceiver"
 
-    const-string v3, "setWorldRegion() failed"
+    const-string/jumbo v3, "setWorldRegion() failed"
 
     invoke-static {v2, v3, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_1

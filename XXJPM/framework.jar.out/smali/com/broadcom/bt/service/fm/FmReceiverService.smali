@@ -2354,7 +2354,7 @@
     :try_start_0
     const-string v3, "FmReceiverService"
 
-    const-string v4, "setStepSize()"
+    const-string/jumbo v4, "setStepSize()"
 
     invoke-static {v3, v4}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_0
@@ -2528,7 +2528,7 @@
     :try_start_4
     const-string v3, "FmReceiverService"
 
-    const-string v4, "setScanStepNative failed"
+    const-string/jumbo v4, "setScanStepNative failed"
 
     invoke-static {v3, v4, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_4
@@ -2555,7 +2555,7 @@
     :try_start_0
     const-string v3, "FmReceiverService"
 
-    const-string v4, "setWorldRegion()"
+    const-string/jumbo v4, "setWorldRegion()"
 
     invoke-static {v3, v4}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_0

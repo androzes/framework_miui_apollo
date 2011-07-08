@@ -697,7 +697,7 @@
 
     const-string v1, "application/vnd.stardivision.writer-global"
 
-    const-string v2, "sgl"
+    const-string/jumbo v2, "sgl"
 
     invoke-direct {v0, v1, v2}, Landroid/webkit/MimeTypeMap;->loadEntry(Ljava/lang/String;Ljava/lang/String;)V
 
@@ -1030,7 +1030,7 @@
 
     const-string v1, "application/x-go-sgf"
 
-    const-string v2, "sgf"
+    const-string/jumbo v2, "sgf"
 
     invoke-direct {v0, v1, v2}, Landroid/webkit/MimeTypeMap;->loadEntry(Ljava/lang/String;Ljava/lang/String;)V
 

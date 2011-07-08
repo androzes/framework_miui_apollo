@@ -3570,7 +3570,7 @@
 
     .line 1804
     .restart local v5       #qb:Landroid/database/sqlite/SQLiteQueryBuilder;
-    const-string v7, "settings"
+    const-string/jumbo v7, "settings"
 
     invoke-virtual {v5, v7}, Landroid/database/sqlite/SQLiteQueryBuilder;->setTables(Ljava/lang/String;)V
 
@@ -10218,7 +10218,7 @@
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "setSyncAutomatically: "
+    const-string/jumbo v2, "setSyncAutomatically: "
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -10282,7 +10282,7 @@
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v4, "setSyncAutomatically: already set to "
+    const-string/jumbo v4, "setSyncAutomatically: already set to "
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

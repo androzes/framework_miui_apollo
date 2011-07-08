@@ -319,7 +319,7 @@
 
     const/4 v8, 0x0
 
-    const-string v9, "sh"
+    const-string/jumbo v9, "sh"
 
     aput-object v9, v6, v8
 
@@ -1271,7 +1271,7 @@
 
     const/4 v8, 0x0
 
-    const-string v9, "sh"
+    const-string/jumbo v9, "sh"
 
     aput-object v9, v1, v8
 

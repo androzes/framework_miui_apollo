@@ -10180,6 +10180,25 @@
     return-object v0
 .end method
 
+.method getTopLevelResources(Ljava/lang/String;Landroid/app/ActivityThread$PackageInfo;Ljava/lang/String;)Landroid/content/res/Resources;
+    .locals 1
+    .parameter "resDir"
+    .parameter "pkgInfo"
+    .parameter "packageName"
+
+    .prologue
+    .line 247
+    invoke-static {p2}, Landroid/app/ActivityThread$PackageInfo;->access$000(Landroid/app/ActivityThread$PackageInfo;)Landroid/content/res/CompatibilityInfo;
+
+    move-result-object v0
+
+    invoke-virtual {p0, p1, v0, p3}, Landroid/app/ActivityThread;->getTopLevelResources(Ljava/lang/String;Landroid/content/res/CompatibilityInfo;Ljava/lang/String;)Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
 .method getTopLevelResources(Ljava/lang/String;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
     .locals 9
     .parameter "resDir"
@@ -10399,6 +10418,241 @@
     goto :goto_1
 
     .line 239
+    .end local v1           #existing:Landroid/content/res/Resources;
+    .end local v5           #wr:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
+    :catchall_1
+    move-exception v6
+
+    monitor-exit v7
+    :try_end_2
+    .catchall {:try_start_2 .. :try_end_2} :catchall_1
+
+    throw v6
+.end method
+
+.method getTopLevelResources(Ljava/lang/String;Landroid/content/res/CompatibilityInfo;Ljava/lang/String;)Landroid/content/res/Resources;
+    .locals 9
+    .parameter "resDir"
+    .parameter "compInfo"
+    .parameter "packageName"
+
+    .prologue
+    const/4 v8, 0x0
+
+    .line 187
+    new-instance v2, Landroid/app/ActivityThread$ResourcesKey;
+
+    iget v6, p2, Landroid/content/res/CompatibilityInfo;->applicationScale:F
+
+    invoke-direct {v2, p1, v6}, Landroid/app/ActivityThread$ResourcesKey;-><init>(Ljava/lang/String;F)V
+
+    .line 189
+    .local v2, key:Landroid/app/ActivityThread$ResourcesKey;
+    iget-object v7, p0, Landroid/app/ActivityThread;->mPackages:Ljava/util/HashMap;
+
+    monitor-enter v7
+
+    .line 195
+    :try_start_0
+    iget-object v6, p0, Landroid/app/ActivityThread;->mActiveResources:Ljava/util/HashMap;
+
+    invoke-virtual {v6, v2}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v5
+
+    check-cast v5, Ljava/lang/ref/WeakReference;
+
+    .line 196
+    .local v5, wr:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
+    if-eqz v5, :cond_0
+
+    invoke-virtual {v5}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
+
+    move-result-object v6
+
+    check-cast v6, Landroid/content/res/Resources;
+
+    move-object v4, v6
+
+    .line 198
+    .local v4, r:Landroid/content/res/Resources;
+    :goto_0
+    if-eqz v4, :cond_1
+
+    invoke-virtual {v4}, Landroid/content/res/Resources;->getAssets()Landroid/content/res/AssetManager;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Landroid/content/res/AssetManager;->isUpToDate()Z
+
+    move-result v6
+
+    if-eqz v6, :cond_1
+
+    .line 203
+    monitor-exit v7
+
+    move-object v6, v4
+
+    .line 239
+    :goto_1
+    return-object v6
+
+    .end local v4           #r:Landroid/content/res/Resources;
+    :cond_0
+    move-object v4, v8
+
+    .line 196
+    goto :goto_0
+
+    .line 205
+    .restart local v4       #r:Landroid/content/res/Resources;
+    :cond_1
+    monitor-exit v7
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    .line 212
+    new-instance v0, Landroid/content/res/AssetManager;
+
+    invoke-direct {v0}, Landroid/content/res/AssetManager;-><init>()V
+
+    .line 213
+    .local v0, assets:Landroid/content/res/AssetManager;
+    invoke-virtual {v0, p1}, Landroid/content/res/AssetManager;->addAssetPath(Ljava/lang/String;)I
+
+    move-result v6
+
+    if-nez v6, :cond_2
+
+    move-object v6, v8
+
+    .line 214
+    goto :goto_1
+
+    .line 205
+    .end local v0           #assets:Landroid/content/res/AssetManager;
+    .end local v4           #r:Landroid/content/res/Resources;
+    .end local v5           #wr:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
+    :catchall_0
+    move-exception v6
+
+    :try_start_1
+    monitor-exit v7
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    throw v6
+
+    .line 218
+    .restart local v0       #assets:Landroid/content/res/AssetManager;
+    .restart local v4       #r:Landroid/content/res/Resources;
+    .restart local v5       #wr:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
+    :cond_2
+    const/4 v6, 0x0
+
+    invoke-virtual {p0, v6}, Landroid/app/ActivityThread;->getDisplayMetricsLocked(Z)Landroid/util/DisplayMetrics;
+
+    move-result-object v3
+
+    .line 219
+    .local v3, metrics:Landroid/util/DisplayMetrics;
+    new-instance v4, Landroid/content/res/Resources;
+
+    .end local v4           #r:Landroid/content/res/Resources;
+    invoke-virtual {p0}, Landroid/app/ActivityThread;->getConfiguration()Landroid/content/res/Configuration;
+
+    move-result-object v6
+
+    invoke-direct {v4, v0, v3, v6, p2}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)V
+
+    .line 220
+    .restart local v4       #r:Landroid/content/res/Resources;
+    invoke-virtual {v4, p3}, Landroid/content/res/Resources;->setThemePath(Ljava/lang/String;)V
+
+    .line 227
+    iget-object v7, p0, Landroid/app/ActivityThread;->mPackages:Ljava/util/HashMap;
+
+    monitor-enter v7
+
+    .line 228
+    :try_start_2
+    iget-object v6, p0, Landroid/app/ActivityThread;->mActiveResources:Ljava/util/HashMap;
+
+    invoke-virtual {v6, v2}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v5
+
+    .end local v5           #wr:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
+    check-cast v5, Ljava/lang/ref/WeakReference;
+
+    .line 229
+    .restart local v5       #wr:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
+    if-eqz v5, :cond_3
+
+    invoke-virtual {v5}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
+
+    move-result-object v6
+
+    check-cast v6, Landroid/content/res/Resources;
+
+    move-object v1, v6
+
+    .line 230
+    .local v1, existing:Landroid/content/res/Resources;
+    :goto_2
+    if-eqz v1, :cond_4
+
+    invoke-virtual {v1}, Landroid/content/res/Resources;->getAssets()Landroid/content/res/AssetManager;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Landroid/content/res/AssetManager;->isUpToDate()Z
+
+    move-result v6
+
+    if-eqz v6, :cond_4
+
+    .line 233
+    invoke-virtual {v4}, Landroid/content/res/Resources;->getAssets()Landroid/content/res/AssetManager;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Landroid/content/res/AssetManager;->close()V
+
+    .line 234
+    monitor-exit v7
+
+    move-object v6, v1
+
+    goto :goto_1
+
+    .end local v1           #existing:Landroid/content/res/Resources;
+    :cond_3
+    move-object v1, v8
+
+    .line 229
+    goto :goto_2
+
+    .line 238
+    .restart local v1       #existing:Landroid/content/res/Resources;
+    :cond_4
+    iget-object v6, p0, Landroid/app/ActivityThread;->mActiveResources:Ljava/util/HashMap;
+
+    new-instance v8, Ljava/lang/ref/WeakReference;
+
+    invoke-direct {v8, v4}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+
+    invoke-virtual {v6, v2, v8}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    .line 239
+    monitor-exit v7
+
+    move-object v6, v4
+
+    goto :goto_1
+
+    .line 240
     .end local v1           #existing:Landroid/content/res/Resources;
     .end local v5           #wr:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
     :catchall_1

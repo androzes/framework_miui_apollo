@@ -1004,7 +1004,7 @@
 
     new-instance v1, Lcom/android/internal/telephony/IccException;
 
-    const-string v2, "setVoiceMailNumber not implemented"
+    const-string/jumbo v2, "setVoiceMailNumber not implemented"
 
     invoke-direct {v1, v2}, Lcom/android/internal/telephony/IccException;-><init>(Ljava/lang/String;)V
 

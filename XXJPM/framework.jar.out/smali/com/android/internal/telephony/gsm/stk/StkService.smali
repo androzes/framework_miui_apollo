@@ -1840,7 +1840,7 @@
     if-nez v3, :cond_5
 
     .line 1590
-    const-string v3, "setup call address is null"
+    const-string/jumbo v3, "setup call address is null"
 
     move-object/from16 v0, p0
 
@@ -1994,7 +1994,7 @@
 
     .line 1610
     :cond_7
-    const-string v3, "setup call"
+    const-string/jumbo v3, "setup call"
 
     move-object/from16 v0, p0
 
@@ -6514,7 +6514,7 @@
     if-nez v5, :cond_e
 
     .line 1361
-    const-string v5, "setup call address is null"
+    const-string/jumbo v5, "setup call address is null"
 
     move-object/from16 v0, p0
 
@@ -7398,6 +7398,8 @@
     goto/16 :goto_0
 
     .line 1216
+    nop
+
     nop
 
     :pswitch_data_0

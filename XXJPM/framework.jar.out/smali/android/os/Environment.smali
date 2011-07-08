@@ -60,6 +60,8 @@
 
 .field public static final MEDIA_UNMOUNTED:Ljava/lang/String; = "unmounted"
 
+.field private static final MIUI_EXTERNAL_STORAGE_DIRECTORY:Ljava/io/File; = null
+
 .field private static final OTG_STORAGE_ANDROID_DATA_DIRECTORY:Ljava/io/File; = null
 
 .field private static final OTG_STORAGE_ANDROID_MEDIA_DIRECTORY:Ljava/io/File; = null
@@ -182,6 +184,23 @@
     move-result-object v0
 
     sput-object v0, Landroid/os/Environment;->INTERNAL_STORAGE_DIRECTORY:Ljava/io/File;
+
+    .line 57
+    new-instance v0, Ljava/io/File;
+
+    const-string v1, "EXTERNAL_STORAGE"
+
+    const-string v1, "/mnt/sdcard"
+
+    invoke-static {v5, v4}, Landroid/os/Environment;->getDirectory(Ljava/lang/String;Ljava/lang/String;)Ljava/io/File;
+
+    move-result-object v1
+
+    const-string v2, "MIUI"
+
+    invoke-direct {v0, v1, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    sput-object v0, Landroid/os/Environment;->MIUI_EXTERNAL_STORAGE_DIRECTORY:Ljava/io/File;
 
     .line 63
     new-instance v0, Ljava/io/File;
@@ -800,6 +819,16 @@
     const-string/jumbo v1, "unmounted"
 
     goto :goto_0
+.end method
+
+.method public static getMIUIExternalStorageDirectory()Ljava/io/File;
+    .locals 1
+
+    .prologue
+    .line 98
+    sget-object v0, Landroid/os/Environment;->MIUI_EXTERNAL_STORAGE_DIRECTORY:Ljava/io/File;
+
+    return-object v0
 .end method
 
 .method public static getRootDirectory()Ljava/io/File;

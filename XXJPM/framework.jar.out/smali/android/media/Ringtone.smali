@@ -871,7 +871,7 @@
 
     .line 160
     .local v8, authority:Ljava/lang/String;
-    const-string v1, "settings"
+    const-string/jumbo v1, "settings"
 
     invoke-virtual {v1, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -1632,7 +1632,7 @@
     .line 97
     sget-object v1, Landroid/media/Ringtone;->TAG:Ljava/lang/String;
 
-    const-string v2, "setStreamType : AudioManager.MODE_NORMAL, mStreamType[AudioManager.STREAM_RING] : setMode(MODE_RINGTONE)"
+    const-string/jumbo v2, "setStreamType : AudioManager.MODE_NORMAL, mStreamType[AudioManager.STREAM_RING] : setMode(MODE_RINGTONE)"
 
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 

@@ -2484,7 +2484,7 @@
 
     .prologue
     .line 712
-    const-string v0, "setTTYMode"
+    const-string/jumbo v0, "setTTYMode"
 
     invoke-direct {p0, v0}, Lcom/android/internal/telephony/PhoneBase;->logUnexpectedCdmaMethodCall(Ljava/lang/String;)V
 

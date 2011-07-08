@@ -1700,7 +1700,7 @@
     :cond_6
     const/4 v6, 0x0
 
-    const-string v9, "sgt"
+    const-string/jumbo v9, "sgt"
 
     move-object/from16 v0, p1
 
@@ -1795,7 +1795,7 @@
     :cond_7
     const/4 v6, 0x0
 
-    const-string v9, "sgc"
+    const-string/jumbo v9, "sgc"
 
     move-object/from16 v0, p1
 

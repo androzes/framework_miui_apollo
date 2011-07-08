@@ -2325,7 +2325,7 @@
     .local v0, ex:Landroid/os/RemoteException;
     const-string v1, "LocationManager"
 
-    const-string v2, "setTestProviderEnabled: RemoteException"
+    const-string/jumbo v2, "setTestProviderEnabled: RemoteException"
 
     invoke-static {v1, v2, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
@@ -2360,7 +2360,7 @@
     .local v0, ex:Landroid/os/RemoteException;
     const-string v1, "LocationManager"
 
-    const-string v2, "setTestProviderLocation: RemoteException"
+    const-string/jumbo v2, "setTestProviderLocation: RemoteException"
 
     invoke-static {v1, v2, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
@@ -2405,7 +2405,7 @@
     .local v6, ex:Landroid/os/RemoteException;
     const-string v0, "LocationManager"
 
-    const-string v1, "setTestProviderStatus: RemoteException"
+    const-string/jumbo v1, "setTestProviderStatus: RemoteException"
 
     invoke-static {v0, v1, v6}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 

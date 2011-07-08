@@ -735,7 +735,7 @@
     invoke-virtual {p0, p1, v0, p4}, Landroid/widget/RemoteViews;->setString(ILjava/lang/String;Ljava/lang/String;)V
 
     .line 682
-    const-string v0, "setStarted"
+    const-string/jumbo v0, "setStarted"
 
     invoke-virtual {p0, p1, v0, p5}, Landroid/widget/RemoteViews;->setBoolean(ILjava/lang/String;Z)V
 
@@ -1056,7 +1056,7 @@
 
     .prologue
     .line 759
-    const-string v0, "setTextColor"
+    const-string/jumbo v0, "setTextColor"
 
     invoke-virtual {p0, p1, v0, p2}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
@@ -1071,7 +1071,7 @@
 
     .prologue
     .line 632
-    const-string v0, "setText"
+    const-string/jumbo v0, "setText"
 
     invoke-virtual {p0, p1, v0, p2}, Landroid/widget/RemoteViews;->setCharSequence(ILjava/lang/String;Ljava/lang/CharSequence;)V
 
@@ -1114,7 +1114,7 @@
 
     .prologue
     .line 622
-    const-string v0, "setVisibility"
+    const-string/jumbo v0, "setVisibility"
 
     invoke-virtual {p0, p1, v0, p2}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
