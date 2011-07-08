@@ -708,7 +708,7 @@ package com.android.launcher2; class HotSeats {/*
 
     #v3=(Byte);
     iput v3, v1, Landroid/widget/LinearLayout$LayoutParams;->width:I
-
+    
     .line 269
     const/high16 v3, 0x3f80
 

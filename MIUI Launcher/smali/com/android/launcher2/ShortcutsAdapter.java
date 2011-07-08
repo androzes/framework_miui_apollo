@@ -424,13 +424,14 @@ package com.android.launcher2; class ShortcutsAdapter {/*
     .line 122
     .local v3, lp:Landroid/view/ViewGroup$LayoutParams;
     #v3=(Reference);
-    const/16 v4, 0x82
+    #akki: width and height of icon in user folder
+    const/16 v4, 0x42
 
     #v4=(PosShort);
     iput v4, v3, Landroid/view/ViewGroup$LayoutParams;->height:I
 
     .line 123
-    const/16 v4, 0x73
+    const/16 v4, 0x42
 
     #v4=(PosByte);
     iput v4, v3, Landroid/view/ViewGroup$LayoutParams;->width:I

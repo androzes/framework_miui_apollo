@@ -31,7 +31,8 @@ package com.android.launcher2; class WidgetThumbnailView {/*
     new-instance v0, Landroid/graphics/Rect;
 
     #v0=(UninitRef);
-    const/16 v1, 0xa0
+    #widget_thumbnail_view top margin
+    const/16 v1, 0x50
 
     #v1=(PosShort);
     const/16 v2, 0x2d
@@ -131,10 +132,11 @@ package com.android.launcher2; class WidgetThumbnailView {/*
     .line 62
     iget-object v2, p0, Lcom/android/launcher2/WidgetThumbnailView;->mHintIndicator:Landroid/widget/TextView;
 
-    const/high16 v3, 0x41b0
+    #"drag widget to desired..." text size in float
+    const/high16 v3, 0x4140
 
     invoke-virtual {v2, v4, v3}, Landroid/widget/TextView;->setTextSize(IF)V
-
+   
     .line 64
     new-instance v0, Landroid/widget/FrameLayout$LayoutParams;
 
@@ -147,7 +149,8 @@ package com.android.launcher2; class WidgetThumbnailView {/*
     .line 68
     .local v0, layout:Landroid/widget/FrameLayout$LayoutParams;
     #v0=(Reference);
-    const/16 v2, 0x50
+    #widget_text_hint top margin
+    const/16 v2, 0x28
 
     invoke-virtual {v0, v4, v2, v4, v4}, Landroid/widget/FrameLayout$LayoutParams;->setMargins(IIII)V
 

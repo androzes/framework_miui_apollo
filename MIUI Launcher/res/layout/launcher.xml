@@ -14,7 +14,7 @@
         <com.android.launcher2.HotSeatButton style="@style/HotseatButton" />
     </com.android.launcher2.HotSeats>
     <LinearLayout android:orientation="vertical" android:id="@id/widget_editing_panel" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <FrameLayout android:id="@id/widget_box" android:background="@drawable/widget_box_background" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="@dimen/widget_box_height">
+        <FrameLayout android:id="@id/widget_box" android:background="@drawable/widget_box_background_trans" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="@dimen/widget_box_height">
             <com.android.launcher2.WidgetThumbnailView android:id="@id/widget_thumbnail_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="48.0dip" />
             <ImageView android:layout_width="fill_parent" android:layout_height="@dimen/widget_box_height_inner" android:src="@drawable/widget_box_foreground_mask" />
         </FrameLayout>

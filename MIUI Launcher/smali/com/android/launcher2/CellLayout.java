@@ -176,6 +176,7 @@ package com.android.launcher2; class CellLayout {/*
     .parameter "defStyle"
 
     .prologue
+    #akki: defines number of hor & vert cells ;)
     const/4 v5, 0x4
 
     #v5=(PosByte);

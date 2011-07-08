@@ -44,7 +44,7 @@ package com.android.launcher2; class Utilities {/*
     .locals 4
 
     .prologue
-    const/16 v0, 0x5a
+    const/16 v0, 0x30
 
     .line 53
     #v0=(PosByte);
