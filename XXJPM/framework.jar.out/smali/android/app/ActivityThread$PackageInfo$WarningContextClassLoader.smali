@@ -337,7 +337,7 @@
 
     .prologue
     .line 585
-    const-string v0, "setPackageAssertionStatus"
+    const-string/jumbo v0, "setPackageAssertionStatus"
 
     invoke-direct {p0, v0}, Landroid/app/ActivityThread$PackageInfo$WarningContextClassLoader;->warn(Ljava/lang/String;)V
 

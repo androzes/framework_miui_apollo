@@ -27,7 +27,7 @@
     .parameter
 
     .prologue
-    .line 520
+    .line 523
     iput-object p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$2$1;->this$1:Lcom/android/internal/policy/impl/PuzzleLockScreen$2;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -42,7 +42,7 @@
     .parameter "arg0"
 
     .prologue
-    .line 521
+    .line 531
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$2$1;->this$1:Lcom/android/internal/policy/impl/PuzzleLockScreen$2;
 
     iget-object v0, v0, Lcom/android/internal/policy/impl/PuzzleLockScreen$2;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
@@ -53,7 +53,7 @@
 
     invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->goToUnlockScreen()V
 
-    .line 522
+    .line 532
     return-void
 .end method
 
@@ -62,7 +62,7 @@
     .parameter "arg0"
 
     .prologue
-    .line 519
+    .line 529
     return-void
 .end method
 
@@ -71,6 +71,6 @@
     .parameter "arg0"
 
     .prologue
-    .line 516
+    .line 526
     return-void
 .end method

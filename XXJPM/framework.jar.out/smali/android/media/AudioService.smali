@@ -5615,7 +5615,7 @@
     const/4 v1, 0x0
 
     .line 990
-    const-string v0, "setRadioSpeakerOn()"
+    const-string/jumbo v0, "setRadioSpeakerOn()"
 
     invoke-virtual {p0, v0}, Landroid/media/AudioService;->checkAudioSettingsPermission(Ljava/lang/String;)Z
 

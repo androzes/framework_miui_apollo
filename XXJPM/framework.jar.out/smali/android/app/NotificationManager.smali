@@ -104,6 +104,25 @@
     goto :goto_0
 .end method
 
+.method private isValidIndex(I)Z
+    .locals 1
+    .parameter "i"
+
+    .prologue
+    .line 203
+    if-ltz p1, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
 
 # virtual methods
 .method public cancel(I)V
@@ -254,6 +273,224 @@
     .line 155
     :catch_0
     move-exception v2
+
+    goto :goto_0
+.end method
+
+.method public getEventContact(I)Ljava/lang/String;
+    .locals 3
+    .parameter "i"
+
+    .prologue
+    .line 181
+    invoke-direct {p0, p1}, Landroid/app/NotificationManager;->isValidIndex(I)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 183
+    :try_start_0
+    invoke-static {}, Landroid/app/NotificationManager;->getService()Landroid/app/INotificationManager;
+
+    move-result-object v0
+
+    invoke-interface {v0, p1}, Landroid/app/INotificationManager;->getEventContact(I)Ljava/lang/String;
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v0
+
+    .line 188
+    :goto_0
+    return-object v0
+
+    .line 184
+    :catch_0
+    move-exception v0
+
+    .line 187
+    :cond_0
+    sget-object v0, Landroid/app/NotificationManager;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "getEventContact - Invalid Index:"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 188
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
+.method public getEventCount(I)I
+    .locals 3
+    .parameter "i"
+
+    .prologue
+    .line 170
+    invoke-direct {p0, p1}, Landroid/app/NotificationManager;->isValidIndex(I)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 172
+    :try_start_0
+    invoke-static {}, Landroid/app/NotificationManager;->getService()Landroid/app/INotificationManager;
+
+    move-result-object v0
+
+    invoke-interface {v0, p1}, Landroid/app/INotificationManager;->getEventCount(I)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result v0
+
+    .line 177
+    :goto_0
+    return v0
+
+    .line 173
+    :catch_0
+    move-exception v0
+
+    .line 176
+    :cond_0
+    sget-object v0, Landroid/app/NotificationManager;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "getEventCount - Invalid Index:"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 177
+    const/4 v0, -0x1
+
+    goto :goto_0
+.end method
+
+.method public getEventIndexWithReq(Ljava/lang/String;I)I
+    .locals 1
+    .parameter "pkg"
+    .parameter "req"
+
+    .prologue
+    .line 163
+    :try_start_0
+    invoke-static {}, Landroid/app/NotificationManager;->getService()Landroid/app/INotificationManager;
+
+    move-result-object v0
+
+    invoke-interface {v0, p1, p2}, Landroid/app/INotificationManager;->getEventIndexWithReq(Ljava/lang/String;I)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result v0
+
+    .line 166
+    :goto_0
+    return v0
+
+    .line 164
+    :catch_0
+    move-exception v0
+
+    .line 166
+    const/4 v0, -0x1
+
+    goto :goto_0
+.end method
+
+.method public getEventIntent(I)Landroid/app/PendingIntent;
+    .locals 3
+    .parameter "i"
+
+    .prologue
+    .line 192
+    invoke-direct {p0, p1}, Landroid/app/NotificationManager;->isValidIndex(I)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 194
+    :try_start_0
+    invoke-static {}, Landroid/app/NotificationManager;->getService()Landroid/app/INotificationManager;
+
+    move-result-object v0
+
+    invoke-interface {v0, p1}, Landroid/app/INotificationManager;->getEventIntent(I)Landroid/app/PendingIntent;
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v0
+
+    .line 199
+    :goto_0
+    return-object v0
+
+    .line 195
+    :catch_0
+    move-exception v0
+
+    .line 198
+    :cond_0
+    sget-object v0, Landroid/app/NotificationManager;->TAG:Ljava/lang/String;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "getEventIntent - Invalid Index:"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 199
+    const/4 v0, 0x0
 
     goto :goto_0
 .end method

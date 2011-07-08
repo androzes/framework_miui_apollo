@@ -1,4 +1,4 @@
-.class Lcom/android/internal/policy/impl/GlassLockScreen$4;
+.class synthetic Lcom/android/internal/policy/impl/GlassLockScreen$4;
 .super Ljava/lang/Object;
 .source "GlassLockScreen.java"
 
@@ -25,7 +25,7 @@
     .locals 3
 
     .prologue
-    .line 694
+    .line 726
     invoke-static {}, Lcom/android/internal/policy/impl/GlassLockScreen$Status;->values()[Lcom/android/internal/policy/impl/GlassLockScreen$Status;
 
     move-result-object v0
@@ -131,7 +131,7 @@
     :try_end_5
     .catch Ljava/lang/NoSuchFieldError; {:try_start_5 .. :try_end_5} :catch_7
 
-    .line 668
+    .line 700
     :goto_5
     invoke-static {}, Lcom/android/internal/telephony/IccCard$State;->values()[Lcom/android/internal/telephony/IccCard$State;
 
@@ -292,7 +292,7 @@
 
     goto :goto_6
 
-    .line 694
+    .line 726
     :catch_7
     move-exception v0
 

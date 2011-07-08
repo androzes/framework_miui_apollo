@@ -15,7 +15,7 @@
 
 
 # static fields
-.field static final synthetic $SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+.field static final synthetic $SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
 .field static final synthetic $SwitchMap$com$android$internal$telephony$IccCard$State:[I
 
@@ -34,10 +34,10 @@
 
     new-array v0, v0, [I
 
-    sput-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+    sput-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
     :try_start_0
-    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
     sget-object v1, Lcom/android/internal/policy/impl/FascinateLockScreen$Status;->Normal:Lcom/android/internal/policy/impl/FascinateLockScreen$Status;
 
@@ -53,7 +53,7 @@
 
     :goto_0
     :try_start_1
-    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
     sget-object v1, Lcom/android/internal/policy/impl/FascinateLockScreen$Status;->NetworkLocked:Lcom/android/internal/policy/impl/FascinateLockScreen$Status;
 
@@ -69,7 +69,7 @@
 
     :goto_1
     :try_start_2
-    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
     sget-object v1, Lcom/android/internal/policy/impl/FascinateLockScreen$Status;->SimMissing:Lcom/android/internal/policy/impl/FascinateLockScreen$Status;
 
@@ -85,7 +85,7 @@
 
     :goto_2
     :try_start_3
-    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
     sget-object v1, Lcom/android/internal/policy/impl/FascinateLockScreen$Status;->SimMissingLocked:Lcom/android/internal/policy/impl/FascinateLockScreen$Status;
 
@@ -101,7 +101,7 @@
 
     :goto_3
     :try_start_4
-    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
     sget-object v1, Lcom/android/internal/policy/impl/FascinateLockScreen$Status;->SimLocked:Lcom/android/internal/policy/impl/FascinateLockScreen$Status;
 
@@ -117,7 +117,7 @@
 
     :goto_4
     :try_start_5
-    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$PuzzleLockScreen$Status:[I
+    sget-object v0, Lcom/android/internal/policy/impl/FascinateLockScreen$5;->$SwitchMap$com$android$internal$policy$impl$FascinateLockScreen$Status:[I
 
     sget-object v1, Lcom/android/internal/policy/impl/FascinateLockScreen$Status;->SimPukLocked:Lcom/android/internal/policy/impl/FascinateLockScreen$Status;
 

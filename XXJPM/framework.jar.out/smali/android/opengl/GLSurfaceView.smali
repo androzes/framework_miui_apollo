@@ -241,7 +241,7 @@
     .line 1566
     new-instance v0, Ljava/lang/IllegalStateException;
 
-    const-string v1, "setRenderer has already been called for this instance."
+    const-string/jumbo v1, "setRenderer has already been called for this instance."
 
     invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
 

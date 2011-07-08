@@ -5346,6 +5346,169 @@
     .catchall {:try_start_4 .. :try_end_4} :catchall_0
 .end method
 
+.method public getEventContact(I)Ljava/lang/String;
+    .locals 2
+    .parameter "i"
+
+    .prologue
+    .line 1293
+    iget-object v1, p0, Lcom/android/server/NotificationManagerService;->mNotificationList:Ljava/util/ArrayList;
+
+    invoke-virtual {v1, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lcom/android/server/NotificationManagerService$NotificationRecord;
+
+    .line 1294
+    .local v0, r:Lcom/android/server/NotificationManagerService$NotificationRecord;
+    iget-object v1, v0, Lcom/android/server/NotificationManagerService$NotificationRecord;->notification:Landroid/app/Notification;
+
+    iget-object v1, v1, Landroid/app/Notification;->contactCharSeq:Ljava/lang/CharSequence;
+
+    invoke-virtual {v1}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    return-object v1
+.end method
+
+.method public getEventCount(I)I
+    .locals 2
+    .parameter "i"
+
+    .prologue
+    .line 1288
+    iget-object v1, p0, Lcom/android/server/NotificationManagerService;->mNotificationList:Ljava/util/ArrayList;
+
+    invoke-virtual {v1, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lcom/android/server/NotificationManagerService$NotificationRecord;
+
+    .line 1289
+    .local v0, r:Lcom/android/server/NotificationManagerService$NotificationRecord;
+    iget-object v1, v0, Lcom/android/server/NotificationManagerService$NotificationRecord;->notification:Landroid/app/Notification;
+
+    iget v1, v1, Landroid/app/Notification;->missedCount:I
+
+    return v1
+.end method
+
+.method public getEventIndexWithReq(Ljava/lang/String;I)I
+    .locals 5
+    .parameter "pkg"
+    .parameter "req"
+
+    .prologue
+    .line 1275
+    const/4 v0, 0x0
+
+    .line 1276
+    .local v0, i:I
+    iget-object v3, p0, Lcom/android/server/NotificationManagerService;->mNotificationList:Ljava/util/ArrayList;
+
+    monitor-enter v3
+
+    .line 1277
+    :try_start_0
+    iget-object v4, p0, Lcom/android/server/NotificationManagerService;->mNotificationList:Ljava/util/ArrayList;
+
+    invoke-virtual {v4}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    .local v1, i$:Ljava/util/Iterator;
+    :goto_0
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v4
+
+    if-eqz v4, :cond_1
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Lcom/android/server/NotificationManagerService$NotificationRecord;
+
+    .line 1278
+    .local v2, r:Lcom/android/server/NotificationManagerService$NotificationRecord;
+    iget-object v4, v2, Lcom/android/server/NotificationManagerService$NotificationRecord;->pkg:Ljava/lang/String;
+
+    invoke-virtual {v4, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_0
+
+    iget v4, v2, Lcom/android/server/NotificationManagerService$NotificationRecord;->id:I
+
+    if-ne v4, p2, :cond_0
+
+    .line 1279
+    monitor-exit v3
+
+    move v3, v0
+
+    .line 1284
+    .end local v2           #r:Lcom/android/server/NotificationManagerService$NotificationRecord;
+    :goto_1
+    return v3
+
+    .line 1281
+    .restart local v2       #r:Lcom/android/server/NotificationManagerService$NotificationRecord;
+    :cond_0
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
+
+    .line 1283
+    .end local v2           #r:Lcom/android/server/NotificationManagerService$NotificationRecord;
+    :cond_1
+    monitor-exit v3
+
+    .line 1284
+    const/4 v3, -0x1
+
+    goto :goto_1
+
+    .line 1283
+    .end local v1           #i$:Ljava/util/Iterator;
+    :catchall_0
+    move-exception v4
+
+    monitor-exit v3
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    throw v4
+.end method
+
+.method public getEventIntent(I)Landroid/app/PendingIntent;
+    .locals 2
+    .parameter "i"
+
+    .prologue
+    .line 1298
+    iget-object v1, p0, Lcom/android/server/NotificationManagerService;->mNotificationList:Ljava/util/ArrayList;
+
+    invoke-virtual {v1, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lcom/android/server/NotificationManagerService$NotificationRecord;
+
+    .line 1299
+    .local v0, r:Lcom/android/server/NotificationManagerService$NotificationRecord;
+    iget-object v1, v0, Lcom/android/server/NotificationManagerService$NotificationRecord;->notification:Landroid/app/Notification;
+
+    iget-object v1, v1, Landroid/app/Notification;->contentIntent:Landroid/app/PendingIntent;
+
+    return-object v1
+.end method
+
 .method systemReady()V
     .locals 1
 

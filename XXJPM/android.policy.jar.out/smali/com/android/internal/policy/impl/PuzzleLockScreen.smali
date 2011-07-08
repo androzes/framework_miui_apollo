@@ -31,6 +31,10 @@
 
 .field private static final GLASS_EFFECT_ANIMATION:Z = true
 
+.field private static final MODE_HOMESCREEN_WALLPAPER:I = 0x0
+
+.field private static final MODE_LOCKSCREEN_WALLPAPER:I = 0x1
+
 .field private static final TAG:Ljava/lang/String; = "PuzzleLockScreen"
 
 
@@ -38,8 +42,6 @@
 .field private PUZZLE_UNLOCK_SOUND_ONLY_ONCE:Z
 
 .field private anim:Landroid/graphics/drawable/AnimationDrawable;
-
-.field private mActivated:Z
 
 .field private mBackgroudLayout:Landroid/widget/RelativeLayout;
 
@@ -68,6 +70,8 @@
 .field private mLayoutGlassEffect:Landroid/widget/ImageView;
 
 .field private final mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
+
+.field private mLockscreenBackground:Landroid/widget/ImageView;
 
 .field private mMediaLayout:Landroid/widget/LinearLayout;
 
@@ -123,7 +127,7 @@
 
 .field private mStatus:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
-.field private mSweepTextBox:Landroid/widget/LinearLayout;
+.field private mSweepTextBox:Landroid/widget/RelativeLayout;
 
 .field private mUnlockClock:Lcom/android/internal/policy/impl/UnlockClock;
 
@@ -157,80 +161,77 @@
 
     const/4 v5, 0x0
 
-    .line 268
+    .line 276
     invoke-direct {p0, p1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 86
+    .line 89
     iput-boolean v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->PUZZLE_UNLOCK_SOUND_ONLY_ONCE:Z
 
-    .line 128
+    .line 131
     const/16 v2, 0x12
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
 
-    .line 129
+    .line 132
     const/16 v2, 0x30
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockStatusBarMargin:I
 
-    .line 130
+    .line 133
     const/4 v2, 0x6
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockMatchHorizontalMargin:I
 
-    .line 152
+    .line 154
     sget-object v2, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->Normal:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mStatus:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
-    .line 270
+    .line 278
     iput-object p2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
-    .line 271
+    .line 279
     iput-object p3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
-    .line 272
+    .line 280
     iput-object p4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    .line 274
+    .line 282
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->shouldEnableMenuKey()Z
 
     move-result v2
 
     iput-boolean v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mEnableMenuKeyInLockScreen:Z
 
-    .line 276
+    .line 284
     iput-boolean v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mCreatedInPortrait:Z
 
-    .line 277
+    .line 285
     iput-boolean v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
-    .line 278
-    iput-boolean v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mActivated:Z
-
-    .line 280
+    .line 287
     iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedCallCount:I
 
-    .line 281
+    .line 288
     iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
 
-    .line 284
+    .line 291
     invoke-static {p1}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
 
     move-result-object v1
 
-    .line 285
+    .line 292
     .local v1, inflater:Landroid/view/LayoutInflater;
     iget-boolean v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mCreatedInPortrait:Z
 
     if-eqz v2, :cond_0
 
-    .line 286
+    .line 293
     const v2, 0x109007e
 
     invoke-virtual {v1, v2, p0, v6}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    .line 292
+    .line 299
     :goto_0
     const v2, 0x10201be
 
@@ -242,19 +243,19 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mCarrier:Landroid/widget/TextView;
 
-    .line 293
+    .line 300
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mCarrier:Landroid/widget/TextView;
 
     invoke-virtual {v2, v6}, Landroid/widget/TextView;->setSelected(Z)V
 
-    .line 294
+    .line 301
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mCarrier:Landroid/widget/TextView;
 
     const/4 v3, -0x1
 
     invoke-virtual {v2, v3}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 300
+    .line 307
     const v2, 0x1020270
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -265,7 +266,7 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayout:Landroid/widget/RelativeLayout;
 
-    .line 302
+    .line 309
     const v2, 0x1020250
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -276,18 +277,18 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayoutGlassEffect:Landroid/widget/ImageView;
 
-    .line 303
+    .line 310
     const v2, 0x1020255
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
 
     move-result-object v2
 
-    check-cast v2, Landroid/widget/LinearLayout;
+    check-cast v2, Landroid/widget/RelativeLayout;
 
-    iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mSweepTextBox:Landroid/widget/LinearLayout;
+    iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mSweepTextBox:Landroid/widget/RelativeLayout;
 
-    .line 305
+    .line 312
     const v2, 0x1020256
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -298,21 +299,21 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mHelp2:Landroid/widget/TextView;
 
-    .line 306
+    .line 313
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mHelp2:Landroid/widget/TextView;
 
     const v3, 0x10403a5
 
     invoke-virtual {v2, v3}, Landroid/widget/TextView;->setText(I)V
 
-    .line 307
+    .line 314
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayoutGlassEffect:Landroid/widget/ImageView;
 
     const v3, 0x108036f
 
     invoke-virtual {v2, v3}, Landroid/widget/ImageView;->setBackgroundResource(I)V
 
-    .line 308
+    .line 315
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayoutGlassEffect:Landroid/widget/ImageView;
 
     invoke-virtual {v2}, Landroid/widget/ImageView;->getBackground()Landroid/graphics/drawable/Drawable;
@@ -323,7 +324,7 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->anim:Landroid/graphics/drawable/AnimationDrawable;
 
-    .line 313
+    .line 320
     const v2, 0x1020271
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -334,7 +335,7 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallLayout:Landroid/widget/LinearLayout;
 
-    .line 314
+    .line 321
     const v2, 0x1020272
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -345,12 +346,12 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallText:Landroid/widget/TextView;
 
-    .line 315
+    .line 322
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallLayout:Landroid/widget/LinearLayout;
 
     invoke-virtual {v2, v7}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 317
+    .line 324
     const v2, 0x1020273
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -361,7 +362,7 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailLayout:Landroid/widget/LinearLayout;
 
-    .line 318
+    .line 325
     const v2, 0x1020274
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -372,12 +373,12 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailText:Landroid/widget/TextView;
 
-    .line 319
+    .line 326
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailLayout:Landroid/widget/LinearLayout;
 
     invoke-virtual {v2, v7}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 321
+    .line 328
     const v2, 0x1020275
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -388,7 +389,7 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayout:Landroid/widget/LinearLayout;
 
-    .line 322
+    .line 329
     const v2, 0x1020276
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
@@ -399,14 +400,14 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatch:Landroid/widget/ImageView;
 
-    .line 326
+    .line 333
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->getContext()Landroid/content/Context;
 
     move-result-object v2
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mContext:Landroid/content/Context;
 
-    .line 328
+    .line 335
     new-instance v2, Lcom/android/internal/policy/impl/UnlockMediaController;
 
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mContext:Landroid/content/Context;
@@ -415,7 +416,7 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
-    .line 329
+    .line 336
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     new-instance v3, Lcom/android/internal/policy/impl/PuzzleLockScreen$LockTouchListener;
@@ -426,7 +427,7 @@
 
     invoke-virtual {v2, v3}, Lcom/android/internal/policy/impl/UnlockMediaController;->setOnCDImageTouchListener(Lcom/android/internal/policy/impl/UnlockMediaController$CDImageTouchListener;)V
 
-    .line 330
+    .line 337
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v2}, Lcom/android/internal/policy/impl/UnlockMediaController;->getMainLayout()Landroid/widget/LinearLayout;
@@ -435,12 +436,12 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaLayout:Landroid/widget/LinearLayout;
 
-    .line 331
+    .line 338
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaLayout:Landroid/widget/LinearLayout;
 
     invoke-virtual {v2, v7}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 335
+    .line 342
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->isDualClockEnabled()Ljava/lang/Boolean;
 
     move-result-object v2
@@ -451,7 +452,7 @@
 
     if-eqz v2, :cond_1
 
-    .line 336
+    .line 343
     new-instance v2, Lcom/android/internal/policy/impl/UnlockDualClock;
 
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mContext:Landroid/content/Context;
@@ -462,7 +463,7 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockDualClock:Lcom/android/internal/policy/impl/UnlockDualClock;
 
-    .line 340
+    .line 347
     :goto_1
     const v2, 0x102024e
 
@@ -474,14 +475,25 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mBackgroudLayout:Landroid/widget/RelativeLayout;
 
-    .line 341
+    .line 348
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mBackgroudLayout:Landroid/widget/RelativeLayout;
 
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaLayout:Landroid/widget/LinearLayout;
 
     invoke-virtual {v2, v3}, Landroid/widget/RelativeLayout;->addView(Landroid/view/View;)V
 
-    .line 343
+    .line 350
+    const v2, 0x10202f3
+
+    invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/widget/ImageView;
+
+    iput-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    .line 354
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->isDualClockEnabled()Ljava/lang/Boolean;
 
     move-result-object v2
@@ -492,14 +504,14 @@
 
     if-eqz v2, :cond_2
 
-    .line 344
+    .line 355
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayout:Landroid/widget/RelativeLayout;
 
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockDualClock:Lcom/android/internal/policy/impl/UnlockDualClock;
 
     invoke-virtual {v2, v3}, Landroid/widget/RelativeLayout;->addView(Landroid/view/View;)V
 
-    .line 349
+    .line 360
     :goto_2
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mContext:Landroid/content/Context;
 
@@ -513,47 +525,47 @@
 
     iget v0, v2, Landroid/util/DisplayMetrics;->densityDpi:I
 
-    .line 350
+    .line 361
     .local v0, densityDpiForPuzzle:I
     sparse-switch v0, :sswitch_data_0
 
-    .line 387
+    .line 398
     iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
 
     mul-int/lit8 v2, v2, 0x2
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockHorizontalMargin:I
 
-    .line 388
+    .line 399
     iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
 
     mul-int/lit8 v2, v2, 0x2
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockVerticalMargin:I
 
-    .line 389
+    .line 400
     iput v8, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockHorizontalMargin:I
 
-    .line 390
+    .line 401
     const/16 v2, 0x230
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockVerticalMargin:I
 
-    .line 392
+    .line 403
     iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassLeft:I
 
-    .line 393
+    .line 404
     iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassTop:I
 
-    .line 394
+    .line 405
     iput v9, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassWidth:I
 
-    .line 395
+    .line 406
     const/16 v2, 0x2fa
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassHeight:I
 
-    .line 414
+    .line 411
     :goto_3
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayout:Landroid/widget/RelativeLayout;
 
@@ -563,7 +575,7 @@
 
     invoke-virtual {v2, v3}, Landroid/widget/RelativeLayout;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V
 
-    .line 475
+    .line 485
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallLayout:Landroid/widget/LinearLayout;
 
     new-instance v3, Lcom/android/internal/policy/impl/PuzzleLockScreen$2;
@@ -572,7 +584,7 @@
 
     invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V
 
-    .line 552
+    .line 575
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailLayout:Landroid/widget/LinearLayout;
 
     new-instance v3, Lcom/android/internal/policy/impl/PuzzleLockScreen$3;
@@ -581,39 +593,39 @@
 
     invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V
 
-    .line 630
+    .line 667
     invoke-virtual {p0, v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->setFocusable(Z)V
 
-    .line 631
+    .line 668
     invoke-virtual {p0, v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->setFocusableInTouchMode(Z)V
 
-    .line 632
+    .line 669
     const/high16 v2, 0x6
 
     invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->setDescendantFocusability(I)V
 
-    .line 634
+    .line 671
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->updateMissedEvent()V
 
-    .line 635
+    .line 672
     invoke-virtual {p3, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->registerInfoCallback(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallback;)V
 
-    .line 636
+    .line 673
     invoke-virtual {p3, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->registerSimStateCallback(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$SimStateCallback;)V
 
-    .line 637
+    .line 674
     invoke-virtual {p3, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->registerConfigurationChangeCallback(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$ConfigurationChangeCallback;)V
 
-    .line 638
+    .line 675
     invoke-virtual {p3, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->registerMediaCallbacks(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$MediaStateCallback;)V
 
-    .line 639
+    .line 677
     invoke-direct {p0, p3}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->resetStatusInfo(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
 
-    .line 640
+    .line 678
     return-void
 
-    .line 288
+    .line 295
     .end local v0           #densityDpiForPuzzle:I
     :cond_0
     const v2, 0x109007f
@@ -622,7 +634,7 @@
 
     goto/16 :goto_0
 
-    .line 338
+    .line 345
     :cond_1
     new-instance v2, Lcom/android/internal/policy/impl/UnlockClock;
 
@@ -636,7 +648,7 @@
 
     goto/16 :goto_1
 
-    .line 346
+    .line 357
     :cond_2
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayout:Landroid/widget/RelativeLayout;
 
@@ -646,48 +658,9 @@
 
     goto/16 :goto_2
 
-    .line 352
+    .line 363
     .restart local v0       #densityDpiForPuzzle:I
     :sswitch_0
-    iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
-
-    mul-int/lit8 v2, v2, 0x2
-
-    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockHorizontalMargin:I
-
-    .line 353
-    iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
-
-    mul-int/lit8 v2, v2, 0x2
-
-    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockVerticalMargin:I
-
-    .line 354
-    iput v8, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockHorizontalMargin:I
-
-    .line 355
-    const/16 v2, 0x230
-
-    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockVerticalMargin:I
-
-    .line 357
-    iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassLeft:I
-
-    .line 358
-    iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassTop:I
-
-    .line 359
-    iput v9, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassWidth:I
-
-    .line 360
-    const/16 v2, 0x2fa
-
-    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassHeight:I
-
-    goto :goto_3
-
-    .line 363
-    :sswitch_1
     iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
 
     mul-int/lit8 v2, v2, 0x2
@@ -723,9 +696,48 @@
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassHeight:I
 
-    goto/16 :goto_3
+    goto :goto_3
 
     .line 374
+    :sswitch_1
+    iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
+
+    mul-int/lit8 v2, v2, 0x2
+
+    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockHorizontalMargin:I
+
+    .line 375
+    iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
+
+    mul-int/lit8 v2, v2, 0x2
+
+    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockVerticalMargin:I
+
+    .line 376
+    iput v8, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockHorizontalMargin:I
+
+    .line 377
+    const/16 v2, 0x230
+
+    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockVerticalMargin:I
+
+    .line 379
+    iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassLeft:I
+
+    .line 380
+    iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassTop:I
+
+    .line 381
+    iput v9, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassWidth:I
+
+    .line 382
+    const/16 v2, 0x2fa
+
+    iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassHeight:I
+
+    goto/16 :goto_3
+
+    .line 385
     :sswitch_2
     iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
 
@@ -735,7 +747,7 @@
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockHorizontalMargin:I
 
-    .line 375
+    .line 386
     iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockRatio:I
 
     mul-int/lit8 v2, v2, 0x2
@@ -744,49 +756,51 @@
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockVerticalMargin:I
 
-    .line 376
+    .line 387
     iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockStatusBarMargin:I
 
     div-int/lit8 v2, v2, 0x2
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockStatusBarMargin:I
 
-    .line 377
+    .line 388
     iget v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockMatchHorizontalMargin:I
 
     div-int/lit8 v2, v2, 0x2
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockMatchHorizontalMargin:I
 
-    .line 378
+    .line 389
     const/16 v2, 0xa8
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockHorizontalMargin:I
 
-    .line 379
+    .line 390
     const/16 v2, 0x118
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockVerticalMargin:I
 
-    .line 381
+    .line 392
     iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassLeft:I
 
-    .line 382
+    .line 393
     iput v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassTop:I
 
-    .line 383
+    .line 394
     const/16 v2, 0xf0
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassWidth:I
 
-    .line 384
+    .line 395
     const/16 v2, 0x17d
 
     iput v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassHeight:I
 
     goto/16 :goto_3
 
-    .line 350
+    .line 361
+    nop
+
     :sswitch_data_0
     .sparse-switch
         0x78 -> :sswitch_2
@@ -800,7 +814,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayout:Landroid/widget/RelativeLayout;
 
     return-object v0
@@ -811,66 +825,78 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mContext:Landroid/content/Context;
 
     return-object v0
 .end method
 
-.method static synthetic access$1100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Lcom/android/internal/widget/LockPatternUtils;
+.method static synthetic access$1100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/LinearLayout;
     .locals 1
     .parameter "x0"
 
     .prologue
-    .line 76
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
-
-    return-object v0
-.end method
-
-.method static synthetic access$1200(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/LinearLayout;
-    .locals 1
-    .parameter "x0"
-
-    .prologue
-    .line 76
+    .line 79
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallLayout:Landroid/widget/LinearLayout;
 
     return-object v0
 .end method
 
-.method static synthetic access$1300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+.method static synthetic access$1200(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
     .locals 1
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayoutLeft:I
 
     return v0
 .end method
 
-.method static synthetic access$1302(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
+.method static synthetic access$1202(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
     .locals 0
     .parameter "x0"
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayoutLeft:I
 
     return p1
 .end method
 
-.method static synthetic access$1400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/LinearLayout;
+.method static synthetic access$1300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/LinearLayout;
     .locals 1
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayout:Landroid/widget/LinearLayout;
 
     return-object v0
+.end method
+
+.method static synthetic access$1400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 79
+    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayoutTop:I
+
+    return v0
+.end method
+
+.method static synthetic access$1402(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    .line 79
+    iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayoutTop:I
+
+    return p1
 .end method
 
 .method static synthetic access$1500(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
@@ -878,8 +904,8 @@
     .parameter "x0"
 
     .prologue
-    .line 76
-    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayoutTop:I
+    .line 79
+    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutLeft:I
 
     return v0
 .end method
@@ -890,8 +916,8 @@
     .parameter "x1"
 
     .prologue
-    .line 76
-    iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchLayoutTop:I
+    .line 79
+    iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutLeft:I
 
     return p1
 .end method
@@ -901,22 +927,10 @@
     .parameter "x0"
 
     .prologue
-    .line 76
-    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutLeft:I
+    .line 79
+    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockMatchHorizontalMargin:I
 
     return v0
-.end method
-
-.method static synthetic access$1602(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
-    .locals 0
-    .parameter "x0"
-    .parameter "x1"
-
-    .prologue
-    .line 76
-    iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutLeft:I
-
-    return p1
 .end method
 
 .method static synthetic access$1700(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
@@ -924,10 +938,22 @@
     .parameter "x0"
 
     .prologue
-    .line 76
-    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockMatchHorizontalMargin:I
+    .line 79
+    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutTop:I
 
     return v0
+.end method
+
+.method static synthetic access$1702(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    .line 79
+    iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutTop:I
+
+    return p1
 .end method
 
 .method static synthetic access$1800(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
@@ -935,22 +961,10 @@
     .parameter "x0"
 
     .prologue
-    .line 76
-    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutTop:I
+    .line 79
+    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockStatusBarMargin:I
 
     return v0
-.end method
-
-.method static synthetic access$1802(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
-    .locals 0
-    .parameter "x0"
-    .parameter "x1"
-
-    .prologue
-    .line 76
-    iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockLayoutTop:I
-
-    return p1
 .end method
 
 .method static synthetic access$1900(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
@@ -958,8 +972,8 @@
     .parameter "x0"
 
     .prologue
-    .line 76
-    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockStatusBarMargin:I
+    .line 79
+    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockHorizontalMargin:I
 
     return v0
 .end method
@@ -969,7 +983,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
     return-object v0
@@ -980,76 +994,65 @@
     .parameter "x0"
 
     .prologue
-    .line 76
-    iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockHorizontalMargin:I
-
-    return v0
-.end method
-
-.method static synthetic access$2100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
-    .locals 1
-    .parameter "x0"
-
-    .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleUnlockVerticalMargin:I
 
     return v0
 .end method
 
-.method static synthetic access$2200(Lcom/android/internal/policy/impl/PuzzleLockScreen;Lcom/android/internal/widget/LockPatternUtils$NotiMode;)V
+.method static synthetic access$2100(Lcom/android/internal/policy/impl/PuzzleLockScreen;Lcom/android/internal/widget/LockPatternUtils$NotiMode;)V
     .locals 0
     .parameter "x0"
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->sendIntent(Lcom/android/internal/widget/LockPatternUtils$NotiMode;)V
 
     return-void
 .end method
 
-.method static synthetic access$2300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/view/animation/TranslateAnimation;
+.method static synthetic access$2200(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/view/animation/TranslateAnimation;
     .locals 1
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchAnimation:Landroid/view/animation/TranslateAnimation;
 
     return-object v0
 .end method
 
-.method static synthetic access$2302(Lcom/android/internal/policy/impl/PuzzleLockScreen;Landroid/view/animation/TranslateAnimation;)Landroid/view/animation/TranslateAnimation;
+.method static synthetic access$2202(Lcom/android/internal/policy/impl/PuzzleLockScreen;Landroid/view/animation/TranslateAnimation;)Landroid/view/animation/TranslateAnimation;
     .locals 0
     .parameter "x0"
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput-object p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleMatchAnimation:Landroid/view/animation/TranslateAnimation;
 
     return-object p1
 .end method
 
-.method static synthetic access$2400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/LinearLayout;
+.method static synthetic access$2300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/LinearLayout;
     .locals 1
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailLayout:Landroid/widget/LinearLayout;
 
     return-object v0
 .end method
 
-.method static synthetic access$2502(Lcom/android/internal/policy/impl/PuzzleLockScreen;Z)Z
+.method static synthetic access$2402(Lcom/android/internal/policy/impl/PuzzleLockScreen;Z)Z
     .locals 0
     .parameter "x0"
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput-boolean p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
     return p1
@@ -1060,7 +1063,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOrigLeft:I
 
     return v0
@@ -1072,7 +1075,7 @@
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOrigLeft:I
 
     return p1
@@ -1083,7 +1086,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOrigTop:I
 
     return v0
@@ -1095,7 +1098,7 @@
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOrigTop:I
 
     return p1
@@ -1106,7 +1109,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOffsetLeft:I
 
     return v0
@@ -1118,7 +1121,7 @@
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOffsetLeft:I
 
     return p1
@@ -1129,7 +1132,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOffsetTop:I
 
     return v0
@@ -1141,7 +1144,7 @@
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mOffsetTop:I
 
     return p1
@@ -1152,7 +1155,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockHorizontalMargin:I
 
     return v0
@@ -1163,7 +1166,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockVerticalMargin:I
 
     return v0
@@ -1174,7 +1177,7 @@
     .parameter "x0"
 
     .prologue
-    .line 76
+    .line 79
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->PUZZLE_UNLOCK_SOUND_ONLY_ONCE:Z
 
     return v0
@@ -1186,7 +1189,7 @@
     .parameter "x1"
 
     .prologue
-    .line 76
+    .line 79
     iput-boolean p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->PUZZLE_UNLOCK_SOUND_ONLY_ONCE:Z
 
     return p1
@@ -1198,24 +1201,24 @@
     .parameter "telephonySpn"
 
     .prologue
-    .line 960
+    .line 1011
     if-eqz p0, :cond_0
 
     if-nez p1, :cond_0
 
     move-object v0, p0
 
-    .line 967
+    .line 1018
     :goto_0
     return-object v0
 
-    .line 962
+    .line 1013
     :cond_0
     if-eqz p0, :cond_1
 
     if-eqz p1, :cond_1
 
-    .line 963
+    .line 1014
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1240,7 +1243,7 @@
 
     goto :goto_0
 
-    .line 964
+    .line 1015
     :cond_1
     if-nez p0, :cond_2
 
@@ -1248,10 +1251,10 @@
 
     move-object v0, p1
 
-    .line 965
+    .line 1016
     goto :goto_0
 
-    .line 967
+    .line 1018
     :cond_2
     const-string v0, ""
 
@@ -1263,7 +1266,7 @@
     .parameter "simState"
 
     .prologue
-    .line 860
+    .line 911
     iget-object v1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
     invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->isDeviceProvisioned()Z
@@ -1280,19 +1283,19 @@
 
     move v0, v1
 
-    .line 862
+    .line 913
     .local v0, missingAndNotProvisioned:Z
     :goto_0
     if-eqz v0, :cond_1
 
-    .line 863
+    .line 914
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimMissingLocked:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
-    .line 882
+    .line 933
     :goto_1
     return-object v1
 
-    .line 860
+    .line 911
     .end local v0           #missingAndNotProvisioned:Z
     :cond_0
     const/4 v1, 0x0
@@ -1301,7 +1304,7 @@
 
     goto :goto_0
 
-    .line 866
+    .line 917
     .restart local v0       #missingAndNotProvisioned:Z
     :cond_1
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$4;->$SwitchMap$com$android$internal$telephony$IccCard$State:[I
@@ -1314,54 +1317,54 @@
 
     packed-switch v1, :pswitch_data_0
 
-    .line 882
+    .line 933
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimMissing:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 868
+    .line 919
     :pswitch_0
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimMissing:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 870
+    .line 921
     :pswitch_1
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimMissingLocked:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 872
+    .line 923
     :pswitch_2
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimMissing:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 874
+    .line 925
     :pswitch_3
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimLocked:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 876
+    .line 927
     :pswitch_4
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimPukLocked:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 878
+    .line 929
     :pswitch_5
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->Normal:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 880
+    .line 931
     :pswitch_6
     sget-object v1, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->SimMissing:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     goto :goto_1
 
-    .line 866
+    .line 917
     nop
 
     :pswitch_data_0
@@ -1380,7 +1383,7 @@
     .locals 1
 
     .prologue
-    .line 985
+    .line 1036
     const/4 v0, 0x0
 
     invoke-static {v0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
@@ -1395,7 +1398,7 @@
     .parameter "updateMonitor"
 
     .prologue
-    .line 977
+    .line 1028
     invoke-virtual {p1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getSimState()Lcom/android/internal/telephony/IccCard$State;
 
     move-result-object v0
@@ -1406,12 +1409,12 @@
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mStatus:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
-    .line 978
+    .line 1029
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mStatus:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->updateLayout(Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;)V
 
-    .line 979
+    .line 1030
     return-void
 .end method
 
@@ -1420,29 +1423,29 @@
     .parameter "notiMode"
 
     .prologue
-    .line 655
+    .line 693
     iget-object v1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
     invoke-virtual {v1, p1}, Lcom/android/internal/widget/LockPatternUtils;->getIntentMissedEvent(Lcom/android/internal/widget/LockPatternUtils$NotiMode;)Landroid/app/PendingIntent;
 
     move-result-object v0
 
-    .line 656
+    .line 694
     .local v0, intent:Landroid/app/PendingIntent;
     if-eqz v0, :cond_0
 
-    .line 658
+    .line 696
     :try_start_0
     invoke-virtual {v0}, Landroid/app/PendingIntent;->send()V
     :try_end_0
     .catch Landroid/app/PendingIntent$CanceledException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 663
+    .line 701
     :cond_0
     :goto_0
     return-void
 
-    .line 659
+    .line 697
     :catch_0
     move-exception v1
 
@@ -1455,12 +1458,12 @@
     .prologue
     const/4 v6, 0x0
 
-    .line 246
+    .line 254
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->getResources()Landroid/content/res/Resources;
 
     move-result-object v3
 
-    .line 247
+    .line 255
     .local v3, res:Landroid/content/res/Resources;
     const v4, 0x10d0009
 
@@ -1468,7 +1471,7 @@
 
     move-result v0
 
-    .line 249
+    .line 257
     .local v0, configDisabled:Z
     const-string v4, "ro.monkey"
 
@@ -1476,7 +1479,7 @@
 
     move-result v2
 
-    .line 251
+    .line 259
     .local v2, isMonkey:Z
     new-instance v4, Ljava/io/File;
 
@@ -1488,7 +1491,7 @@
 
     move-result v1
 
-    .line 252
+    .line 260
     .local v1, fileOverride:Z
     if-eqz v0, :cond_0
 
@@ -1508,12 +1511,47 @@
     goto :goto_0
 .end method
 
+.method private switchLockscreenMode(I)V
+    .locals 2
+    .parameter "mode"
+
+    .prologue
+    .line 1059
+    packed-switch p1, :pswitch_data_0
+
+    .line 1073
+    :goto_0
+    :pswitch_0
+    return-void
+
+    .line 1063
+    :pswitch_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getLockscreenWallpaper()Landroid/graphics/drawable/Drawable;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V
+
+    goto :goto_0
+
+    .line 1059
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
+.end method
+
 .method private updateLayout(Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;)V
     .locals 0
     .parameter "status"
 
     .prologue
-    .line 890
+    .line 941
     return-void
 .end method
 
@@ -1531,18 +1569,18 @@
 
     const/4 v5, 0x1
 
-    .line 666
+    .line 704
     const/4 v2, 0x0
 
-    .line 667
+    .line 705
     .local v2, visibility:I
     const/4 v0, 0x0
 
-    .line 668
+    .line 706
     .local v0, nCallCount:I
     const/4 v1, 0x0
 
-    .line 670
+    .line 708
     .local v1, nMsgCount:I
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
@@ -1552,7 +1590,7 @@
 
     move-result v0
 
-    .line 671
+    .line 709
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
     sget-object v4, Lcom/android/internal/widget/LockPatternUtils$NotiMode;->MissedMsg:Lcom/android/internal/widget/LockPatternUtils$NotiMode;
@@ -1561,14 +1599,14 @@
 
     move-result v1
 
-    .line 673
+    .line 711
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedCallCount:I
 
     if-le v0, v3, :cond_0
 
     iput v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedCallCount:I
 
-    .line 674
+    .line 712
     :cond_0
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
 
@@ -1576,7 +1614,7 @@
 
     iput v1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
 
-    .line 677
+    .line 715
     :cond_1
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedCallCount:I
 
@@ -1584,7 +1622,7 @@
 
     iput v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedCallCount:I
 
-    .line 678
+    .line 716
     :cond_2
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
 
@@ -1592,7 +1630,7 @@
 
     iput v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
 
-    .line 681
+    .line 719
     :cond_3
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedCallCount:I
 
@@ -1604,7 +1642,7 @@
 
     invoke-virtual {v3, v5, v9}, Landroid/widget/TextView;->setTextSize(IF)V
 
-    .line 683
+    .line 721
     :goto_0
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
 
@@ -1616,7 +1654,7 @@
 
     invoke-virtual {v3, v5, v9}, Landroid/widget/TextView;->setTextSize(IF)V
 
-    .line 686
+    .line 724
     :goto_1
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallText:Landroid/widget/TextView;
 
@@ -1628,7 +1666,7 @@
 
     invoke-virtual {v3, v4}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 687
+    .line 725
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailText:Landroid/widget/TextView;
 
     iget v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
@@ -1639,7 +1677,7 @@
 
     invoke-virtual {v3, v4}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 689
+    .line 727
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallLayout:Landroid/widget/LinearLayout;
 
     invoke-virtual {v3}, Landroid/widget/LinearLayout;->getVisibility()I
@@ -1648,20 +1686,20 @@
 
     if-ne v3, v6, :cond_4
 
-    .line 690
+    .line 728
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedCallCount:I
 
     if-nez v3, :cond_8
 
     move v2, v6
 
-    .line 691
+    .line 729
     :goto_2
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallLayout:Landroid/widget/LinearLayout;
 
     invoke-virtual {v3, v2}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 693
+    .line 731
     :cond_4
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailLayout:Landroid/widget/LinearLayout;
 
@@ -1671,24 +1709,24 @@
 
     if-ne v3, v6, :cond_5
 
-    .line 694
+    .line 732
     iget v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMissedMsgCount:I
 
     if-nez v3, :cond_9
 
     move v2, v6
 
-    .line 695
+    .line 733
     :goto_3
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailLayout:Landroid/widget/LinearLayout;
 
     invoke-virtual {v3, v2}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 697
+    .line 735
     :cond_5
     return-void
 
-    .line 682
+    .line 720
     :cond_6
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiCallText:Landroid/widget/TextView;
 
@@ -1696,7 +1734,7 @@
 
     goto :goto_0
 
-    .line 684
+    .line 722
     :cond_7
     iget-object v3, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mPuzzleNotiMailText:Landroid/widget/TextView;
 
@@ -1704,7 +1742,7 @@
 
     goto :goto_1
 
-    .line 690
+    .line 728
     :cond_8
     const/4 v3, 0x0
 
@@ -1712,7 +1750,7 @@
 
     goto :goto_2
 
-    .line 694
+    .line 732
     :cond_9
     const/4 v3, 0x0
 
@@ -1727,12 +1765,12 @@
     .locals 1
 
     .prologue
-    .line 790
+    .line 844
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
     invoke-virtual {v0, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->removeCallback(Ljava/lang/Object;)V
 
-    .line 791
+    .line 845
     return-void
 .end method
 
@@ -1740,10 +1778,33 @@
     .locals 1
 
     .prologue
-    .line 733
+    .line 785
     const/4 v0, 0x0
 
     return v0
+.end method
+
+.method protected onAttachedToWindow()V
+    .locals 0
+
+    .prologue
+    .line 775
+    invoke-super {p0}, Landroid/widget/LinearLayout;->onAttachedToWindow()V
+
+    .line 776
+    return-void
+.end method
+
+.method protected onConfigurationChanged(Landroid/content/res/Configuration;)V
+    .locals 0
+    .parameter "newConfig"
+
+    .prologue
+    .line 769
+    invoke-super {p0, p1}, Landroid/widget/LinearLayout;->onConfigurationChanged(Landroid/content/res/Configuration;)V
+
+    .line 770
+    return-void
 .end method
 
 .method public onKeyDown(ILandroid/view/KeyEvent;)Z
@@ -1752,7 +1813,7 @@
     .parameter "event"
 
     .prologue
-    .line 645
+    .line 683
     const/4 v0, 0x3
 
     if-ne p1, v0, :cond_0
@@ -1763,17 +1824,17 @@
 
     if-nez v0, :cond_0
 
-    .line 646
+    .line 684
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
     if-eqz v0, :cond_0
 
-    .line 647
+    .line 685
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->startControllerAnimation()V
 
-    .line 651
+    .line 689
     :cond_0
     const/4 v0, 0x0
 
@@ -1785,7 +1846,7 @@
     .parameter "isKeyboardOpen"
 
     .prologue
-    .line 729
+    .line 781
     return-void
 .end method
 
@@ -1794,39 +1855,33 @@
     .parameter "isStop"
 
     .prologue
-    .line 822
-    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mActivated:Z
+    .line 874
+    if-nez p1, :cond_0
 
-    if-nez v0, :cond_1
-
-    .line 831
-    :cond_0
+    .line 882
     :goto_0
     return-void
 
-    .line 823
-    :cond_1
-    if-eqz p1, :cond_0
-
-    .line 825
+    .line 876
+    :cond_0
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
-    if-nez v0, :cond_2
+    if-nez v0, :cond_1
 
-    .line 826
+    .line 877
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
-    .line 827
+    .line 878
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaLayout:Landroid/widget/LinearLayout;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 830
-    :cond_2
+    .line 881
+    :cond_1
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->stopPlaying()V
@@ -1841,84 +1896,75 @@
     .parameter "mediaUri"
 
     .prologue
-    .line 797
-    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mActivated:Z
+    .line 851
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
     if-nez v0, :cond_0
 
-    .line 818
-    :goto_0
-    return-void
+    if-eqz p1, :cond_0
 
-    .line 799
-    :cond_0
-    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
-
-    if-nez v0, :cond_1
-
-    if-eqz p1, :cond_1
-
-    .line 800
+    .line 852
     iput-boolean p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
-    .line 801
+    .line 853
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaLayout:Landroid/widget/LinearLayout;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 804
+    .line 856
+    :cond_0
+    if-nez p1, :cond_1
+
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
+
+    if-eqz v0, :cond_1
+
+    .line 857
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->stopPlaying()V
+
+    .line 860
     :cond_1
-    if-nez p1, :cond_2
+    if-eqz p1, :cond_2
 
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
     if-eqz v0, :cond_2
 
-    .line 805
+    .line 861
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
-    invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->stopPlaying()V
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->startPlaying()V
 
-    .line 808
+    .line 864
     :cond_2
-    if-eqz p1, :cond_3
+    if-eqz p2, :cond_3
 
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
     if-eqz v0, :cond_3
 
-    .line 809
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
-
-    invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->startPlaying()V
-
-    .line 812
-    :cond_3
-    if-eqz p2, :cond_4
-
-    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
-
-    if-eqz v0, :cond_4
-
-    .line 813
+    .line 865
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v0, p2}, Lcom/android/internal/policy/impl/UnlockMediaController;->setControllerVisibility(Z)V
 
-    .line 816
-    :cond_4
+    .line 868
+    :cond_3
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v0, p1}, Lcom/android/internal/policy/impl/UnlockMediaController;->playingFlagSet(Z)V
 
-    .line 817
+    .line 869
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v0, p3}, Lcom/android/internal/policy/impl/UnlockMediaController;->updateMediaPlayer(Landroid/net/Uri;)V
 
-    goto :goto_0
+    .line 870
+    return-void
 .end method
 
 .method public onOrientationChange(Z)V
@@ -1926,48 +1972,45 @@
     .parameter "inPortrait"
 
     .prologue
-    .line 725
+    .line 763
     return-void
 .end method
 
 .method public onPause()V
-    .locals 3
+    .locals 2
 
     .prologue
-    const/4 v2, 0x0
-
-    .line 738
+    .line 790
     const-string v0, "PuzzleLockScreen"
 
     const-string v1, "PuzzleLock onPause"
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 740
-    iput-boolean v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mActivated:Z
-
-    .line 741
+    .line 792
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
     if-eqz v0, :cond_0
 
-    .line 742
+    .line 793
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->onPause()V
 
-    .line 746
+    .line 797
     :cond_0
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mHelp2:Landroid/widget/TextView;
 
-    invoke-virtual {v0, v2}, Landroid/widget/TextView;->setSelected(Z)V
+    const/4 v1, 0x0
 
-    .line 747
+    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setSelected(Z)V
+
+    .line 798
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->anim:Landroid/graphics/drawable/AnimationDrawable;
 
     invoke-virtual {v0}, Landroid/graphics/drawable/AnimationDrawable;->stop()V
 
-    .line 748
+    .line 799
     return-void
 .end method
 
@@ -1976,7 +2019,7 @@
     .parameter "newState"
 
     .prologue
-    .line 1003
+    .line 1054
     return-void
 .end method
 
@@ -1987,7 +2030,7 @@
     .parameter "batteryLevel"
 
     .prologue
-    .line 702
+    .line 740
     return-void
 .end method
 
@@ -1997,12 +2040,12 @@
     .parameter "spn"
 
     .prologue
-    .line 853
+    .line 904
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mStatus:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->updateLayout(Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;)V
 
-    .line 854
+    .line 905
     return-void
 .end method
 
@@ -2012,14 +2055,14 @@
     .prologue
     const/4 v5, 0x1
 
-    .line 752
+    .line 803
     const-string v0, "PuzzleLockScreen"
 
     const-string v1, "PuzzleLock onResume"
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 754
+    .line 805
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLayout:Landroid/widget/RelativeLayout;
 
     iget v1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mInitGlassLeft:I
@@ -2032,18 +2075,31 @@
 
     invoke-virtual {v0, v1, v2, v3, v4}, Landroid/widget/RelativeLayout;->layout(IIII)V
 
-    .line 756
+    .line 807
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->forceLayout()V
 
-    .line 757
+    .line 808
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
     invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->resetStatusInfo(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
 
-    .line 759
-    iput-boolean v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mActivated:Z
+    .line 810
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
-    .line 761
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getWallpaperMode()I
+
+    move-result v0
+
+    invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->switchLockscreenMode(I)V
+
+    .line 811
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    sget-object v1, Landroid/widget/ImageView$ScaleType;->FIT_XY:Landroid/widget/ImageView$ScaleType;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
+
+    .line 815
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->isDualClockEnabled()Ljava/lang/Boolean;
 
     move-result-object v0
@@ -2054,50 +2110,50 @@
 
     if-eqz v0, :cond_1
 
-    .line 762
+    .line 816
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockDualClock:Lcom/android/internal/policy/impl/UnlockDualClock;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockDualClock;->refreshTimeAndDateDisplay()V
 
-    .line 766
+    .line 820
     :goto_0
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->updateMissedEvent()V
 
-    .line 768
+    .line 822
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mMediaOpened:Z
 
     if-eqz v0, :cond_0
 
-    .line 769
+    .line 823
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockMediaController:Lcom/android/internal/policy/impl/UnlockMediaController;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockMediaController;->onResume()V
 
-    .line 773
+    .line 827
     :cond_0
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mHelp2:Landroid/widget/TextView;
 
     invoke-virtual {v0, v5}, Landroid/widget/TextView;->setSelected(Z)V
 
-    .line 782
+    .line 836
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->anim:Landroid/graphics/drawable/AnimationDrawable;
 
     invoke-virtual {v0, v5}, Landroid/graphics/drawable/AnimationDrawable;->setOneShot(Z)V
 
-    .line 783
+    .line 837
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->anim:Landroid/graphics/drawable/AnimationDrawable;
 
     invoke-virtual {v0}, Landroid/graphics/drawable/AnimationDrawable;->stop()V
 
-    .line 784
+    .line 838
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->anim:Landroid/graphics/drawable/AnimationDrawable;
 
     invoke-virtual {v0}, Landroid/graphics/drawable/AnimationDrawable;->start()V
 
-    .line 786
+    .line 840
     return-void
 
-    .line 764
+    .line 818
     :cond_1
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockClock:Lcom/android/internal/policy/impl/UnlockClock;
 
@@ -2111,7 +2167,7 @@
     .parameter "state"
 
     .prologue
-    .line 721
+    .line 759
     return-void
 .end method
 
@@ -2120,30 +2176,30 @@
     .parameter "simState"
 
     .prologue
-    .line 972
+    .line 1023
     invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->getCurrentStatus(Lcom/android/internal/telephony/IccCard$State;)Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     move-result-object v0
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mStatus:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
-    .line 973
+    .line 1024
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mStatus:Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->updateLayout(Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;)V
 
-    .line 974
+    .line 1025
     return-void
 .end method
 
 .method public onTimeChanged()V
-    .locals 1
+    .locals 2
 
     .prologue
-    .line 711
+    .line 749
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->forceLayout()V
 
-    .line 713
+    .line 751
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->isDualClockEnabled()Ljava/lang/Boolean;
 
     move-result-object v0
@@ -2154,20 +2210,22 @@
 
     if-eqz v0, :cond_0
 
-    .line 714
+    .line 752
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockDualClock:Lcom/android/internal/policy/impl/UnlockDualClock;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockDualClock;->refreshTimeAndDateDisplay()V
 
-    .line 717
+    .line 755
     :goto_0
     return-void
 
-    .line 716
+    .line 754
     :cond_0
     iget-object v0, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUnlockClock:Lcom/android/internal/policy/impl/UnlockClock;
 
-    invoke-virtual {v0}, Lcom/android/internal/policy/impl/UnlockClock;->refreshTimeAndDateDisplay()V
+    iget-object v1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v0, v1}, Lcom/android/internal/policy/impl/UnlockClock;->resetClockInfo(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
 
     goto :goto_0
 .end method
@@ -2178,6 +2236,6 @@
     .parameter "batteryLevel"
 
     .prologue
-    .line 707
+    .line 745
     return-void
 .end method

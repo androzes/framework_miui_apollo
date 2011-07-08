@@ -51,8 +51,6 @@
 
 .field private mEnableMenuKeyInLockScreen:Z
 
-.field private mEpicUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
-
 .field private mEventMatchLayoutTop:I
 
 .field private mInitGlassHeight:I
@@ -66,6 +64,8 @@
 .field private mLayout:Landroid/widget/RelativeLayout;
 
 .field private final mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
+
+.field private mLockscreenBackground:Landroid/widget/ImageView;
 
 .field private mMediaLayout:Landroid/widget/LinearLayout;
 
@@ -126,6 +126,8 @@
 .field private mUnlockArrowLayout:Landroid/widget/LinearLayout;
 
 .field private mUnlockButton:Landroid/widget/LinearLayout;
+
+.field private mUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
 
 .field private mUnlockDualClock:Lcom/android/internal/policy/impl/UnlockDualClock;
 
@@ -611,6 +613,16 @@
 
     invoke-virtual {v2, v3}, Landroid/widget/RelativeLayout;->addView(Landroid/view/View;)V
 
+    const v2, 0x10202f3
+
+    invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/EpicLockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/widget/ImageView;
+
+    iput-object v2, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
     .line 414
     invoke-direct {p0}, Lcom/android/internal/policy/impl/EpicLockScreen;->isDualClockEnabled()Ljava/lang/Boolean;
 
@@ -726,7 +738,7 @@
     .line 326
     .end local v0           #densityDpiForPuzzle:I
     :cond_0
-    const v2, 0x109008c
+    const v2, 0x109008a
 
     invoke-virtual {v1, v2, p0, v7}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
@@ -742,7 +754,7 @@
 
     invoke-direct {v2, v3, v4}, Lcom/android/internal/policy/impl/EpicUnlockClock;-><init>(Landroid/content/Context;Z)V
 
-    iput-object v2, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mEpicUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
+    iput-object v2, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
 
     goto/16 :goto_1
 
@@ -750,7 +762,7 @@
     :cond_2
     iget-object v2, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mLayout:Landroid/widget/RelativeLayout;
 
-    iget-object v3, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mEpicUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
+    iget-object v3, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
 
     invoke-virtual {v2, v3}, Landroid/widget/RelativeLayout;->addView(Landroid/view/View;)V
 
@@ -893,6 +905,8 @@
     goto/16 :goto_3
 
     .line 421
+    nop
+
     nop
 
     :sswitch_data_0
@@ -1216,7 +1230,7 @@
 
     .prologue
     .line 78
-    iget-object v0, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mEpicUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
+    iget-object v0, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
 
     return-object v0
 .end method
@@ -1637,6 +1651,41 @@
     move v4, v6
 
     goto :goto_0
+.end method
+
+.method private switchLockscreenMode(I)V
+    .locals 2
+    .parameter "mode"
+
+    .prologue
+    .line 1059
+    packed-switch p1, :pswitch_data_0
+
+    .line 1073
+    :goto_0
+    :pswitch_0
+    return-void
+
+    .line 1063
+    :pswitch_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getLockscreenWallpaper()Landroid/graphics/drawable/Drawable;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V
+
+    goto :goto_0
+
+    .line 1059
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method private updateLayout(Lcom/android/internal/policy/impl/EpicLockScreen$Status;)V
@@ -2543,6 +2592,20 @@
 
     iput-boolean v1, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mActivated:Z
 
+    iget-object v0, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getWallpaperMode()I
+
+    move-result v0
+
+    invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/EpicLockScreen;->switchLockscreenMode(I)V
+
+    iget-object v0, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    sget-object v1, Landroid/widget/ImageView$ScaleType;->FIT_XY:Landroid/widget/ImageView$ScaleType;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
+
     .line 1199
     invoke-direct {p0}, Lcom/android/internal/policy/impl/EpicLockScreen;->isDualClockEnabled()Ljava/lang/Boolean;
 
@@ -2589,7 +2652,7 @@
 
     .line 1202
     :cond_2
-    iget-object v1, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mEpicUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
+    iget-object v1, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
 
     invoke-virtual {v1}, Lcom/android/internal/policy/impl/EpicUnlockClock;->refreshTimeAndDateDisplay()V
 
@@ -2643,7 +2706,7 @@
 
     .line 1129
     :cond_0
-    iget-object v0, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mEpicUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
+    iget-object v0, p0, Lcom/android/internal/policy/impl/EpicLockScreen;->mUnlockClock:Lcom/android/internal/policy/impl/EpicUnlockClock;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/EpicUnlockClock;->refreshTimeAndDateDisplay()V
 

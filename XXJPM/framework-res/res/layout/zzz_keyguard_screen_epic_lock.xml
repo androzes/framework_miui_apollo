@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout android:id="@id/root" android:layout_width="fill_parent" android:layout_height="fill_parent"
   xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/zzz_lockscreen_wallpaper01" android:layout_width="fill_parent" android:layout_height="fill_parent" />
     <RelativeLayout android:id="@id/zzz_background01" android:layout_width="fill_parent" android:layout_height="fill_parent"
       xmlns:android="http://schemas.android.com/apk/res/android">
         <RelativeLayout android:id="@id/zzz_puzzlelockfullbg" android:layout_width="fill_parent" android:layout_height="fill_parent">

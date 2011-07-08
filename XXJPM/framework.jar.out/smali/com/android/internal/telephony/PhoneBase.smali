@@ -2181,7 +2181,7 @@
 
     .prologue
     .line 926
-    const-string v0, "setOnEcbModeExitResponse"
+    const-string/jumbo v0, "setOnEcbModeExitResponse"
 
     invoke-direct {p0, v0}, Lcom/android/internal/telephony/PhoneBase;->logUnexpectedCdmaMethodCall(Ljava/lang/String;)V
 

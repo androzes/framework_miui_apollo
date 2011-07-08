@@ -982,7 +982,7 @@
     invoke-virtual {p0, p1, v0, p2}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 
     .line 703
-    const-string v0, "setProgress"
+    const-string/jumbo v0, "setProgress"
 
     invoke-virtual {p0, p1, v0, p3}, Landroid/widget/RemoteViews;->setInt(ILjava/lang/String;I)V
 

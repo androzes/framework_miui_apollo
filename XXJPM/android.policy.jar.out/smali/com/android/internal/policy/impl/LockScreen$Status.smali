@@ -36,6 +36,8 @@
 
 .field public static final enum SimMissingLocked:Lcom/android/internal/policy/impl/LockScreen$Status;
 
+.field public static final enum SimPukBlocked:Lcom/android/internal/policy/impl/LockScreen$Status;
+
 .field public static final enum SimPukLocked:Lcom/android/internal/policy/impl/LockScreen$Status;
 
 
@@ -114,8 +116,19 @@
 
     sput-object v0, Lcom/android/internal/policy/impl/LockScreen$Status;->SimLocked:Lcom/android/internal/policy/impl/LockScreen$Status;
 
+    .line 148
+    new-instance v0, Lcom/android/internal/policy/impl/LockScreen$Status;
+
+    const-string v1, "SimPukBlocked"
+
+    const/4 v2, 0x6
+
+    invoke-direct {v0, v1, v2, v3}, Lcom/android/internal/policy/impl/LockScreen$Status;-><init>(Ljava/lang/String;IZ)V
+
+    sput-object v0, Lcom/android/internal/policy/impl/LockScreen$Status;->SimPukBlocked:Lcom/android/internal/policy/impl/LockScreen$Status;
+
     .line 112
-    const/4 v0, 0x6
+    const/4 v0, 0x7
 
     new-array v0, v0, [Lcom/android/internal/policy/impl/LockScreen$Status;
 
@@ -142,6 +155,12 @@
     const/4 v1, 0x5
 
     sget-object v2, Lcom/android/internal/policy/impl/LockScreen$Status;->SimLocked:Lcom/android/internal/policy/impl/LockScreen$Status;
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x6
+
+    sget-object v2, Lcom/android/internal/policy/impl/LockScreen$Status;->SimPukBlocked:Lcom/android/internal/policy/impl/LockScreen$Status;
 
     aput-object v2, v0, v1
 
@@ -190,7 +209,7 @@
     return-object p0
 .end method
 
-.method public static final values()[Lcom/android/internal/policy/impl/LockScreen$Status;
+.method public static values()[Lcom/android/internal/policy/impl/LockScreen$Status;
     .locals 1
 
     .prologue

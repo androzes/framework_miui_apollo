@@ -2,9 +2,9 @@
 <RelativeLayout android:id="@id/zzz_UnlockClock" android:layout_width="fill_parent" android:layout_height="wrap_content"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:gravity="center_vertical" android:id="@id/zzz_citylayout" android:background="@drawable/zzz_unlock_blackbg_dual" android:layout_width="fill_parent" android:layout_height="24.0dip" android:layout_marginBottom="57.329987dip" android:layout_alignParentBottom="true">
-        <TextView android:textSize="17.329987dip" android:textColor="#ffffffff" android:ellipsize="marquee" android:id="@id/zzz_city02" android:layout_width="118.66998dip" android:layout_height="fill_parent" android:layout_marginLeft="20.0dip" android:singleLine="true" android:shadowDx="1.0" android:shadowDy="-1.0" android:marqueeRepeatLimit="marquee_forever" />
+        <TextView android:textSize="17.329987dip" android:textColor="#ffb2d1ff" android:ellipsize="marquee" android:id="@id/zzz_city02" android:layout_width="118.66998dip" android:layout_height="fill_parent" android:layout_marginLeft="20.0dip" android:singleLine="true" android:shadowDx="1.0" android:shadowDy="-1.0" android:marqueeRepeatLimit="marquee_forever" />
         <TextView android:layout_width="48.0dip" android:layout_height="fill_parent" />
-        <TextView android:textSize="17.329987dip" android:textColor="#ffffffff" android:ellipsize="marquee" android:id="@id/zzz_city01" android:layout_width="118.66998dip" android:layout_height="fill_parent" android:singleLine="true" android:shadowDx="1.0" android:shadowDy="-1.0" android:layout_weight="0.7" android:marqueeRepeatLimit="marquee_forever" />
+        <TextView android:textSize="17.329987dip" android:textColor="#ffb2d1ff" android:ellipsize="marquee" android:id="@id/zzz_city01" android:layout_width="118.66998dip" android:layout_height="fill_parent" android:singleLine="true" android:shadowDx="1.0" android:shadowDy="-1.0" android:layout_weight="0.7" android:marqueeRepeatLimit="marquee_forever" />
         <TextView android:layout_width="14.669983dip" android:layout_height="fill_parent" android:layout_weight="0.4" />
     </LinearLayout>
     <LinearLayout android:id="@id/zzz_datetime02" android:background="@drawable/zzz_unlock_dualclock_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">

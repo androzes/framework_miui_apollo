@@ -33,6 +33,8 @@
 
 .field public static final MESSAGE_TYPE_INBOX:I = 0x1
 
+.field public static final MESSAGE_TYPE_INVALID:I = 0x7
+
 .field public static final MESSAGE_TYPE_OUTBOX:I = 0x4
 
 .field public static final MESSAGE_TYPE_QUEUED:I = 0x6

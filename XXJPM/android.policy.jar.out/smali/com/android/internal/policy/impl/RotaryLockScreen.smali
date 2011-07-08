@@ -30,6 +30,8 @@
 
 
 # instance fields
+.field private am:Landroid/media/AudioManager;
+
 .field private mAlarmIcon:Landroid/graphics/drawable/Drawable;
 
 .field private mAudioManager:Landroid/media/AudioManager;
@@ -54,15 +56,31 @@
 
 .field private mEmergencyCallButton:Landroid/widget/Button;
 
+.field private mForwardIcon:Landroid/widget/ImageButton;
+
+.field private mIsMusicActive:Z
+
+.field private mLockAlwaysMusic:Z
+
+.field private mLockMusicControls:Z
+
 .field private final mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
+.field private mLockscreenBackground:Landroid/widget/ImageView;
+
 .field private mNextAlarm:Ljava/lang/String;
+
+.field private mPauseIcon:Landroid/widget/ImageButton;
 
 .field private mPendingR1:Ljava/lang/Runnable;
 
 .field private mPendingR2:Ljava/lang/Runnable;
 
+.field private mPlayIcon:Landroid/widget/ImageButton;
+
 .field private mPluggedIn:Z
+
+.field private mRewindIcon:Landroid/widget/ImageButton;
 
 .field private mRotary:Lcom/android/internal/widget/RotarySelector;
 
@@ -83,6 +101,8 @@
 .field private mTimeFormat:Ljava/text/DateFormat;
 
 .field private final mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+.field private mWasMusicActive:Z
 
 
 # direct methods
@@ -125,6 +145,38 @@
 
     iput-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mStatus:Lcom/android/internal/policy/impl/RotaryLockScreen$Status;
 
+    .line 55
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->getContext()Landroid/content/Context;
+
+    move-result-object v1
+
+    const-string v2, "audio"
+
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/media/AudioManager;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->am:Landroid/media/AudioManager;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->am:Landroid/media/AudioManager;
+
+    invoke-virtual {v1}, Landroid/media/AudioManager;->isMusicActive()Z
+
+    move-result v1
+
+    iput-boolean v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mWasMusicActive:Z
+
+    .line 75
+    iput-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mIsMusicActive:Z
+
+    const/4 v2, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v3, 0x1
+
     .line 68
     iput-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mShowingBatteryInfo:Z
 
@@ -148,6 +200,46 @@
     .line 79
     iput-object v2, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mChargingIcon:Landroid/graphics/drawable/Drawable;
 
+    .line 104
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    const-string v2, "lockscreen_music_controls"
+
+    invoke-static {v1, v2, v3}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v1
+
+    if-ne v1, v3, :cond_0
+
+    const/4 v2, 0x1
+
+    :goto_0
+    iput-boolean v2, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockMusicControls:Z
+
+    .line 106
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    const-string v2, "lockscreen_always_music_controls"
+
+    invoke-static {v1, v2, v4}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v1
+
+    if-ne v1, v3, :cond_1
+
+    const/4 v2, 0x1
+
+    :goto_1
+    iput-boolean v2, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockAlwaysMusic:Z
+
     .line 151
     iput-object p2, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
@@ -162,13 +254,13 @@
 
     move-result-object v1
 
-    const v2, 0x10d0009
+    const v2, 0x10d000f
 
     invoke-virtual {v1, v2}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v1
 
-    if-eqz v1, :cond_0
+    if-eqz v1, :cond_2
 
     const-string v1, "ro.monkey"
 
@@ -176,11 +268,11 @@
 
     move-result v1
 
-    if-nez v1, :cond_0
+    if-nez v1, :cond_2
 
     move v1, v3
 
-    :goto_0
+    :goto_2
     iput-boolean v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mDisableMenuKeyInLockScreen:Z
 
     .line 159
@@ -199,7 +291,7 @@
     .local v0, inflater:Landroid/view/LayoutInflater;
     iget-boolean v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mCreatedInPortrait:Z
 
-    if-eqz v1, :cond_1
+    if-eqz v1, :cond_3
 
     .line 163
     const v1, 0x109008f
@@ -207,7 +299,7 @@
     invoke-virtual {v0, v1, p0, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
     .line 168
-    :goto_1
+    :goto_3
     const v1, 0x10201be
 
     invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/RotaryLockScreen;->findViewById(I)Landroid/view/View;
@@ -276,9 +368,63 @@
     .line 175
     iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mEmergencyCallButton:Landroid/widget/Button;
 
-    const v2, 0x10402a4
+    const v2, 0x10402ac
 
     invoke-virtual {v1, v2}, Landroid/widget/Button;->setText(I)V
+
+    const v2, 0x10202f3
+
+    invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/RotaryLockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/widget/ImageView;
+
+    iput-object v2, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    .line 212
+    const v1, 0x10202be
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/RotaryLockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    .line 213
+    const v1, 0x10202bf
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/RotaryLockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    .line 214
+    const v1, 0x10202c0
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/RotaryLockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    .line 215
+    const v1, 0x10202c1
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/RotaryLockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mForwardIcon:Landroid/widget/ImageButton;
 
     .line 176
     const v1, 0x10201cb
@@ -310,6 +456,42 @@
     invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/RotaryLockScreen$1;-><init>(Lcom/android/internal/policy/impl/RotaryLockScreen;)V
 
     invoke-virtual {v1, v2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 231
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/RotaryLockScreen$5;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/RotaryLockScreen$5;-><init>(Lcom/android/internal/policy/impl/RotaryLockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 245
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/RotaryLockScreen$6;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/RotaryLockScreen$6;-><init>(Lcom/android/internal/policy/impl/RotaryLockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 259
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/RotaryLockScreen$7;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/RotaryLockScreen$7;-><init>(Lcom/android/internal/policy/impl/RotaryLockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 266
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/RotaryLockScreen$8;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/RotaryLockScreen$8;-><init>(Lcom/android/internal/policy/impl/RotaryLockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     .line 184
     invoke-virtual {p0, v3}, Lcom/android/internal/policy/impl/RotaryLockScreen;->setFocusable(Z)V
@@ -349,15 +531,10 @@
     .line 193
     iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mAudioManager:Landroid/media/AudioManager;
 
-    invoke-virtual {v1}, Landroid/media/AudioManager;->getRingerMode()I
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->isSilentMode()Z
 
     move-result v1
 
-    if-nez v1, :cond_2
-
-    move v1, v3
-
-    :goto_2
     iput-boolean v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
     .line 195
@@ -375,14 +552,7 @@
     .line 197
     iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRotary:Lcom/android/internal/widget/RotarySelector;
 
-    iget-boolean v2, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
-
-    if-eqz v2, :cond_3
-
-    const v2, 0x108019a
-
-    :goto_3
-    invoke-virtual {v1, v2}, Lcom/android/internal/widget/RotarySelector;->setRightHandleResource(I)V
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->updateRightTabResources()V
 
     .line 201
     invoke-direct {p0, p3}, Lcom/android/internal/policy/impl/RotaryLockScreen;->resetStatusInfo(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
@@ -390,33 +560,33 @@
     .line 202
     return-void
 
-    .end local v0           #inflater:Landroid/view/LayoutInflater;
     :cond_0
+    const/4 v2, 0x0
+
+    .line 104
+    goto/16 :goto_0
+
+    :cond_1
+    const/4 v2, 0x0
+
+    .line 106
+    goto/16 :goto_1
+
+    .end local v0           #inflater:Landroid/view/LayoutInflater;
+    :cond_2
     move v1, v4
 
     .line 155
-    goto/16 :goto_0
+    goto/16 :goto_2
 
     .line 165
     .restart local v0       #inflater:Landroid/view/LayoutInflater;
-    :cond_1
+    :cond_3
     const v1, 0x109008f
 
     invoke-virtual {v0, v1, p0, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    goto/16 :goto_1
-
-    :cond_2
-    move v1, v4
-
-    .line 193
-    goto :goto_2
-
-    .line 197
-    :cond_3
-    const v2, 0x108019b
-
-    goto :goto_3
+    goto/16 :goto_3
 .end method
 
 .method static synthetic access$000(Lcom/android/internal/policy/impl/RotaryLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
@@ -428,6 +598,84 @@
     iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
     return-object v0
+.end method
+
+.method static synthetic access$100(Lcom/android/internal/policy/impl/RotaryLockScreen;)V
+    .locals 0
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->refreshMusicStatus()V
+
+    return-void
+.end method
+
+.method static synthetic access$200(Lcom/android/internal/policy/impl/RotaryLockScreen;)Landroid/media/AudioManager;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->am:Landroid/media/AudioManager;
+
+    return-object v0
+.end method
+
+.method static synthetic access$300(Lcom/android/internal/policy/impl/RotaryLockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$400(Lcom/android/internal/policy/impl/RotaryLockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$500(Lcom/android/internal/policy/impl/RotaryLockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$600(Lcom/android/internal/policy/impl/RotaryLockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$700(Lcom/android/internal/policy/impl/RotaryLockScreen;I)V
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    .line 49
+    invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/RotaryLockScreen;->sendMediaButtonEvent(I)V
+
+    return-void
 .end method
 
 .method static getCarrierString(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
@@ -640,6 +888,22 @@
 
     move-result-object v4
 
+    const-string v5, "MMMM"
+
+    const-string v6, "MMM"
+
+    invoke-virtual {v4, v5, v6}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v4
+
+    const-string v5, "EEEE"
+
+    const-string v6, "EEE"
+
+    invoke-virtual {v4, v5, v6}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v4
+
     invoke-direct {v1, v4}, Ljava/text/SimpleDateFormat;-><init>(Ljava/lang/String;)V
     :try_end_0
     .catch Ljava/lang/ClassCastException; {:try_start_0 .. :try_end_0} :catch_0
@@ -677,6 +941,32 @@
     invoke-static {v4}, Ljava/text/DateFormat;->getDateInstance(I)Ljava/text/DateFormat;
 
     move-result-object v4
+
+    goto :goto_0
+.end method
+
+.method private isSilentMode()Z
+    .locals 2
+
+    .prologue
+    .line 266
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mAudioManager:Landroid/media/AudioManager;
+
+    invoke-virtual {v0}, Landroid/media/AudioManager;->getRingerMode()I
+
+    move-result v0
+
+    const/4 v1, 0x2
+
+    if-eq v0, v1, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
 
     goto :goto_0
 .end method
@@ -814,7 +1104,7 @@
 
     move-result-object v0
 
-    const v1, 0x10402a9
+    const v1, 0x10402b1
 
     invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
@@ -912,6 +1202,112 @@
     move-result-object v0
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mCharging:Ljava/lang/String;
+
+    goto :goto_0
+.end method
+
+.method private refreshMusicStatus()V
+    .locals 3
+
+    .prologue
+    const/4 v2, 0x0
+
+    const/16 v1, 0x8
+
+    .line 426
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mWasMusicActive:Z
+
+    if-nez v0, :cond_0
+
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mIsMusicActive:Z
+
+    if-nez v0, :cond_0
+
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockAlwaysMusic:Z
+
+    if-eqz v0, :cond_2
+
+    :cond_0
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockMusicControls:Z
+
+    if-eqz v0, :cond_2
+
+    .line 427
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mAudioManager:Landroid/media/AudioManager;
+
+    invoke-virtual {v0}, Landroid/media/AudioManager;->isMusicActive()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    .line 428
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 429
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 430
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 431
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 444
+    :goto_0
+    return-void
+
+    .line 433
+    :cond_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 434
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 435
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 436
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    goto :goto_0
+
+    .line 439
+    :cond_2
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 440
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 441
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 442
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
 
     goto :goto_0
 .end method
@@ -1014,6 +1410,9 @@
     .line 295
     invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->refreshAlarmDisplay()V
 
+    .line 303
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->refreshMusicStatus()V
+
     .line 297
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->getContext()Landroid/content/Context;
 
@@ -1040,6 +1439,134 @@
 
     .line 301
     return-void
+.end method
+
+.method private sendMediaButtonEvent(I)V
+    .locals 13
+    .parameter "code"
+
+    .prologue
+    .line 447
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v1
+
+    .line 449
+    .local v1, eventtime:J
+    new-instance v11, Landroid/content/Intent;
+
+    const-string v4, "android.intent.action.MEDIA_BUTTON"
+
+    const/4 v5, 0x0
+
+    invoke-direct {v11, v4, v5}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    .line 450
+    .local v11, downIntent:Landroid/content/Intent;
+    new-instance v0, Landroid/view/KeyEvent;
+
+    const/4 v5, 0x0
+
+    const/4 v7, 0x0
+
+    move-wide v3, v1
+
+    move v6, p1
+
+    invoke-direct/range {v0 .. v7}, Landroid/view/KeyEvent;-><init>(JJIII)V
+
+    .line 451
+    .local v0, downEvent:Landroid/view/KeyEvent;
+    const-string v4, "android.intent.extra.KEY_EVENT"
+
+    invoke-virtual {v11, v4, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
+
+    .line 452
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->getContext()Landroid/content/Context;
+
+    move-result-object v4
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v4, v11, v5}, Landroid/content/Context;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
+
+    .line 454
+    new-instance v12, Landroid/content/Intent;
+
+    const-string v4, "android.intent.action.MEDIA_BUTTON"
+
+    const/4 v5, 0x0
+
+    invoke-direct {v12, v4, v5}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    .line 455
+    .local v12, upIntent:Landroid/content/Intent;
+    new-instance v3, Landroid/view/KeyEvent;
+
+    const/4 v8, 0x1
+
+    const/4 v10, 0x0
+
+    move-wide v4, v1
+
+    move-wide v6, v1
+
+    move v9, p1
+
+    invoke-direct/range {v3 .. v10}, Landroid/view/KeyEvent;-><init>(JJIII)V
+
+    .line 456
+    .local v3, upEvent:Landroid/view/KeyEvent;
+    const-string v4, "android.intent.extra.KEY_EVENT"
+
+    invoke-virtual {v12, v4, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
+
+    .line 457
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->getContext()Landroid/content/Context;
+
+    move-result-object v4
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v4, v12, v5}, Landroid/content/Context;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
+
+    .line 458
+    return-void
+.end method
+
+.method private switchLockscreenMode(I)V
+    .locals 2
+    .parameter "mode"
+
+    .prologue
+    .line 1059
+    packed-switch p1, :pswitch_data_0
+
+    .line 1073
+    :goto_0
+    :pswitch_0
+    return-void
+
+    .line 1063
+    :pswitch_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getLockscreenWallpaper()Landroid/graphics/drawable/Drawable;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V
+
+    goto :goto_0
+
+    .line 1059
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method private toastMessage(Landroid/widget/TextView;Ljava/lang/String;I)V
@@ -1353,29 +1880,101 @@
 .end method
 
 .method private updateRightTabResources()V
-    .locals 5
+    .locals 6
 
     .prologue
-    .line 242
-    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRotary:Lcom/android/internal/widget/RotarySelector;
+    const/4 v2, 0x1
 
+    .line 270
     iget-boolean v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
     if-eqz v1, :cond_0
 
-    const v1, 0x108019a
+    iget-object v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mAudioManager:Landroid/media/AudioManager;
 
+    invoke-virtual {v1}, Landroid/media/AudioManager;->getRingerMode()I
+
+    move-result v1
+
+    if-ne v1, v2, :cond_0
+
+    move v0, v2
+
+    .line 273
+    .local v0, vibe:Z
     :goto_0
-    invoke-virtual {v0, v1}, Lcom/android/internal/widget/RotarySelector;->setRightHandleResource(I)V
+    iget-boolean v2, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
-    .line 249
+    if-eqz v2, :cond_2
+
+    if-eqz v0, :cond_1
+
+    const v2, 0x108019d
+
+    :goto_1
+    iget-boolean v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+
+    if-eqz v3, :cond_3
+
+    const v3, 0x1080211
+
+    :goto_2
+    iget-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+
+    if-eqz v4, :cond_4
+
+    const v4, 0x10801fa
+
+    :goto_3
+    iget-boolean v5, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+
+    if-eqz v5, :cond_5
+
+    const v5, 0x108020d
+
+    :goto_4
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRotary:Lcom/android/internal/widget/RotarySelector;
+
+    invoke-virtual {v0, v2}, Lcom/android/internal/widget/RotarySelector;->setRightHandleResource(I)V
+
+    .line 283
     return-void
 
-    .line 242
+    .line 270
+    .end local v0           #vibe:Z
     :cond_0
-    const v1, 0x108019b
+    const/4 v1, 0x0
+
+    move v0, v1
 
     goto :goto_0
+
+    .line 273
+    .restart local v0       #vibe:Z
+    :cond_1
+    const v2, 0x108019a
+
+    goto :goto_1
+
+    :cond_2
+    const v2, 0x108019b
+
+    goto :goto_1
+
+    :cond_3
+    const v3, 0x108020e
+
+    goto :goto_2
+
+    :cond_4
+    const v4, 0x10801f9
+
+    goto :goto_3
+
+    :cond_5
+    const v5, 0x108020c
+
+    goto :goto_4
 .end method
 
 .method private updateStatusLines()V
@@ -1570,171 +2169,194 @@
 .end method
 
 .method public onDialTrigger(Landroid/view/View;I)V
-    .locals 7
+    .locals 8
     .parameter "v"
     .parameter "whichHandle"
 
     .prologue
-    const/4 v6, 0x2
+    const/4 v5, 0x2
 
-    const/4 v4, 0x1
+    const/4 v7, 0x0
 
-    const/4 v5, 0x0
+    const/4 v6, 0x1
 
-    .line 231
-    if-ne p2, v4, :cond_1
+    .line 317
+    if-ne p2, v6, :cond_1
 
-    .line 232
-    iget-object v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
+    .line 318
+    iget-object v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    invoke-interface {v3}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->goToUnlockScreen()V
+    invoke-interface {v4}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->goToUnlockScreen()V
 
-    .line 251
+    .line 350
     :cond_0
     :goto_0
     return-void
 
-    .line 233
+    .line 319
     :cond_1
-    if-ne p2, v6, :cond_0
+    if-ne p2, v5, :cond_0
 
-    .line 235
-    iget-boolean v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
-
-    if-nez v3, :cond_2
-
-    move v3, v4
-
-    :goto_1
-    iput-boolean v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
-
-    .line 236
-    iget-object v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mAudioManager:Landroid/media/AudioManager;
-
+    .line 321
     iget-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
-    if-eqz v4, :cond_3
+    if-nez v4, :cond_2
 
-    move v4, v5
+    move v4, v6
 
+    :goto_1
+    iput-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+
+    .line 322
+    iget-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+
+    if-eqz v4, :cond_5
+
+    .line 323
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->getContext()Landroid/content/Context;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v4
+
+    const-string v5, "vibrate_in_silent"
+
+    invoke-static {v4, v5, v6}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v4
+
+    if-ne v4, v6, :cond_3
+
+    move v3, v6
+
+    .line 327
+    .local v3, vibe:Z
     :goto_2
-    invoke-virtual {v3, v4}, Landroid/media/AudioManager;->setRingerMode(I)V
-
-    .line 238
-    iget-boolean v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+    iget-object v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mAudioManager:Landroid/media/AudioManager;
 
     if-eqz v3, :cond_4
 
-    const v3, 0x108019a
+    move v5, v6
 
-    move v0, v3
-
-    .line 241
-    .local v0, handleIcon:I
     :goto_3
-    iget-boolean v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+    invoke-virtual {v4, v5}, Landroid/media/AudioManager;->setRingerMode(I)V
 
-    if-eqz v3, :cond_5
-
-    const v3, 0x108019a
-
-    move v2, v3
-
-    .line 244
-    .local v2, toastIcon:I
+    .line 334
+    .end local v3           #vibe:Z
     :goto_4
-    iget-object v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mRotary:Lcom/android/internal/widget/RotarySelector;
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->updateRightTabResources()V
 
-    invoke-virtual {v3, v0}, Lcom/android/internal/widget/RotarySelector;->setRightHandleResource(I)V
+    .line 336
+    iget-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
-    .line 245
-    iget-boolean v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
-
-    if-eqz v3, :cond_6
+    if-eqz v4, :cond_6
 
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->getContext()Landroid/content/Context;
 
-    move-result-object v3
+    move-result-object v4
 
-    const v4, 0x1040143
+    const v5, 0x1040143
 
-    invoke-virtual {v3, v4}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+    invoke-virtual {v4, v5}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v4
 
-    move-object v1, v3
+    move-object v0, v4
 
-    .line 248
-    .local v1, message:Ljava/lang/String;
+    .line 340
+    .local v0, message:Ljava/lang/String;
     :goto_5
-    iget-object v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mScreenLocked:Landroid/widget/TextView;
+    iget-boolean v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
-    invoke-direct {p0, v3, v1, v2}, Lcom/android/internal/policy/impl/RotaryLockScreen;->toastMessage(Landroid/widget/TextView;Ljava/lang/String;I)V
+    if-eqz v4, :cond_7
 
-    .line 249
-    iget-object v3, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
+    const v4, 0x10801a1
 
-    invoke-interface {v3}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->pokeWakelock()V
+    move v2, v4
+
+    :goto_6
+    iget-object v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mScreenLocked:Landroid/widget/TextView;
+
+    invoke-direct {p0, v4, v0, v2}, Lcom/android/internal/policy/impl/RotaryLockScreen;->toastMessage(Landroid/widget/TextView;Ljava/lang/String;I)V
+
+    .line 348
+    iget-object v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
+
+    invoke-interface {v4}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->pokeWakelock()V
 
     goto :goto_0
 
-    .end local v0           #handleIcon:I
-    .end local v1           #message:Ljava/lang/String;
-    .end local v2           #toastIcon:I
+    .end local v0           #message:Ljava/lang/String;
+    .end local v1
+    .end local v2
     :cond_2
-    move v3, v5
+    move v4, v7
 
-    .line 235
+    .line 321
     goto :goto_1
 
     :cond_3
-    move v4, v6
+    move v3, v7
 
-    .line 236
+    .line 323
     goto :goto_2
 
-    .line 238
+    .restart local v3       #vibe:Z
     :cond_4
-    const v3, 0x108019b
+    move v5, v7
 
-    move v0, v3
-
+    .line 327
     goto :goto_3
 
-    .line 241
-    .restart local v0       #handleIcon:I
+    .line 331
+    .end local v3           #vibe:Z
     :cond_5
-    const v3, 0x108019b
+    iget-object v4, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mAudioManager:Landroid/media/AudioManager;
 
-    move v2, v3
+    invoke-virtual {v4, v5}, Landroid/media/AudioManager;->setRingerMode(I)V
 
     goto :goto_4
 
-    .line 245
-    .restart local v2       #toastIcon:I
+    .line 336
     :cond_6
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->getContext()Landroid/content/Context;
 
-    move-result-object v3
+    move-result-object v4
 
-    const v4, 0x1040144
+    const v5, 0x1040144
 
-    invoke-virtual {v3, v4}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+    invoke-virtual {v4, v5}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v4
 
-    move-object v1, v3
+    move-object v0, v4
 
     goto :goto_5
+
+    .line 340
+    .restart local v0       #message:Ljava/lang/String;
+    :cond_7
+    const v4, 0x10801a2
+
+    move v2, v4
+
+    goto :goto_6
 .end method
 
 .method public onGrabbedStateChange(Landroid/view/View;I)V
-    .locals 0
+    .locals 2
     .parameter "v"
     .parameter "grabbedState"
 
     .prologue
-    .line 256
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->isSilentMode()Z
+
+    move-result v0
+
+    iput-boolean v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
+
     return-void
 .end method
 
@@ -1921,6 +2543,20 @@
 
     invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternUtils;->updateEmergencyCallButtonState(Landroid/widget/Button;)V
 
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getWallpaperMode()I
+
+    move-result v0
+
+    invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->switchLockscreenMode(I)V
+
+    iget-object v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    sget-object v1, Landroid/widget/ImageView$ScaleType;->FIT_XY:Landroid/widget/ImageView$ScaleType;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
+
     .line 719
     return-void
 .end method
@@ -1930,31 +2566,33 @@
     .parameter "state"
 
     .prologue
-    .line 625
-    if-nez p1, :cond_1
+    .line 742
+    const/4 v1, 0x2
+
+    if-eq v1, p1, :cond_1
 
     const/4 v1, 0x1
 
     move v0, v1
 
-    .line 626
+    .line 743
     .local v0, silent:Z
     :goto_0
     iget-boolean v1, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
     if-eq v0, v1, :cond_0
 
-    .line 627
+    .line 744
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/RotaryLockScreen;->mSilentMode:Z
 
-    .line 628
+    .line 745
     invoke-direct {p0}, Lcom/android/internal/policy/impl/RotaryLockScreen;->updateRightTabResources()V
 
-    .line 630
+    .line 747
     :cond_0
     return-void
 
-    .line 625
+    .line 742
     .end local v0           #silent:Z
     :cond_1
     const/4 v1, 0x0

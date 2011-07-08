@@ -27,7 +27,7 @@
     .parameter
 
     .prologue
-    .line 259
+    .line 272
     iput-object p1, p0, Lcom/android/internal/policy/impl/GlassLockScreen$1;->this$0:Lcom/android/internal/policy/impl/GlassLockScreen;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -42,7 +42,7 @@
     .parameter "v"
 
     .prologue
-    .line 260
+    .line 274
     iget-object v0, p0, Lcom/android/internal/policy/impl/GlassLockScreen$1;->this$0:Lcom/android/internal/policy/impl/GlassLockScreen;
 
     invoke-static {v0}, Lcom/android/internal/policy/impl/GlassLockScreen;->access$000(Lcom/android/internal/policy/impl/GlassLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
@@ -51,7 +51,7 @@
 
     invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->pokeWakelock()V
 
-    .line 261
+    .line 275
     iget-object v0, p0, Lcom/android/internal/policy/impl/GlassLockScreen$1;->this$0:Lcom/android/internal/policy/impl/GlassLockScreen;
 
     invoke-static {v0}, Lcom/android/internal/policy/impl/GlassLockScreen;->access$000(Lcom/android/internal/policy/impl/GlassLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
@@ -60,6 +60,6 @@
 
     invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->takeEmergencyCallAction()V
 
-    .line 262
+    .line 276
     return-void
 .end method

@@ -18,12 +18,14 @@
 
 
 # instance fields
+.field private mPendingIntent:Landroid/content/Intent;
+
 .field final synthetic this$0:Lcom/android/internal/policy/impl/LockPatternKeyguardView;
 
 
 # direct methods
 .method constructor <init>(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
-    .locals 0
+    .locals 1
     .parameter
 
     .prologue
@@ -31,6 +33,11 @@
     iput-object p1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$3;->this$0:Lcom/android/internal/policy/impl/LockPatternKeyguardView;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    .line 207
+    const/4 v0, 0x0
+
+    iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$3;->mPendingIntent:Landroid/content/Intent;
 
     return-void
 .end method
@@ -594,7 +601,19 @@
 
     invoke-virtual {v0}, Lcom/android/internal/widget/LockPatternUtils;->reportSuccessfulPasswordAttempt()V
 
-    .line 478
+    .line 526
+    return-void
+.end method
+
+.method public setPendingIntent(Landroid/content/Intent;)V
+    .locals 0
+    .parameter "intent"
+
+    .prologue
+    .line 210
+    iput-object p1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$3;->mPendingIntent:Landroid/content/Intent;
+
+    .line 211
     return-void
 .end method
 

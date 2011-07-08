@@ -27,13 +27,23 @@
 # static fields
 .field public static final CONTENT_CONVERSATIONS_URI:Landroid/net/Uri; = null
 
+.field public static final CONTENT_CONVERSATION_THREAD_URI:Landroid/net/Uri; = null
+
+.field public static final CONTENT_COUNT_OF_THREADS_MESSAGES:Landroid/net/Uri; = null
+
 .field public static final CONTENT_DRAFT_URI:Landroid/net/Uri; = null
 
 .field public static final CONTENT_FILTER_BYPHONE_URI:Landroid/net/Uri; = null
 
 .field public static final CONTENT_LOCKED_URI:Landroid/net/Uri; = null
 
+.field public static final CONTENT_PREVIEW_URI:Landroid/net/Uri; = null
+
+.field public static final CONTENT_SUM_OF_UNREAD_COUNT:Landroid/net/Uri; = null
+
 .field public static final CONTENT_UNDELIVERED_URI:Landroid/net/Uri; = null
+
+.field public static final CONTENT_UPDATE_BYADDRESS_URI:Landroid/net/Uri; = null
 
 .field public static final CONTENT_URI:Landroid/net/Uri; = null
 
@@ -54,6 +64,20 @@
 .field public static final MMS_PROTO:I = 0x1
 
 .field public static final NO_ERROR:I = 0x0
+
+.field public static final PREVIEW_ADDRESS_COLUMN_INDEX:I = 0x1
+
+.field public static final PREVIEW_BODY_COLUMN_INDEX:I = 0x4
+
+.field public static final PREVIEW_CHARSET_COLUMN_INDEX:I = 0x5
+
+.field public static final PREVIEW_DATE_COLUMN_INDEX:I = 0x2
+
+.field public static final PREVIEW_ID_COLUMN_INDEX:I = 0x0
+
+.field public static final PREVIEW_THREAD_ID_COLUMN_INDEX:I = 0x6
+
+.field public static final PREVIEW_TYPE_COLUMN_INDEX:I = 0x3
 
 .field public static final SEARCH_URI:Landroid/net/Uri; = null
 
@@ -76,7 +100,43 @@
 
     sput-object v0, Landroid/provider/Telephony$MmsSms;->CONTENT_URI:Landroid/net/Uri;
 
-    .line 1698
+    .line 1661
+    const-string v0, "content://mms-sms/threads/#"
+
+    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    sput-object v0, Landroid/provider/Telephony$MmsSms;->CONTENT_CONVERSATION_THREAD_URI:Landroid/net/Uri;
+
+    .line 1664
+    const-string v0, "content://mms-sms/addresses"
+
+    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    sput-object v0, Landroid/provider/Telephony$MmsSms;->CONTENT_UPDATE_BYADDRESS_URI:Landroid/net/Uri;
+
+    .line 1667
+    const-string v0, "content://mms-sms/sum-unread"
+
+    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    sput-object v0, Landroid/provider/Telephony$MmsSms;->CONTENT_SUM_OF_UNREAD_COUNT:Landroid/net/Uri;
+
+    .line 1673
+    const-string v0, "content://mms-sms/count-threads-messages"
+
+    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    sput-object v0, Landroid/provider/Telephony$MmsSms;->CONTENT_COUNT_OF_THREADS_MESSAGES:Landroid/net/Uri;
+
+    .line 1725
     const-string v0, "content://mms-sms/conversations"
 
     invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
@@ -121,7 +181,16 @@
 
     sput-object v0, Landroid/provider/Telephony$MmsSms;->CONTENT_LOCKED_URI:Landroid/net/Uri;
 
-    .line 1718
+    .line 1691
+    const-string v0, "content://mms-sms/sum-unread"
+
+    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    sput-object v0, Landroid/provider/Telephony$MmsSms;->CONTENT_PREVIEW_URI:Landroid/net/Uri;
+
+    .line 1745
     const-string v0, "content://mms-sms/search"
 
     invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;

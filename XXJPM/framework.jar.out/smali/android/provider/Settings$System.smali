@@ -30,6 +30,8 @@
 
 .field public static final ALARM_ALERT:Ljava/lang/String; = "alarm_alert"
 
+.field public static final ALWAYS_ENABLE_MMS:Ljava/lang/String; = "always_enable_mms"
+
 .field public static final ALWAYS_FINISH_ACTIVITIES:Ljava/lang/String; = "always_finish_activities"
 
 .field public static final ANDROID_ID:Ljava/lang/String; = "android_id"
@@ -246,6 +248,8 @@
 .field public static final SHOW_PROCESSES:Ljava/lang/String; = "show_processes"
 
 .field public static final SHOW_WEB_SUGGESTIONS:Ljava/lang/String; = "show_web_suggestions"
+
+.field public static final SMS_NOTIFICATION_BODY_ENABLED:Ljava/lang/String; = "pref_key_enable_notifications_body"
 
 .field public static final SOUND_EFFECTS_ENABLED:Ljava/lang/String; = "sound_effects_enabled"
 

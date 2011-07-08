@@ -2113,7 +2113,7 @@
     :try_start_0
     const-string v6, "FmReceiverService"
 
-    const-string v7, "setRdsMode()"
+    const-string/jumbo v7, "setRdsMode()"
 
     invoke-static {v6, v7}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_0
@@ -2329,7 +2329,7 @@
     :try_start_4
     const-string v6, "FmReceiverService"
 
-    const-string v7, "setRdsNative failed"
+    const-string/jumbo v7, "setRdsNative failed"
 
     invoke-static {v6, v7, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_4
@@ -2748,7 +2748,7 @@
     :try_start_4
     const-string v3, "FmReceiverService"
 
-    const-string v4, "setRdsNative failed"
+    const-string/jumbo v4, "setRdsNative failed"
 
     invoke-static {v3, v4, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_4

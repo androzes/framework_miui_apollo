@@ -37,5 +37,8 @@
 .method public abstract reportSuccessfulUnlockAttempt()V
 .end method
 
+.method public abstract setPendingIntent(Landroid/content/Intent;)V
+.end method
+
 .method public abstract takeEmergencyCallAction()V
 .end method

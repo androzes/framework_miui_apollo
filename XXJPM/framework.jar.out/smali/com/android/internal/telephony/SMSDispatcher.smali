@@ -1442,7 +1442,7 @@
 
     .line 2347
     .local v0, intent:Landroid/content/Intent;
-    const-string v1, "setRsp"
+    const-string/jumbo v1, "setRsp"
 
     invoke-virtual {v0, v1, p1}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;
 

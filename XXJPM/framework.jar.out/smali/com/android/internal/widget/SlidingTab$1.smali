@@ -27,7 +27,7 @@
     .parameter
 
     .prologue
-    .line 100
+    .line 98
     iput-object p1, p0, Lcom/android/internal/widget/SlidingTab$1;->this$0:Lcom/android/internal/widget/SlidingTab;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -42,12 +42,12 @@
     .parameter "animation"
 
     .prologue
-    .line 101
+    .line 108
     iget-object v0, p0, Lcom/android/internal/widget/SlidingTab$1;->this$0:Lcom/android/internal/widget/SlidingTab;
 
     invoke-static {v0}, Lcom/android/internal/widget/SlidingTab;->access$000(Lcom/android/internal/widget/SlidingTab;)V
 
-    .line 102
+    .line 109
     return-void
 .end method
 
@@ -56,7 +56,7 @@
     .parameter "animation"
 
     .prologue
-    .line 98
+    .line 105
     return-void
 .end method
 
@@ -65,6 +65,6 @@
     .parameter "animation"
 
     .prologue
-    .line 94
+    .line 101
     return-void
 .end method

@@ -336,7 +336,7 @@
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v4, "setRingerIcon(), ringerMode: "
+    const-string/jumbo v4, "setRingerIcon(), ringerMode: "
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 

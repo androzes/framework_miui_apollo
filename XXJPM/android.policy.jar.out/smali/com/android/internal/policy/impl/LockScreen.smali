@@ -6,6 +6,7 @@
 .implements Lcom/android/internal/policy/impl/KeyguardScreen;
 .implements Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallback;
 .implements Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$SimStateCallback;
+.implements Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$ConfigurationChangeCallback;
 .implements Lcom/android/internal/widget/SlidingTab$OnTriggerListener;
 
 
@@ -45,6 +46,8 @@
 
 .field private final PLUG_OUT:I
 
+.field private am:Landroid/media/AudioManager;
+
 .field private mAlarmIcon:Landroid/graphics/drawable/Drawable;
 
 .field private mAudioManager:Landroid/media/AudioManager;
@@ -71,17 +74,33 @@
 
 .field private mEnableMenuKeyInLockScreen:Z
 
+.field private mForwardIcon:Landroid/widget/ImageButton;
+
+.field private mIsMusicActive:Z
+
 .field private mKeyboardHidden:I
+
+.field private mLockAlwaysMusic:Z
+
+.field private mLockMusicControls:Z
 
 .field private final mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
+.field private mLockscreenBackground:Landroid/widget/ImageView;
+
 .field private mNextAlarm:Ljava/lang/String;
+
+.field private mPauseIcon:Landroid/widget/ImageButton;
 
 .field private mPendingR1:Ljava/lang/Runnable;
 
 .field private mPendingR2:Ljava/lang/Runnable;
 
+.field private mPlayIcon:Landroid/widget/ImageButton;
+
 .field private mPluggedIn:Z
+
+.field private mRewindIcon:Landroid/widget/ImageButton;
 
 .field private mScreenLocked:Landroid/widget/TextView;
 
@@ -103,6 +122,8 @@
 
 .field private final mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
+.field private mWasMusicActive:Z
+
 
 # direct methods
 .method static constructor <clinit>()V
@@ -123,7 +144,7 @@
 .end method
 
 .method constructor <init>(Landroid/content/Context;Landroid/content/res/Configuration;Lcom/android/internal/widget/LockPatternUtils;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Lcom/android/internal/policy/impl/KeyguardScreenCallback;)V
-    .locals 6
+    .locals 9
     .parameter "context"
     .parameter "configuration"
     .parameter "lockPatternUtils"
@@ -147,6 +168,38 @@
 
     iput-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mStatus:Lcom/android/internal/policy/impl/LockScreen$Status;
 
+    .line 55
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/LockScreen;->getContext()Landroid/content/Context;
+
+    move-result-object v1
+
+    const-string v2, "audio"
+
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/media/AudioManager;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->am:Landroid/media/AudioManager;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->am:Landroid/media/AudioManager;
+
+    invoke-virtual {v1}, Landroid/media/AudioManager;->isMusicActive()Z
+
+    move-result v1
+
+    iput-boolean v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mWasMusicActive:Z
+
+    .line 75
+    iput-boolean v4, p0, Lcom/android/internal/policy/impl/LockScreen;->mIsMusicActive:Z
+
+    const/4 v2, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v3, 0x1
+
     .line 77
     iput-boolean v4, p0, Lcom/android/internal/policy/impl/LockScreen;->mShowingBatteryInfo:Z
 
@@ -169,6 +222,46 @@
 
     .line 88
     iput-object v2, p0, Lcom/android/internal/policy/impl/LockScreen;->mChargingIcon:Landroid/graphics/drawable/Drawable;
+
+    .line 129
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    const-string v6, "lockscreen_music_controls"
+
+    invoke-static {v1, v6, v3}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v1
+
+    if-ne v1, v3, :cond_0
+
+    const/4 v2, 0x1
+
+    :goto_0
+    iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockMusicControls:Z
+
+    .line 131
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    const-string v6, "lockscreen_always_music_controls"
+
+    invoke-static {v1, v6, v4}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v1
+
+    if-ne v1, v3, :cond_1
+
+    const/4 v2, 0x1
+
+    :goto_1
+    iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockAlwaysMusic:Z
 
     .line 97
     iput v4, p0, Lcom/android/internal/policy/impl/LockScreen;->BATTERY_INFO_NOT_DISPLAY:I
@@ -230,7 +323,7 @@
     .local v0, inflater:Landroid/view/LayoutInflater;
     iget v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mCreationOrientation:I
 
-    if-eq v1, v5, :cond_0
+    if-eq v1, v5, :cond_2
 
     .line 206
     const v1, 0x1090037
@@ -238,7 +331,7 @@
     invoke-virtual {v0, v1, p0, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
     .line 211
-    :goto_0
+    :goto_2
     const v1, 0x10201be
 
     invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockScreen;->findViewById(I)Landroid/view/View;
@@ -293,6 +386,50 @@
     check-cast v1, Landroid/widget/TextView;
 
     iput-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mStatus2:Landroid/widget/TextView;
+
+    .line 212
+    const v1, 0x10202be
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    .line 213
+    const v1, 0x10202bf
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    .line 214
+    const v1, 0x10202c0
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    .line 215
+    const v1, 0x10202c1
+
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/widget/ImageButton;
+
+    iput-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mForwardIcon:Landroid/widget/ImageButton;
 
     .line 220
     const v1, 0x10201cb
@@ -353,9 +490,19 @@
     .line 227
     iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mEmergencyCallButton:Landroid/widget/Button;
 
-    const v2, 0x10402a4
+    const v2, 0x10402ac
 
     invoke-virtual {v1, v2}, Landroid/widget/Button;->setText(I)V
+
+    const v2, 0x10202f3
+
+    invoke-virtual {p0, v2}, Lcom/android/internal/policy/impl/LockScreen;->findViewById(I)Landroid/view/View;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/widget/ImageView;
+
+    iput-object v2, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
 
     .line 229
     iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
@@ -372,6 +519,42 @@
     invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/LockScreen$1;-><init>(Lcom/android/internal/policy/impl/LockScreen;)V
 
     invoke-virtual {v1, v2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 231
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/LockScreen$5;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/LockScreen$5;-><init>(Lcom/android/internal/policy/impl/LockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 245
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/LockScreen$6;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/LockScreen$6;-><init>(Lcom/android/internal/policy/impl/LockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 259
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/LockScreen$7;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/LockScreen$7;-><init>(Lcom/android/internal/policy/impl/LockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    .line 266
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    new-instance v2, Lcom/android/internal/policy/impl/LockScreen$8;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/LockScreen$8;-><init>(Lcom/android/internal/policy/impl/LockScreen;)V
+
+    invoke-virtual {v1, v2}, Landroid/widget/ImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     .line 238
     invoke-virtual {p0, v3}, Lcom/android/internal/policy/impl/LockScreen;->setFocusable(Z)V
@@ -439,13 +622,25 @@
     .line 259
     return-void
 
-    .line 208
+    .line 129
     :cond_0
-    const v1, 0x1090038
+    const/4 v2, 0x0
+
+    goto/16 :goto_0
+
+    .line 131
+    :cond_1
+    const/4 v2, 0x0
+
+    goto/16 :goto_1
+
+    .line 208
+    :cond_2
+    const v1, 0x1090037
 
     invoke-virtual {v0, v1, p0, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    goto/16 :goto_0
+    goto/16 :goto_2
 .end method
 
 .method static synthetic access$000(Lcom/android/internal/policy/impl/LockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
@@ -457,6 +652,84 @@
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
     return-object v0
+.end method
+
+.method static synthetic access$100(Lcom/android/internal/policy/impl/LockScreen;)V
+    .locals 0
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/LockScreen;->refreshMusicStatus()V
+
+    return-void
+.end method
+
+.method static synthetic access$200(Lcom/android/internal/policy/impl/LockScreen;)Landroid/media/AudioManager;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->am:Landroid/media/AudioManager;
+
+    return-object v0
+.end method
+
+.method static synthetic access$300(Lcom/android/internal/policy/impl/LockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$400(Lcom/android/internal/policy/impl/LockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$500(Lcom/android/internal/policy/impl/LockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$600(Lcom/android/internal/policy/impl/LockScreen;)Landroid/widget/ImageButton;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 49
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    return-object v0
+.end method
+
+.method static synthetic access$700(Lcom/android/internal/policy/impl/LockScreen;I)V
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    .line 49
+    invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/LockScreen;->sendMediaButtonEvent(I)V
+
+    return-void
 .end method
 
 .method static getCarrierString(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
@@ -877,13 +1150,119 @@
 
     move-result-object v0
 
-    const v1, 0x10402ab
+    const v1, 0x10402b3
 
     invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
     move-result-object v0
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mCharging:Ljava/lang/String;
+
+    goto :goto_0
+.end method
+
+.method private refreshMusicStatus()V
+    .locals 3
+
+    .prologue
+    const/4 v2, 0x0
+
+    const/16 v1, 0x8
+
+    .line 426
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mWasMusicActive:Z
+
+    if-nez v0, :cond_0
+
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mIsMusicActive:Z
+
+    if-nez v0, :cond_0
+
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockAlwaysMusic:Z
+
+    if-eqz v0, :cond_2
+
+    :cond_0
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockMusicControls:Z
+
+    if-eqz v0, :cond_2
+
+    .line 427
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->am:Landroid/media/AudioManager;
+
+    invoke-virtual {v0}, Landroid/media/AudioManager;->isMusicActive()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    .line 428
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 429
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 430
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 431
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 444
+    :goto_0
+    return-void
+
+    .line 433
+    :cond_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v2}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 434
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 435
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 436
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    goto :goto_0
+
+    .line 439
+    :cond_2
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPlayIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 440
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mPauseIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 441
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mRewindIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
+
+    .line 442
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mForwardIcon:Landroid/widget/ImageButton;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setVisibility(I)V
 
     goto :goto_0
 .end method
@@ -973,6 +1352,9 @@
     .line 295
     invoke-direct {p0}, Lcom/android/internal/policy/impl/LockScreen;->refreshAlarmDisplay()V
 
+    .line 303
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/LockScreen;->refreshMusicStatus()V
+
     .line 297
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/LockScreen;->getContext()Landroid/content/Context;
 
@@ -1004,6 +1386,99 @@
     invoke-direct {p0}, Lcom/android/internal/policy/impl/LockScreen;->updateStatusLines()V
 
     .line 301
+    return-void
+.end method
+
+.method private sendMediaButtonEvent(I)V
+    .locals 13
+    .parameter "code"
+
+    .prologue
+    .line 447
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v1
+
+    .line 449
+    .local v1, eventtime:J
+    new-instance v11, Landroid/content/Intent;
+
+    const-string v4, "android.intent.action.MEDIA_BUTTON"
+
+    const/4 v5, 0x0
+
+    invoke-direct {v11, v4, v5}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    .line 450
+    .local v11, downIntent:Landroid/content/Intent;
+    new-instance v0, Landroid/view/KeyEvent;
+
+    const/4 v5, 0x0
+
+    const/4 v7, 0x0
+
+    move-wide v3, v1
+
+    move v6, p1
+
+    invoke-direct/range {v0 .. v7}, Landroid/view/KeyEvent;-><init>(JJIII)V
+
+    .line 451
+    .local v0, downEvent:Landroid/view/KeyEvent;
+    const-string v4, "android.intent.extra.KEY_EVENT"
+
+    invoke-virtual {v11, v4, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
+
+    .line 452
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/LockScreen;->getContext()Landroid/content/Context;
+
+    move-result-object v4
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v4, v11, v5}, Landroid/content/Context;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
+
+    .line 454
+    new-instance v12, Landroid/content/Intent;
+
+    const-string v4, "android.intent.action.MEDIA_BUTTON"
+
+    const/4 v5, 0x0
+
+    invoke-direct {v12, v4, v5}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    .line 455
+    .local v12, upIntent:Landroid/content/Intent;
+    new-instance v3, Landroid/view/KeyEvent;
+
+    const/4 v8, 0x1
+
+    const/4 v10, 0x0
+
+    move-wide v4, v1
+
+    move-wide v6, v1
+
+    move v9, p1
+
+    invoke-direct/range {v3 .. v10}, Landroid/view/KeyEvent;-><init>(JJIII)V
+
+    .line 456
+    .local v3, upEvent:Landroid/view/KeyEvent;
+    const-string v4, "android.intent.extra.KEY_EVENT"
+
+    invoke-virtual {v12, v4, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
+
+    .line 457
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/LockScreen;->getContext()Landroid/content/Context;
+
+    move-result-object v4
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v4, v12, v5}, Landroid/content/Context;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
+
+    .line 458
     return-void
 .end method
 
@@ -1058,12 +1533,47 @@
     const/4 v4, 0x1
 
     :goto_0
-    return v4
+    return v6
 
     :cond_1
     move v4, v6
 
     goto :goto_0
+.end method
+
+.method private switchLockscreenMode(I)V
+    .locals 2
+    .parameter "mode"
+
+    .prologue
+    .line 1059
+    packed-switch p1, :pswitch_data_0
+
+    .line 1073
+    :goto_0
+    :pswitch_0
+    return-void
+
+    .line 1063
+    :pswitch_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/LockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getLockscreenWallpaper()Landroid/graphics/drawable/Drawable;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V
+
+    goto :goto_0
+
+    .line 1059
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_0
+        :pswitch_1
+    .end packed-switch
 .end method
 
 .method private toastMessage(Landroid/widget/TextView;Ljava/lang/String;II)V
@@ -1986,7 +2496,21 @@
 
     invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternUtils;->updateEmergencyCallButtonState(Landroid/widget/Button;)V
 
-    .line 719
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getWallpaperMode()I
+
+    move-result v0
+
+    invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/LockScreen;->switchLockscreenMode(I)V
+
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mLockscreenBackground:Landroid/widget/ImageView;
+
+    sget-object v1, Landroid/widget/ImageView$ScaleType;->FIT_XY:Landroid/widget/ImageView$ScaleType;
+
+    invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
+
+    .line 741
     return-void
 .end method
 

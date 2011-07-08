@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animation-list
+<animation-list android:oneshot="false"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0000" />
     <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0001" />
@@ -8,11 +8,7 @@
     <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0004" />
     <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0005" />
     <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0006" />
-    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0000" />
-    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0001" />
-    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0002" />
-    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0003" />
-    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0004" />
-    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0005" />
-    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0006" />
+    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0007" />
+    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0008" />
+    <item android:duration="250" android:drawable="@drawable/zzz_unlock_arrow_0009" />
 </animation-list>

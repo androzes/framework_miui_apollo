@@ -3023,3 +3023,60 @@
 
     goto :goto_0
 .end method
+
+.method public updateEmergencyCallButtonState(Landroid/widget/TextView;)V
+    .locals 6
+    .parameter "button"
+
+    .prologue
+    const/4 v5, 0x0
+
+    .line 845
+    invoke-static {}, Landroid/telephony/TelephonyManager;->getDefault()Landroid/telephony/TelephonyManager;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Landroid/telephony/TelephonyManager;->getCallState()I
+
+    move-result v1
+
+    .line 847
+    .local v1, newState:I
+    const/4 v4, 0x2
+
+    if-ne v1, v4, :cond_0
+
+    .line 849
+    const v3, 0x104036a
+
+    .line 850
+    .local v3, textId:I
+    const v2, 0x1080084
+
+    .line 851
+    .local v2, phoneCallIcon:I
+    invoke-virtual {p1, v2, v5, v5, v5}, Landroid/widget/TextView;->setCompoundDrawablesWithIntrinsicBounds(IIII)V
+
+    .line 857
+    .end local v2           #phoneCallIcon:I
+    :goto_0
+    invoke-virtual {p1, v3}, Landroid/widget/TextView;->setText(I)V
+
+    .line 858
+    return-void
+
+    .line 853
+    .end local v3           #textId:I
+    :cond_0
+    const v3, 0x1040369
+
+    .line 854
+    .restart local v3       #textId:I
+    const v0, 0x108019f
+
+    .line 855
+    .local v0, emergencyIcon:I
+    invoke-virtual {p1, v0, v5, v5, v5}, Landroid/widget/TextView;->setCompoundDrawablesWithIntrinsicBounds(IIII)V
+
+    goto :goto_0
+.end method

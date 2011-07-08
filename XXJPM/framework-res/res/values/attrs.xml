@@ -1162,4 +1162,5 @@
     <attr name="framesCount" format="integer" />
     <attr name="keyboardViewStyle" format="reference" />
     <attr name="aspect" format="string" />
+    <attr name="GlobalActionlistPreferredItemHeight" format="dimension" />
 </resources>

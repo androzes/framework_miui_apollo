@@ -1488,7 +1488,7 @@
 
     move-result-object v2
 
-    const v3, 0x10803af
+    const v3, 0x1080401
 
     invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->setBackgroundResource(I)V
 

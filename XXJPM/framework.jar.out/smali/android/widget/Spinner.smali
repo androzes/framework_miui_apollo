@@ -650,7 +650,7 @@
     .line 99
     new-instance v0, Ljava/lang/RuntimeException;
 
-    const-string v1, "setOnItemClickListener cannot be used with a spinner."
+    const-string/jumbo v1, "setOnItemClickListener cannot be used with a spinner."
 
     invoke-direct {v0, v1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
 

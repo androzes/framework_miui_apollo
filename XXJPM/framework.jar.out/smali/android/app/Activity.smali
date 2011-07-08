@@ -5112,7 +5112,7 @@
     :cond_0
     new-instance v0, Ljava/lang/RuntimeException;
 
-    const-string v1, "setPersistent() not yet supported for embedded activities"
+    const-string/jumbo v1, "setPersistent() not yet supported for embedded activities"
 
     invoke-direct {v0, v1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
 

@@ -4417,7 +4417,7 @@
     .line 670
     const-string v0, "CDMA"
 
-    const-string v1, "setOutgoingCallerIdDisplay: not possible in CDMA"
+    const-string/jumbo v1, "setOutgoingCallerIdDisplay: not possible in CDMA"
 
     invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 

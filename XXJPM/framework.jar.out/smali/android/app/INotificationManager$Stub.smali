@@ -40,6 +40,14 @@
 
 .field static final TRANSACTION_enqueueToast:I = 0x4
 
+.field static final TRANSACTION_getEventContact:I = 0xa
+
+.field static final TRANSACTION_getEventCount:I = 0x9
+
+.field static final TRANSACTION_getEventIndexWithReq:I = 0x8
+
+.field static final TRANSACTION_getEventIntent:I = 0xb
+
 
 # direct methods
 .method public constructor <init>()V
@@ -118,7 +126,7 @@
 .end method
 
 .method public onTransact(ILandroid/os/Parcel;Landroid/os/Parcel;I)Z
-    .locals 8
+    .locals 9
     .parameter "code"
     .parameter "data"
     .parameter "reply"
@@ -130,9 +138,9 @@
     .end annotation
 
     .prologue
-    const/4 v6, 0x1
+    const/4 v7, 0x1
 
-    const-string v7, "android.app.INotificationManager"
+    const-string v8, "android.app.INotificationManager"
 
     .line 39
     sparse-switch p1, :sswitch_data_0
@@ -149,9 +157,9 @@
     :sswitch_0
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p3, v7}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+    invoke-virtual {p3, v8}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
 
-    move v0, v6
+    move v0, v7
 
     .line 44
     goto :goto_0
@@ -160,7 +168,7 @@
     :sswitch_1
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p2, v7}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
     .line 50
     invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
@@ -207,7 +215,7 @@
     .line 64
     invoke-virtual {p3, v4}, Landroid/os/Parcel;->writeIntArray([I)V
 
-    move v0, v6
+    move v0, v7
 
     .line 65
     goto :goto_0
@@ -228,7 +236,7 @@
     :sswitch_2
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p2, v7}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
     .line 71
     invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
@@ -248,7 +256,7 @@
     .line 75
     invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
 
-    move v0, v6
+    move v0, v7
 
     .line 76
     goto :goto_0
@@ -259,7 +267,7 @@
     :sswitch_3
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p2, v7}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
     .line 82
     invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
@@ -273,7 +281,7 @@
     .line 84
     invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
 
-    move v0, v6
+    move v0, v7
 
     .line 85
     goto :goto_0
@@ -283,7 +291,7 @@
     :sswitch_4
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p2, v7}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
     .line 91
     invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
@@ -313,7 +321,7 @@
     .line 97
     invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
 
-    move v0, v6
+    move v0, v7
 
     .line 98
     goto :goto_0
@@ -325,7 +333,7 @@
     :sswitch_5
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p2, v7}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
     .line 104
     invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
@@ -349,7 +357,7 @@
     .line 108
     invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
 
-    move v0, v6
+    move v0, v7
 
     .line 109
     goto/16 :goto_0
@@ -360,7 +368,7 @@
     :sswitch_6
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p2, v7}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
     .line 115
     invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
@@ -415,7 +423,7 @@
     .line 131
     invoke-virtual {p3, v5}, Landroid/os/Parcel;->writeIntArray([I)V
 
-    move v0, v6
+    move v0, v7
 
     .line 132
     goto/16 :goto_0
@@ -437,7 +445,7 @@
     :sswitch_7
     const-string v0, "android.app.INotificationManager"
 
-    invoke-virtual {p2, v7}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
     .line 138
     invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
@@ -463,10 +471,157 @@
     .line 144
     invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
 
-    move v0, v6
+    move v0, v7
 
     .line 145
     goto/16 :goto_0
+
+    .line 149
+    .end local v1           #_arg0:Ljava/lang/String;
+    .end local v2           #_arg1:Ljava/lang/String;
+    .end local v3           #_arg2:I
+    :sswitch_8
+    const-string v0, "android.app.INotificationManager"
+
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    .line 151
+    invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
+
+    move-result-object v1
+
+    .line 153
+    .restart local v1       #_arg0:Ljava/lang/String;
+    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
+
+    move-result v2
+
+    .line 154
+    .local v2, _arg1:I
+    invoke-virtual {p0, v1, v2}, Landroid/app/INotificationManager$Stub;->getEventIndexWithReq(Ljava/lang/String;I)I
+
+    move-result v6
+
+    .line 155
+    .local v6, _result:I
+    invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
+
+    .line 156
+    invoke-virtual {p3, v6}, Landroid/os/Parcel;->writeInt(I)V
+
+    move v0, v7
+
+    .line 157
+    goto/16 :goto_0
+
+    .line 161
+    .end local v1           #_arg0:Ljava/lang/String;
+    .end local v2           #_arg1:I
+    .end local v6           #_result:I
+    :sswitch_9
+    const-string v0, "android.app.INotificationManager"
+
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    .line 163
+    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
+
+    move-result v1
+
+    .line 164
+    .local v1, _arg0:I
+    invoke-virtual {p0, v1}, Landroid/app/INotificationManager$Stub;->getEventCount(I)I
+
+    move-result v6
+
+    .line 165
+    .restart local v6       #_result:I
+    invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
+
+    .line 166
+    invoke-virtual {p3, v6}, Landroid/os/Parcel;->writeInt(I)V
+
+    move v0, v7
+
+    .line 167
+    goto/16 :goto_0
+
+    .line 171
+    .end local v1           #_arg0:I
+    .end local v6           #_result:I
+    :sswitch_a
+    const-string v0, "android.app.INotificationManager"
+
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    .line 173
+    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
+
+    move-result v1
+
+    .line 174
+    .restart local v1       #_arg0:I
+    invoke-virtual {p0, v1}, Landroid/app/INotificationManager$Stub;->getEventContact(I)Ljava/lang/String;
+
+    move-result-object v6
+
+    .line 175
+    .local v6, _result:Ljava/lang/String;
+    invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
+
+    .line 176
+    invoke-virtual {p3, v6}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
+
+    move v0, v7
+
+    .line 177
+    goto/16 :goto_0
+
+    .line 181
+    .end local v1           #_arg0:I
+    .end local v6           #_result:Ljava/lang/String;
+    :sswitch_b
+    const-string v0, "android.app.INotificationManager"
+
+    invoke-virtual {p2, v8}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    .line 183
+    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
+
+    move-result v1
+
+    .line 184
+    .restart local v1       #_arg0:I
+    invoke-virtual {p0, v1}, Landroid/app/INotificationManager$Stub;->getEventIntent(I)Landroid/app/PendingIntent;
+
+    move-result-object v6
+
+    .line 185
+    .local v6, _result:Landroid/app/PendingIntent;
+    invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
+
+    .line 186
+    if-eqz v6, :cond_2
+
+    .line 187
+    invoke-virtual {p3, v7}, Landroid/os/Parcel;->writeInt(I)V
+
+    .line 188
+    invoke-virtual {v6, p3, v7}, Landroid/app/PendingIntent;->writeToParcel(Landroid/os/Parcel;I)V
+
+    :goto_3
+    move v0, v7
+
+    .line 193
+    goto/16 :goto_0
+
+    .line 191
+    :cond_2
+    const/4 v0, 0x0
+
+    invoke-virtual {p3, v0}, Landroid/os/Parcel;->writeInt(I)V
+
+    goto :goto_3
 
     .line 39
     nop
@@ -480,6 +635,10 @@
         0x5 -> :sswitch_5
         0x6 -> :sswitch_6
         0x7 -> :sswitch_7
+        0x8 -> :sswitch_8
+        0x9 -> :sswitch_9
+        0xa -> :sswitch_a
+        0xb -> :sswitch_b
         0x5f4e5446 -> :sswitch_0
     .end sparse-switch
 .end method

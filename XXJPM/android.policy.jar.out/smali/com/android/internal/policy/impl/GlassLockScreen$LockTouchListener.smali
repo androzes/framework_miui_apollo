@@ -27,7 +27,7 @@
     .parameter
 
     .prologue
-    .line 602
+    .line 645
     iput-object p1, p0, Lcom/android/internal/policy/impl/GlassLockScreen$LockTouchListener;->this$0:Lcom/android/internal/policy/impl/GlassLockScreen;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -41,7 +41,7 @@
     .parameter "x1"
 
     .prologue
-    .line 602
+    .line 645
     invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/GlassLockScreen$LockTouchListener;-><init>(Lcom/android/internal/policy/impl/GlassLockScreen;)V
 
     return-void
@@ -54,7 +54,7 @@
     .parameter "opened"
 
     .prologue
-    .line 611
+    .line 654
     return-void
 .end method
 
@@ -63,12 +63,12 @@
     .parameter "visible"
 
     .prologue
-    .line 614
+    .line 657
     iget-object v0, p0, Lcom/android/internal/policy/impl/GlassLockScreen$LockTouchListener;->this$0:Lcom/android/internal/policy/impl/GlassLockScreen;
 
-    invoke-static {v0, p1}, Lcom/android/internal/policy/impl/GlassLockScreen;->access$1302(Lcom/android/internal/policy/impl/GlassLockScreen;Z)Z
+    invoke-static {v0, p1}, Lcom/android/internal/policy/impl/GlassLockScreen;->access$1402(Lcom/android/internal/policy/impl/GlassLockScreen;Z)Z
 
-    .line 615
+    .line 658
     return-void
 .end method
 
@@ -76,7 +76,7 @@
     .locals 1
 
     .prologue
-    .line 606
+    .line 649
     iget-object v0, p0, Lcom/android/internal/policy/impl/GlassLockScreen$LockTouchListener;->this$0:Lcom/android/internal/policy/impl/GlassLockScreen;
 
     invoke-static {v0}, Lcom/android/internal/policy/impl/GlassLockScreen;->access$000(Lcom/android/internal/policy/impl/GlassLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
@@ -85,6 +85,6 @@
 
     invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->pokeWakelock()V
 
-    .line 607
+    .line 650
     return-void
 .end method

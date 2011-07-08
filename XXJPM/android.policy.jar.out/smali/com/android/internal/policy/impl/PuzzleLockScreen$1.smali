@@ -27,7 +27,7 @@
     .parameter
 
     .prologue
-    .line 421
+    .line 411
     iput-object p1, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,7 +43,7 @@
     .parameter "absY"
 
     .prologue
-    .line 416
+    .line 413
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
     invoke-static {v2}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
@@ -54,7 +54,7 @@
 
     move-result v1
 
-    .line 417
+    .line 414
     .local v1, width:I
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
@@ -66,7 +66,7 @@
 
     move-result v0
 
-    .line 418
+    .line 415
     .local v0, height:I
     iget-object v2, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
@@ -80,364 +80,399 @@
 
     invoke-virtual {v2, p1, p2, v3, v4}, Landroid/widget/RelativeLayout;->layout(IIII)V
 
-    .line 419
+    .line 416
     return-void
 .end method
 
 .method public onTouch(Landroid/view/View;Landroid/view/MotionEvent;)Z
-    .locals 7
+    .locals 10
     .parameter "v"
     .parameter "event"
 
     .prologue
-    const/4 v6, 0x1
+    const/4 v8, 0x1
 
-    .line 423
+    const-string v9, "PuzzleLockScreen"
+
+    .line 420
     invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawX()F
 
-    move-result v4
+    move-result v6
 
-    float-to-int v1, v4
+    float-to-int v1, v6
 
-    .line 424
+    .line 421
     .local v1, rawX:I
     invoke-virtual {p2}, Landroid/view/MotionEvent;->getRawY()F
 
-    move-result v4
+    move-result v6
 
-    float-to-int v2, v4
+    float-to-int v2, v6
 
-    .line 425
+    .line 422
     .local v2, rawY:I
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
 
-    move-result-object v4
+    move-result-object v6
 
-    invoke-virtual {v4}, Landroid/widget/RelativeLayout;->getWidth()I
+    invoke-virtual {v6}, Landroid/widget/RelativeLayout;->getWidth()I
 
-    move-result v3
+    move-result v5
 
-    .line 426
-    .local v3, width2:I
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    .line 423
+    .local v5, width2:I
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
 
-    move-result-object v4
+    move-result-object v6
 
-    invoke-virtual {v4}, Landroid/widget/RelativeLayout;->getHeight()I
+    invoke-virtual {v6}, Landroid/widget/RelativeLayout;->getHeight()I
 
     move-result v0
 
-    .line 428
+    .line 425
     .local v0, height2:I
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$200(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$200(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    move-result-object v4
+    move-result-object v6
 
-    invoke-interface {v4}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->pokeWakelock()V
+    invoke-interface {v6}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->pokeWakelock()V
 
-    .line 430
+    .line 427
     invoke-virtual {p2}, Landroid/view/MotionEvent;->getAction()I
 
-    move-result v4
+    move-result v6
 
-    packed-switch v4, :pswitch_data_0
+    packed-switch v6, :pswitch_data_0
 
-    .line 470
+    .line 480
     :cond_0
     :goto_0
-    return v6
+    return v8
+
+    .line 429
+    :pswitch_0
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Landroid/widget/RelativeLayout;->getLeft()I
+
+    move-result v7
+
+    invoke-static {v6, v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$302(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
+
+    .line 430
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Landroid/widget/RelativeLayout;->getTop()I
+
+    move-result v7
+
+    invoke-static {v6, v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$402(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
+
+    .line 431
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+
+    move-result v7
+
+    sub-int v7, v1, v7
+
+    invoke-static {v6, v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$502(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
 
     .line 432
-    :pswitch_0
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result-object v5
+    move-result v7
 
-    invoke-virtual {v5}, Landroid/widget/RelativeLayout;->getLeft()I
+    sub-int v7, v2, v7
 
-    move-result v5
-
-    invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$302(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
+    invoke-static {v6, v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$602(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
 
     .line 433
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    const-string v6, "PuzzleLockScreen"
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    const-string v6, "Puzzle lockscreen receives touch event"
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/widget/RelativeLayout;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Landroid/widget/RelativeLayout;->getTop()I
-
-    move-result v5
-
-    invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$402(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
-
-    .line 434
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
-
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
-
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
-
-    move-result v5
-
-    sub-int v5, v1, v5
-
-    invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$502(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
-
-    .line 435
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
-
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
-
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
-
-    move-result v5
-
-    sub-int v5, v2, v5
-
-    invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$602(Lcom/android/internal/policy/impl/PuzzleLockScreen;I)I
-
-    .line 436
-    const-string v4, "PuzzleLockScreen"
-
-    const-string v5, "Puzzle lockscreen receives touch event"
-
-    invoke-static {v4, v5}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v9, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     goto :goto_0
 
-    .line 441
+    .line 438
     :pswitch_1
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v4
+    move-result v6
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$500(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$500(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    sub-int v5, v1, v5
+    sub-int v7, v1, v7
 
-    sub-int/2addr v4, v5
+    sub-int/2addr v6, v7
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$700(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$700(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    if-gt v4, v5, :cond_1
+    if-gt v6, v7, :cond_1
 
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v4
+    move-result v6
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$500(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$500(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    sub-int v5, v1, v5
+    sub-int v7, v1, v7
 
-    sub-int/2addr v4, v5
+    sub-int/2addr v6, v7
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$700(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$700(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    neg-int v5, v5
+    neg-int v7, v7
 
-    if-lt v4, v5, :cond_1
+    if-lt v6, v7, :cond_1
 
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v4
+    move-result v6
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$600(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$600(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    sub-int v5, v2, v5
+    sub-int v7, v2, v7
 
-    sub-int/2addr v4, v5
+    sub-int/2addr v6, v7
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$800(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$800(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    if-gt v4, v5, :cond_1
+    if-gt v6, v7, :cond_1
 
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v4
+    move-result v6
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$600(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$600(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    sub-int v5, v2, v5
+    sub-int v7, v2, v7
 
-    sub-int/2addr v4, v5
+    sub-int/2addr v6, v7
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$800(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$800(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    neg-int v5, v5
+    neg-int v7, v7
 
-    if-ge v4, v5, :cond_3
+    if-ge v6, v7, :cond_3
+
+    .line 444
+    :cond_1
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$200(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
+
+    move-result-object v6
+
+    invoke-interface {v6}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->goToUnlockScreen()V
+
+    .line 445
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$900(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Z
+
+    move-result v6
+
+    if-eqz v6, :cond_0
 
     .line 447
-    :cond_1
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$200(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Lcom/android/internal/policy/impl/KeyguardScreenCallback;
+    const/4 v7, 0x0
 
-    move-result-object v4
+    invoke-static {v6, v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$902(Lcom/android/internal/policy/impl/PuzzleLockScreen;Z)Z
 
-    invoke-interface {v4}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->goToUnlockScreen()V
+    .line 449
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    .line 448
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$1000(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/content/Context;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$900(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Z
+    move-result-object v6
 
-    move-result v4
+    invoke-virtual {v6}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
 
-    if-eqz v4, :cond_0
+    move-result-object v6
+
+    const-string v7, "lockscreen_sounds_enabled"
+
+    invoke-static {v6, v7, v8}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v6
+
+    if-ne v6, v8, :cond_0
 
     .line 450
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    const-string v6, "file:///system/media/audio/ui/TW_Unlock_Glass.ogg"
 
-    const/4 v5, 0x0
-
-    invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$902(Lcom/android/internal/policy/impl/PuzzleLockScreen;Z)Z
-
-    .line 452
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
-
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$1000(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/content/Context;
+    invoke-static {v6}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
 
     move-result-object v4
 
-    invoke-virtual {v4}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+    .line 451
+    .local v4, soundUri:Landroid/net/Uri;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    move-result-object v4
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$1000(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Landroid/content/Context;
 
-    const-string v5, "lockscreen_sounds_enabled"
+    move-result-object v6
 
-    invoke-static {v4, v5, v6}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+    invoke-static {v6, v4}, Landroid/media/RingtoneManager;->getRingtone(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;
 
-    move-result v4
-
-    if-ne v4, v6, :cond_2
+    move-result-object v3
 
     .line 453
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    .local v3, sfx:Landroid/media/Ringtone;
+    if-eqz v3, :cond_2
 
-    const/4 v5, -0x1
-
-    invoke-virtual {v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->setSoundEffect(I)V
-
-    .line 454
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
-
-    const/16 v5, 0xa
-
-    invoke-virtual {v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->playSoundEffect(I)V
+    .line 455
+    invoke-virtual {v3, v8}, Landroid/media/Ringtone;->setStreamType(I)V
 
     .line 456
+    invoke-virtual {v3}, Landroid/media/Ringtone;->play()V
+
+    goto/16 :goto_0
+
+    .line 460
     :cond_2
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    const-string v6, "PuzzleLockScreen"
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$1100(Lcom/android/internal/policy/impl/PuzzleLockScreen;)Lcom/android/internal/widget/LockPatternUtils;
+    new-instance v6, Ljava/lang/StringBuilder;
 
-    move-result-object v4
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
 
-    invoke-virtual {v4}, Lcom/android/internal/widget/LockPatternUtils;->addUnlockCounter()V
+    const-string v7, "playSounds: failed to load ringtone from uri: "
+
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-static {v9, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     goto/16 :goto_0
 
-    .line 461
+    .line 471
+    .end local v3           #sfx:Landroid/media/Ringtone;
+    .end local v4           #soundUri:Landroid/net/Uri;
     :cond_3
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$500(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$500(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v4
+    move-result v6
 
-    sub-int v4, v1, v4
+    sub-int v6, v1, v6
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$600(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$600(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    sub-int v5, v2, v5
+    sub-int v7, v2, v7
 
-    invoke-virtual {p0, v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->moveTo(II)V
+    invoke-virtual {p0, v6, v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->moveTo(II)V
 
     goto/16 :goto_0
 
-    .line 466
+    .line 476
     :pswitch_2
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4, v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$902(Lcom/android/internal/policy/impl/PuzzleLockScreen;Z)Z
+    invoke-static {v6, v8}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$902(Lcom/android/internal/policy/impl/PuzzleLockScreen;Z)Z
 
-    .line 467
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    .line 477
+    iget-object v6, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v4}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v6}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$300(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v4
+    move-result v6
 
-    iget-object v5, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
+    iget-object v7, p0, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->this$0:Lcom/android/internal/policy/impl/PuzzleLockScreen;
 
-    invoke-static {v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
+    invoke-static {v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen;->access$400(Lcom/android/internal/policy/impl/PuzzleLockScreen;)I
 
-    move-result v5
+    move-result v7
 
-    invoke-virtual {p0, v4, v5}, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->moveTo(II)V
+    invoke-virtual {p0, v6, v7}, Lcom/android/internal/policy/impl/PuzzleLockScreen$1;->moveTo(II)V
 
     goto/16 :goto_0
 
-    .line 430
+    .line 427
     :pswitch_data_0
     .packed-switch 0x0
         :pswitch_0

@@ -172,6 +172,7 @@
         <item name="gestureOverlayViewStyle">@style/Widget.GestureOverlayView</item>
         <item name="horizontalScrollViewStyle">@style/Widget.HorizontalScrollView</item>
         <item name="keyboardViewStyle">@style/Widget.KeyboardView</item>
+        <item name="GlobalActionlistPreferredItemHeight">56.0dip</item>
     </style>
     <style name="Theme.NoTitleBar" parent="@style/Theme">
         <item name="windowNoTitle">true</item>

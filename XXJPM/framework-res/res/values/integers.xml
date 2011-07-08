@@ -20,4 +20,5 @@
     <integer name="config_datause_threshold_bytes">0</integer>
     <integer name="config_datause_throttle_kbitsps">300</integer>
     <integer name="config_datause_notification_type">2</integer>
+    <integer name="config_lcd_screen_dimingLevle">5</integer>
 </resources>

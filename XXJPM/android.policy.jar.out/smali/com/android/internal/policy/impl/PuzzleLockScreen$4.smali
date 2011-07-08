@@ -1,4 +1,4 @@
-.class Lcom/android/internal/policy/impl/PuzzleLockScreen$4;
+.class synthetic Lcom/android/internal/policy/impl/PuzzleLockScreen$4;
 .super Ljava/lang/Object;
 .source "PuzzleLockScreen.java"
 
@@ -25,7 +25,7 @@
     .locals 3
 
     .prologue
-    .line 892
+    .line 943
     invoke-static {}, Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;->values()[Lcom/android/internal/policy/impl/PuzzleLockScreen$Status;
 
     move-result-object v0
@@ -131,7 +131,7 @@
     :try_end_5
     .catch Ljava/lang/NoSuchFieldError; {:try_start_5 .. :try_end_5} :catch_7
 
-    .line 866
+    .line 917
     :goto_5
     invoke-static {}, Lcom/android/internal/telephony/IccCard$State;->values()[Lcom/android/internal/telephony/IccCard$State;
 
@@ -292,7 +292,7 @@
 
     goto :goto_6
 
-    .line 892
+    .line 943
     :catch_7
     move-exception v0
 

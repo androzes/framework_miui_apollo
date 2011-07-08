@@ -7111,6 +7111,321 @@
     goto :goto_2
 .end method
 
+.method public static parseTelocationString(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
+    .locals 10
+    .parameter "context"
+    .parameter "phoneNumber"
+
+    .prologue
+    .line 2682
+    const/4 v7, 0x0
+
+    .line 2683
+    .local v7, location:Ljava/lang/String;
+    const/4 v6, 0x0
+
+    .line 2685
+    .local v6, c:Landroid/database/Cursor;
+    :try_start_0
+    invoke-static {p1}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->parse(Ljava/lang/String;)Landroid/telephony/PhoneNumberUtils$PhoneNumber;
+
+    move-result-object v9
+
+    .line 2686
+    .local v9, pn:Landroid/telephony/PhoneNumberUtils$PhoneNumber;
+    if-eqz v9, :cond_0
+
+    .line 2687
+    invoke-virtual {v9}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->isChineseNumber()Z
+
+    move-result v0
+
+    if-nez v0, :cond_3
+
+    .line 2688
+    invoke-static {v9}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->access$000(Landroid/telephony/PhoneNumberUtils$PhoneNumber;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->getCountry(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v7
+
+    .line 2696
+    :cond_0
+    :goto_0
+    if-eqz v6, :cond_1
+
+    invoke-interface {v6}, Landroid/database/Cursor;->moveToFirst()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    .line 2697
+    const/4 v0, 0x1
+
+    invoke-interface {v6, v0}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    move-result-object v7
+
+    .line 2700
+    :cond_1
+    if-eqz v6, :cond_2
+
+    .line 2701
+    invoke-interface {v6}, Landroid/database/Cursor;->close()V
+
+    .line 2703
+    :cond_2
+    return-object v7
+
+    .line 2689
+    :cond_3
+    :try_start_1
+    invoke-static {v9}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->access$100(Landroid/telephony/PhoneNumberUtils$PhoneNumber;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_4
+
+    .line 2690
+    invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "content://telocation/tel/"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-static {v9}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->access$100(Landroid/telephony/PhoneNumberUtils$PhoneNumber;)Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v1
+
+    const/4 v2, 0x0
+
+    const/4 v3, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v5, 0x0
+
+    invoke-virtual/range {v0 .. v5}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+
+    move-result-object v6
+
+    goto :goto_0
+
+    .line 2691
+    :cond_4
+    invoke-virtual {v9}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->isNormalMobileNumber()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 2692
+    invoke-static {v9}, Landroid/telephony/PhoneNumberUtils$PhoneNumber;->access$200(Landroid/telephony/PhoneNumberUtils$PhoneNumber;)Ljava/lang/String;
+
+    move-result-object v0
+
+    const/4 v1, 0x0
+
+    const/4 v2, 0x7
+
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v8
+
+    .line 2693
+    .local v8, locationId:Ljava/lang/String;
+    invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v0
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "content://telocation/mobile/"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v1
+
+    const/4 v2, 0x0
+
+    const/4 v3, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v5, 0x0
+
+    invoke-virtual/range {v0 .. v5}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    move-result-object v6
+
+    goto :goto_0
+
+    .line 2700
+    .end local v8           #locationId:Ljava/lang/String;
+    .end local v9           #pn:Landroid/telephony/PhoneNumberUtils$PhoneNumber;
+    :catchall_0
+    move-exception v0
+
+    if-eqz v6, :cond_5
+
+    .line 2701
+    invoke-interface {v6}, Landroid/database/Cursor;->close()V
+
+    :cond_5
+    throw v0
+.end method
+
+.method private static processPlusCodeWithinNanp(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
+    .locals 9
+    .parameter "context"
+    .parameter "networkDialStr"
+
+    .prologue
+    const/4 v8, 0x0
+
+    const/4 v7, 0x1
+
+    .line 2450
+    move-object v1, p1
+
+    .line 2456
+    .local v1, retStr:Ljava/lang/String;
+    invoke-virtual {p1, v7}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 2457
+    .local v0, newStr:Ljava/lang/String;
+    invoke-static {p0}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v2
+
+    .line 2458
+    .local v2, sp:Landroid/content/SharedPreferences;
+    const-string v4, "country_code"
+
+    const-string v5, "011"
+
+    invoke-interface {v2, v4, v5}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v3
+
+    .line 2460
+    .local v3, value:Ljava/lang/String;
+    if-eqz p1, :cond_1
+
+    move v4, v7
+
+    :goto_0
+    invoke-virtual {p1, v8}, Ljava/lang/String;->charAt(I)C
+
+    move-result v5
+
+    const/16 v6, 0x2b
+
+    if-ne v5, v6, :cond_2
+
+    move v5, v7
+
+    :goto_1
+    and-int/2addr v4, v5
+
+    if-eqz v4, :cond_0
+
+    invoke-virtual {p1}, Ljava/lang/String;->length()I
+
+    move-result v4
+
+    if-le v4, v7, :cond_0
+
+    .line 2464
+    invoke-static {v0}, Landroid/telephony/PhoneNumberUtils;->isOneNanp(Ljava/lang/String;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_3
+
+    invoke-static {v3}, Landroid/telephony/PhoneNumberUtils;->isDefaultPlusCode(Ljava/lang/String;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_3
+
+    .line 2466
+    move-object v1, v0
+
+    .line 2474
+    :cond_0
+    :goto_2
+    return-object v1
+
+    :cond_1
+    move v4, v8
+
+    .line 2460
+    goto :goto_0
+
+    :cond_2
+    move v5, v8
+
+    goto :goto_1
+
+    .line 2470
+    :cond_3
+    const-string v4, "[+]"
+
+    invoke-virtual {p1, v4, v3}, Ljava/lang/String;->replaceFirst(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    goto :goto_2
+.end method
+
 .method private static processPlusCodeWithinNanp(Ljava/lang/String;)Ljava/lang/String;
     .locals 6
     .parameter "networkDialStr"

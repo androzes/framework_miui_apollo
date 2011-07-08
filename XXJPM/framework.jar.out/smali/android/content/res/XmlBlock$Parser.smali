@@ -2029,7 +2029,7 @@
     .line 103
     new-instance v0, Lorg/xmlpull/v1/XmlPullParserException;
 
-    const-string v1, "setProperty() not supported"
+    const-string/jumbo v1, "setProperty() not supported"
 
     invoke-direct {v0, v1}, Lorg/xmlpull/v1/XmlPullParserException;-><init>(Ljava/lang/String;)V
 
