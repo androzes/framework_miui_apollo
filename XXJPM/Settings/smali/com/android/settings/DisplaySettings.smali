@@ -23,6 +23,8 @@
 
 .field private static final KEY_G_SENSOR:Ljava/lang/String; = "g_sensor"
 
+.field private static final KEY_LOCK_SCREEN:Ljava/lang/String; = "lock_screen"
+
 .field private static final KEY_POWER_SAVING_MODE:Ljava/lang/String; = "power_saving_mode"
 
 .field private static final KEY_SCREEN_TIMEOUT:Ljava/lang/String; = "screen_timeout"
@@ -42,6 +44,8 @@
 .field private mAnimations:Landroid/preference/ListPreference;
 
 .field private mContentResolver:Landroid/content/ContentResolver;
+
+.field private mLockScreen:Landroid/preference/ListPreference;
 
 .field private mOrientationObserver:Lcom/android/settings/DisplaySettings$OrientationObserver;
 
@@ -296,6 +300,63 @@
     const/4 v11, 0x0
 
     goto :goto_3
+.end method
+
+.method private getLockConfig()I
+    .locals 3
+
+    const-string v0, "DisplaySettings"
+
+    const-string v1, "getLockConfig()"
+
+    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    iget-object v0, p0, Lcom/android/settings/DisplaySettings;->mContentResolver:Landroid/content/ContentResolver;
+
+    const-string v1, "lockscreen_type_key"
+
+    const/4 v2, 0x0
+
+    invoke-static {v0, v1, v2}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method private setLockConfig(I)V
+    .locals 3
+    .parameter "lockscreenType"
+
+    const-string v0, "DisplaySettings"
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "setLockConfig()"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    iget-object v0, p0, Lcom/android/settings/DisplaySettings;->mContentResolver:Landroid/content/ContentResolver;
+
+    const-string v1, "lockscreen_type_key"
+
+    invoke-static {v0, v1, p1}, Landroid/provider/Settings$System;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
+
+    return-void
 .end method
 
 .method private updateAnimationsSummary(Ljava/lang/Object;)V
@@ -559,6 +620,26 @@
     :goto_3
     invoke-virtual {v6, v7}, Landroid/preference/CheckBoxPreference;->setChecked(Z)V
 
+    iget-object v6, p0, Lcom/android/settings/DisplaySettings;->mLockScreen:Landroid/preference/ListPreference;
+
+    invoke-direct {p0}, Lcom/android/settings/DisplaySettings;->getLockConfig()I
+
+    move-result v7
+
+    invoke-static {v7}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-virtual {v6, v7}, Landroid/preference/ListPreference;->setValue(Ljava/lang/String;)V
+
+    iget-object v6, p0, Lcom/android/settings/DisplaySettings;->mLockScreen:Landroid/preference/ListPreference;
+
+    invoke-virtual {v6}, Landroid/preference/ListPreference;->getValue()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-direct {p0, v6}, Lcom/android/settings/DisplaySettings;->updateUnlockScreenSummary(Ljava/lang/Object;)V
+
     .line 200
     return-void
 
@@ -583,6 +664,96 @@
     move-exception v6
 
     goto/16 :goto_0
+.end method
+
+.method private updateUnlockScreenSummary(Ljava/lang/Object;)V
+    .locals 6
+    .parameter "value"
+
+    invoke-virtual {p0}, Lcom/android/settings/DisplaySettings;->getResources()Landroid/content/res/Resources;
+
+    move-result-object v3
+
+    const v4, 0x7f05002f
+
+    invoke-virtual {v3, v4}, Landroid/content/res/Resources;->getTextArray(I)[Ljava/lang/CharSequence;
+
+    move-result-object v1
+
+    iget-object v3, p0, Lcom/android/settings/DisplaySettings;->mLockScreen:Landroid/preference/ListPreference;
+
+    invoke-virtual {v3}, Landroid/preference/ListPreference;->getEntryValues()[Ljava/lang/CharSequence;
+
+    move-result-object v2
+
+    const/4 v0, 0x0
+
+    :goto_0
+    array-length v3, v2
+
+    if-ge v0, v3, :cond_0
+
+    const-string v3, "foo"
+
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v5, "Comparing entry "
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    aget-object v5, v2, v0
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    const-string v5, " to current "
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    iget-object v5, p0, Lcom/android/settings/DisplaySettings;->mLockScreen:Landroid/preference/ListPreference;
+
+    invoke-virtual {v5}, Landroid/preference/ListPreference;->getValue()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    invoke-static {v3, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    aget-object v3, v2, v0
+
+    invoke-virtual {v3, p1}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_1
+
+    iget-object v3, p0, Lcom/android/settings/DisplaySettings;->mLockScreen:Landroid/preference/ListPreference;
+
+    aget-object v4, v1, v0
+
+    invoke-virtual {v3, v4}, Landroid/preference/ListPreference;->setSummary(Ljava/lang/CharSequence;)V
+
+    :cond_0
+    return-void
+
+    :cond_1
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
 .end method
 
 
@@ -745,6 +916,20 @@
 
     .line 115
     :cond_0
+    const-string v2, "lock_screen"
+
+    invoke-virtual {p0, v2}, Lcom/android/settings/DisplaySettings;->findPreference(Ljava/lang/CharSequence;)Landroid/preference/Preference;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/preference/ListPreference;
+
+    iput-object v2, p0, Lcom/android/settings/DisplaySettings;->mLockScreen:Landroid/preference/ListPreference;
+
+    iget-object v2, p0, Lcom/android/settings/DisplaySettings;->mLockScreen:Landroid/preference/ListPreference;
+
+    invoke-virtual {v2, p0}, Landroid/preference/ListPreference;->setOnPreferenceChangeListener(Landroid/preference/Preference$OnPreferenceChangeListener;)V
+
     return-void
 .end method
 
@@ -838,7 +1023,7 @@
 
     invoke-interface {v4, v5}, Landroid/view/IWindowManager;->setAnimationScales([F)V
     :try_end_1
-    .catch Landroid/os/RemoteException; {:try_start_1 .. :try_end_1} :catch_2
+    .catch Landroid/os/RemoteException; {:try_start_1 .. :try_end_1} :catch_3
     .catch Ljava/lang/NumberFormatException; {:try_start_1 .. :try_end_1} :catch_0
 
     .line 253
@@ -852,13 +1037,40 @@
     .end local v3           #value:I
     :cond_2
     :goto_1
-    const-string v4, "screen_timeout"
+    const-string v4, "lock_screen"
 
     invoke-virtual {v4, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v4
 
     if-eqz v4, :cond_3
+
+    move-object v0, p2
+
+    check-cast v0, Ljava/lang/String;
+
+    move-object v4, v0
+
+    invoke-static {v4}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v4
+
+    :try_start_3
+    invoke-direct {p0, v4}, Lcom/android/settings/DisplaySettings;->setLockConfig(I)V
+
+    invoke-direct {p0, p2}, Lcom/android/settings/DisplaySettings;->updateUnlockScreenSummary(Ljava/lang/Object;)V
+    :try_end_3
+    .catch Ljava/lang/NumberFormatException; {:try_start_3 .. :try_end_3} :catch_1
+
+    :cond_3
+    :goto_2
+    const-string v4, "screen_timeout"
+
+    invoke-virtual {v4, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_4
 
     .line 260
     check-cast p2, Ljava/lang/String;
@@ -870,7 +1082,7 @@
 
     .line 262
     .restart local v3       #value:I
-    :try_start_3
+    :try_start_4
     invoke-virtual {p0}, Lcom/android/settings/DisplaySettings;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v4
@@ -878,13 +1090,13 @@
     const-string v5, "screen_off_timeout"
 
     invoke-static {v4, v5, v3}, Landroid/provider/Settings$System;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
-    :try_end_3
-    .catch Ljava/lang/NumberFormatException; {:try_start_3 .. :try_end_3} :catch_1
+    :try_end_4
+    .catch Ljava/lang/NumberFormatException; {:try_start_4 .. :try_end_4} :catch_2
 
     .line 269
     .end local v3           #value:I
-    :cond_3
-    :goto_2
+    :cond_4
+    :goto_3
     return v7
 
     .line 254
@@ -904,11 +1116,26 @@
 
     goto :goto_1
 
+    :catch_1
+    move-exception v4
+
+    move-object v1, v4
+
+    .line 260
+    .restart local v1       #e:Ljava/lang/NumberFormatException;
+    const-string v4, "DisplaysSettings"
+
+    const-string v4, "could not persist screen unlock setting"
+
+    invoke-static {v8, v4, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+
+    goto :goto_2
+
     .line 264
     .end local v1           #e:Ljava/lang/NumberFormatException;
     .end local p2
     .restart local v3       #value:I
-    :catch_1
+    :catch_2
     move-exception v4
 
     move-object v1, v4
@@ -921,12 +1148,12 @@
 
     invoke-static {v8, v4, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    goto :goto_2
+    goto :goto_3
 
     .line 251
     .end local v1           #e:Ljava/lang/NumberFormatException;
     .restart local p2
-    :catch_2
+    :catch_3
     move-exception v4
 
     goto :goto_0

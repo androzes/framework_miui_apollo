@@ -24,6 +24,8 @@
 
 .field private static mContext:Landroid/content/Context;
 
+.field public static mReboot:I
+
 .field private static mReboot:Z
 
 .field private static mRebootReason:Ljava/lang/String;
@@ -1362,7 +1364,7 @@
 
     cmp-long v4, v15, v4
 
-    if-gtz v4, :cond_c
+    if-gtz v4, :cond_f
 
     .line 474
     const-string v4, "ShutdownThread"
@@ -1477,7 +1479,7 @@
 
     const/16 v4, 0xa
 
-    if-ne v3, v4, :cond_d
+    if-ne v3, v4, :cond_10
 
     :cond_5
     const/4 v3, 0x1
@@ -1506,7 +1508,7 @@
     .line 531
     :cond_6
     :goto_6
-    if-nez v28, :cond_e
+    if-nez v28, :cond_11
 
     const/4 v3, 0x1
 
@@ -1594,7 +1596,7 @@
 
     const/16 v4, 0xa
 
-    if-ne v3, v4, :cond_f
+    if-ne v3, v4, :cond_12
 
     const/4 v3, 0x1
 
@@ -1644,9 +1646,9 @@
     .line 578
     .end local v29           #repPhoneOff:Ljava/lang/String;
     :cond_9
-    if-eqz v11, :cond_10
+    if-eqz v11, :cond_13
 
-    if-eqz v14, :cond_10
+    if-eqz v14, :cond_13
 
     .line 580
     const-string v3, "ShutdownThread"
@@ -1702,7 +1704,7 @@
     monitor-enter v3
 
     .line 602
-    if-eqz v24, :cond_11
+    if-eqz v24, :cond_14
 
     .line 603
     :try_start_9
@@ -1735,7 +1737,7 @@
 
     cmp-long v4, v15, v4
 
-    if-gtz v4, :cond_12
+    if-gtz v4, :cond_15
 
     .line 613
     const-string v4, "ShutdownThread"
@@ -1779,7 +1781,7 @@
     .line 623
     sget-boolean v3, Lcom/android/internal/app/ShutdownThread;->mReboot:Z
 
-    if-eqz v3, :cond_13
+    if-eqz v3, :cond_16
 
     .line 624
     const-string v3, "ShutdownThread"
@@ -1822,10 +1824,45 @@
 
     invoke-static {v3, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
+    sget v1, Lcom/android/internal/app/ShutdownThread;->mReboot:I
+
+    const/4 v2, 0x1
+
+    if-eq v1, v2, :cond_c
+
+    const/4 v2, 0x2
+
+    if-eq v1, v2, :cond_d
+
+    const/4 v2, 0x3
+
+    if-eq v1, v2, :cond_e
+
     .line 643
     invoke-static {}, Landroid/os/Power;->shutdown()V
 
     .line 644
+    return-void
+
+    :cond_c
+    const-string v4, "now"
+
+    invoke-static {v4}, Landroid/os/Power;->reboot(Ljava/lang/String;)V
+
+    return-void
+
+    :cond_d
+    const-string v4, "recovery"
+
+    invoke-static {v4}, Landroid/os/Power;->reboot(Ljava/lang/String;)V
+
+    return-void
+
+    :cond_e
+    const-string v4, "download"
+
+    invoke-static {v4}, Landroid/os/Power;->reboot(Ljava/lang/String;)V
+
     return-void
 
     .line 404
@@ -1881,7 +1918,7 @@
     .restart local v6       #br:Landroid/content/BroadcastReceiver;
     .restart local v15       #delay:J
     .restart local v20       #endTime:J
-    :cond_c
+    :cond_f
     :try_start_d
     move-object/from16 v0, p0
 
@@ -1923,7 +1960,7 @@
     .restart local v13       #bluetooth:Landroid/bluetooth/IBluetooth;
     .restart local v24       #mount:Landroid/os/storage/IMountService;
     .restart local v28       #phone:Lcom/android/internal/telephony/ITelephony;
-    :cond_d
+    :cond_10
     const/4 v3, 0x0
 
     move v14, v3
@@ -1958,7 +1995,7 @@
 
     .line 531
     .end local v22           #ex:Landroid/os/RemoteException;
-    :cond_e
+    :cond_11
     const/4 v3, 0x0
 
     move v11, v3
@@ -1994,7 +2031,7 @@
     .line 553
     .end local v22           #ex:Landroid/os/RemoteException;
     .restart local v23       #i:I
-    :cond_f
+    :cond_12
     const/4 v3, 0x0
 
     move v14, v3
@@ -2026,7 +2063,7 @@
 
     .line 583
     .end local v22           #ex:Landroid/os/RemoteException;
-    :cond_10
+    :cond_13
     const-string v3, "imdg81"
 
     const-string v4, "before SystemClock.sleep(PHONE_STATE_POLL_SLEEP_MSEC)"
@@ -2053,7 +2090,7 @@
     .line 605
     .restart local v18       #endShutTime:J
     .restart local v25       #observer:Landroid/os/storage/IMountShutdownObserver;
-    :cond_11
+    :cond_14
     :try_start_f
     const-string v4, "ShutdownThread"
 
@@ -2102,7 +2139,7 @@
 
     .line 617
     .restart local v15       #delay:J
-    :cond_12
+    :cond_15
     :try_start_11
     move-object/from16 v0, p0
 
@@ -2152,7 +2189,7 @@
 
     .line 632
     .end local v17           #e:Ljava/lang/Exception;
-    :cond_13
+    :cond_16
     new-instance v30, Landroid/os/Vibrator;
 
     invoke-direct/range {v30 .. v30}, Landroid/os/Vibrator;-><init>()V

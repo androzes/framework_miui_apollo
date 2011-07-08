@@ -326,6 +326,9 @@
     <public type="array" name="app_install_location_values" id="0x7f05002b" />
     <public type="array" name="vibrate_entries" id="0x7f05002c" />
     <public type="array" name="vibrate_values" id="0x7f05002d" />
+    <public type="array" name="lock_screen_entries" id="0x7f05002e" />
+    <public type="array" name="lock_screen_summaries" id="0x7f05002f" />
+    <public type="array" name="lock_screen_values" id="0x7f050030" />
     <public type="bool" name="has_intrusive_led" id="0x7f060000" />
     <public type="bool" name="has_dock_settings" id="0x7f060001" />
     <public type="color" name="black" id="0x7f070000" />
@@ -1868,6 +1871,8 @@
     <public type="string" name="bluetooth_pointing_device_connected_title" id="0x7f0905fa" />
     <public type="string" name="bluetooth_pointing_device_connected_confirmation_text" id="0x7f0905fb" />
     <public type="string" name="bluetooth_hid_advanced_online_mode_summary" id="0x7f0905fc" />
+    <public type="string" name="lock_screen" id="0x7f0905fd" />
+    <public type="string" name="lock_screen_summary" id="0x7f0905fe" />
     <public type="style" name="info_label" id="0x7f0a0000" />
     <public type="style" name="info_value" id="0x7f0a0001" />
     <public type="style" name="info_small" id="0x7f0a0002" />

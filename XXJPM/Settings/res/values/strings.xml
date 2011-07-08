@@ -1558,4 +1558,6 @@ Wi-Fi will be deactivated"</string>
     <string name="bluetooth_pointing_device_connected_title">Bluetooth pointing device connected</string>
     <string name="bluetooth_pointing_device_connected_confirmation_text" formatted="false">%s paired. Tap OK to connect. Time remaining: %d seconds</string>
     <string name="bluetooth_hid_advanced_online_mode_summary">Pair and connect to HID device</string>
+    <string name="lock_screen">Unlock screen</string>
+    <string name="lock_screen_summary">Android unlock will be shown when the device is locked</string>
 </resources>

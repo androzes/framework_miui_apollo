@@ -271,4 +271,25 @@
         <item>silent</item>
         <item>notsilent</item>
     </string-array>
+    <string-array name="lock_screen_entries">
+        <item>Android unlock</item>
+        <item>Samsung unlock</item>
+        <item>Puzzle unlock</item>
+        <item>Epic unlock</item>
+        <item>Rotary unlock</item>
+    </string-array>
+    <string-array name="lock_screen_summaries">
+        <item>Android unlock will be shown when the device is locked</item>
+        <item>Samsung unlock will be shown when the device is locked</item>
+        <item>Puzzle unlock will be shown when the device is locked</item>
+        <item>Epic unlock will be shown when the device is locked</item>
+        <item>Rotary unlock will be shown when the device is locked</item>
+    </string-array>
+    <string-array name="lock_screen_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

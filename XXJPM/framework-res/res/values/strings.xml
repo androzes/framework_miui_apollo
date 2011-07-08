@@ -993,4 +993,12 @@ Buy a new USIM card, please."</string>
     <string name="zzz_global_action_data_mode_on_status">Data network mode activated</string>
     <string name="zzz_global_action_data_mode_off_status">Data network mode deactivated</string>
     <string name="mobileap_notification">Mobile AP activated</string>
+    <string name="zzz_puzzle_lock_help_text_3">Fit puzzle to unlock</string>
+    <string name="reboot_recovery">Recovery</string>
+    <string name="reboot_download">Download</string>
+    <string name="reboot">Reboot</string>
+    <string name="missed_call">Missed Call</string>
+    <string name="missed_text">Unread Message</string>
+    <string name="missed_calls">Missed Calls</string>
+    <string name="missed_texts">Unread Messages</string>
 </resources>

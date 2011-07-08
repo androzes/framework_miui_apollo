@@ -355,4 +355,28 @@
     <item type="id" name="webselect_dialog_listview">false</item>
     <item type="id" name="tw_cursorhandle_view">false</item>
     <item type="id" name="mode_normal">false</item>
+    <item type="id" name="zzz_sweepglass2">false</item>
+    <item type="id" name="zzz_sweepglasstext03">false</item>
+    <item type="id" name="zzz_puzzlelockpuzzlebg">false</item>
+    <item type="id" name="zzz_puzzlenotivvmlayout">false</item>
+    <item type="id" name="zzz_puzzlenotivvmtext">false</item>
+    <item type="id" name="zzz_puzzlenotiUnlocklayout">false</item>
+    <item type="id" name="unlock_missedevent_layout">false</item>
+    <item type="id" name="unlock_missedevent_icon">false</item>
+    <item type="id" name="unlock_missedevent_text">false</item>
+    <item type="id" name="unlock_missedevent_count">false</item>
+    <item type="id" name="unlock_missedevent_layout2">false</item>
+    <item type="id" name="unlock_missednoticall_layout">false</item>
+    <item type="id" name="unlock_missednoticall_text">false</item>
+    <item type="id" name="unlock_missednoticall_count">false</item>
+    <item type="id" name="unlock_missednotimail_layout">false</item>
+    <item type="id" name="unlock_missednotimail_text">false</item>
+    <item type="id" name="unlock_missednotimail_count">false</item>
+    <item type="id" name="unlock_lock_button">false</item>
+    <item type="id" name="unlock_arrow">false</item>
+    <item type="id" name="unlock_event_arrow">false</item>
+    <item type="id" name="missed_call_arrow">false</item>
+    <item type="id" name="event_arrow">false</item>
+    <item type="id" name="missed_txt_arrow">false</item>
+    <item type="id" name="rotary">false</item>
 </resources>

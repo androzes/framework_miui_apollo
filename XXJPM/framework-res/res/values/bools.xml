@@ -9,7 +9,7 @@
     <bool name="config_carDockEnablesAccelerometer">true</bool>
     <bool name="config_batterySdCardAccessibility">false</bool>
     <bool name="config_use_strict_phone_number_comparation">false</bool>
-    <bool name="config_disableMenuKeyInLockScreen">false</bool>
+    <bool name="config_disableMenuKeyInLockScreen">true</bool>
     <bool name="config_hspa_data_distinguishable">true</bool>
     <bool name="config_swipeDisambiguation">true</bool>
     <bool name="config_filterTouchEvents">false</bool>

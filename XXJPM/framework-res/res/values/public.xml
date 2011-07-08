@@ -1365,6 +1365,30 @@
     <public type="id" name="webselect_dialog_listview" id="0x01020285" />
     <public type="id" name="tw_cursorhandle_view" id="0x01020286" />
     <public type="id" name="mode_normal" id="0x01020287" />
+    <public type="id" name="zzz_sweepglass2" id="0x01020288" />
+    <public type="id" name="zzz_sweepglasstext03" id="0x01020289" />
+    <public type="id" name="zzz_puzzlelockpuzzlebg" id="0x0102028a" />
+    <public type="id" name="zzz_puzzlenotivvmlayout" id="0x0102028b" />
+    <public type="id" name="zzz_puzzlenotivvmtext" id="0x0102028c" />
+    <public type="id" name="zzz_puzzlenotiUnlocklayout" id="0x0102028d" />
+    <public type="id" name="unlock_missedevent_layout" id="0x0102028e" />
+    <public type="id" name="unlock_missedevent_icon" id="0x0102028f" />
+    <public type="id" name="unlock_missedevent_text" id="0x01020290" />
+    <public type="id" name="unlock_missedevent_count" id="0x01020291" />
+    <public type="id" name="unlock_missedevent_layout2" id="0x01020292" />
+    <public type="id" name="unlock_missednoticall_layout" id="0x01020293" />
+    <public type="id" name="unlock_missednoticall_text" id="0x01020294" />
+    <public type="id" name="unlock_missednoticall_count" id="0x01020295" />
+    <public type="id" name="unlock_missednotimail_layout" id="0x01020296" />
+    <public type="id" name="unlock_missednotimail_text" id="0x01020297" />
+    <public type="id" name="unlock_missednotimail_count" id="0x01020298" />
+    <public type="id" name="unlock_lock_button" id="0x01020299" />
+    <public type="id" name="unlock_arrow" id="0x0102029a" />
+    <public type="id" name="unlock_event_arrow" id="0x0102029b" />
+    <public type="id" name="missed_call_arrow" id="0x0102029c" />
+    <public type="id" name="event_arrow" id="0x0102029d" />
+    <public type="id" name="missed_txt_arrow" id="0x0102029e" />
+    <public type="id" name="rotary" id="0x0102029f" />
     <public type="style" name="Animation" id="0x01030000" />
     <public type="style" name="Animation.Activity" id="0x01030001" />
     <public type="style" name="Animation.Dialog" id="0x01030002" />
@@ -2505,6 +2529,14 @@
     <public type="string" name="zzz_global_action_data_mode_on_status" id="0x010403ce" />
     <public type="string" name="zzz_global_action_data_mode_off_status" id="0x010403cf" />
     <public type="string" name="mobileap_notification" id="0x010403d0" />
+    <public type="string" name="zzz_puzzle_lock_help_text_3" id="0x010403f8" />
+    <public type="string" name="reboot_recovery" id="0x010403f9" />
+    <public type="string" name="reboot_download" id="0x010403fa" />
+    <public type="string" name="reboot" id="0x010403fb" />
+    <public type="string" name="missed_call" id="0x010403fc" />
+    <public type="string" name="missed_text" id="0x010403fd" />
+    <public type="string" name="missed_calls" id="0x010403fe" />
+    <public type="string" name="missed_texts" id="0x010403ff" />
     <public type="string" name="zzzzz_tw_cursor_handle_popup_search" id="0x010403d1" />
     <public type="string" name="zzzzz_tw_cursor_handle_choosertitle_sharevia" id="0x010403d2" />
     <public type="string" name="permlab_restartPackages" id="0x010403d3" />
@@ -2708,6 +2740,7 @@
     <public type="drawable" name="btn_keyboard_key" id="0x010800e8" />
     <public type="drawable" name="btn_keyboard_key_fulltrans" id="0x010800e9" />
     <public type="drawable" name="btn_keyboard_key_trans" id="0x010800f6" />
+    <public type="drawable" name="APKTOOL_DUMMY_00fe" id="0x010800fe" />
     <public type="drawable" name="btn_search_dialog" id="0x0108011b" />
     <public type="drawable" name="btn_search_dialog_voice" id="0x0108011f" />
     <public type="drawable" name="btn_square_overlay" id="0x01080123" />
@@ -3049,6 +3082,23 @@
     <public type="drawable" name="zzzzz_tw_quickcontact_top_frame" id="0x010803eb" />
     <public type="drawable" name="zzzzzz_ic_lock_data_disable" id="0x010803ef" />
     <public type="drawable" name="zzzzzz_ic_lock_data_enable" id="0x010803f0" />
+    <public type="drawable" name="ic_lock_download" id="0x010803f7" />
+    <public type="drawable" name="ic_lock_reboot" id="0x010803f8" />
+    <public type="drawable" name="ic_lock_recovery" id="0x010803f9" />
+    <public type="drawable" name="zz_event_arrow" id="0x010803fa" />
+    <public type="drawable" name="zz_missed_call_arrow" id="0x010803fb" />
+    <public type="drawable" name="zz_missed_txt_arrow" id="0x010803fc" />
+    <public type="drawable" name="zz_unlock_arrow" id="0x010803fd" />
+    <public type="drawable" name="zz_unlock_arrow_msg" id="0x010803fe" />
+    <public type="drawable" name="zz_unlock_arrow_msg_es" id="0x010803ff" />
+    <public type="drawable" name="zz_unlock_icon_lock" id="0x01080400" />
+    <public type="drawable" name="zz_unlock_lockbg" id="0x01080401" />
+    <public type="drawable" name="zz_unlock_lockbg_press" id="0x01080402" />
+    <public type="drawable" name="zz_unlock_missed_event_bg" id="0x01080403" />
+    <public type="drawable" name="zz_unlock_missedcall_icon" id="0x01080404" />
+    <public type="drawable" name="zz_unlock_missedtxt_icon" id="0x01080405" />
+    <public type="drawable" name="zzz_unlock_puzzle_bg_land" id="0x01080406" />
+    <public type="drawable" name="zzz_unlock_puzzle_noti_icon_visual_voice_mail" id="0x01080407" />
     <public type="drawable" name="arrow_down_float" id="0x01080002" />
     <public type="drawable" name="arrow_up_float" id="0x01080003" />
     <public type="drawable" name="btn_star_big_off" id="0x0108000b" />
@@ -3668,7 +3718,6 @@
     <public type="drawable" name="zzzzz_tw_quickcontact_drop_shadow" id="0x010803e1" />
     <public type="drawable" name="zzzz_webselect_topbar_key_bg_press" id="0x010803ee" />
     <public type="drawable" name="bottombar_565" id="0x010800af" />
-    <public type="drawable" name="APKTOOL_DUMMY_00fe" id="0x010800fe" />
     <public type="layout" name="activity_list_item" id="0x01090000" />
     <public type="layout" name="expandable_list_content" id="0x01090001" />
     <public type="layout" name="preference_category" id="0x01090002" />
@@ -3805,6 +3854,14 @@
     <public type="layout" name="zzzzz_tw_cursor_handle_menu" id="0x01090086" />
     <public type="layout" name="zzzzz_tw_cursor_handle_menu_down_arrow" id="0x01090087" />
     <public type="layout" name="zzzzz_tw_cursor_handle_menu_up_arrow" id="0x01090088" />
+    <public type="layout" name="zzz_keyguard_screen_epic_clock" id="0x01090089" />
+    <public type="layout" name="zzz_keyguard_screen_epic_clock_land" id="0x0109008a" />
+    <public type="layout" name="zzz_keyguard_screen_epic_lock" id="0x0109008b" />
+    <public type="layout" name="zzz_keyguard_screen_epic_lock_land" id="0x0109008c" />
+    <public type="layout" name="zzz_keyguard_screen_fascinate_lock" id="0x0109008d" />
+    <public type="layout" name="zzz_keyguard_screen_fascinate_lock_land" id="0x0109008e" />
+    <public type="layout" name="zzz_keyguard_screen_rotary_unlock" id="0x0109008f" />
+    <public type="layout" name="zzz_keyguard_screen_rotary_unlock_land" id="0x01090090" />
     <public type="layout" name="icon_menu_layout" id="0x0109002a" />
     <public type="anim" name="fade_in" id="0x010a0000" />
     <public type="anim" name="fade_out" id="0x010a0001" />
