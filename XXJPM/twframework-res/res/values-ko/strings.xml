@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="status_bar_clear_all_button">Clear Notification</string>
+    <string name="status_bar_no_notifications_title">No notifications</string>
+    <string name="status_bar_ongoing_events_title">Ongoing</string>
+    <string name="status_bar_latest_events_title">Notifications</string>
+    <string name="indicator_wifi">무선랜</string>
+    <string name="indicator_bt">블루투스</string>
+    <string name="indicator_vibration">진동</string>
+    <string name="indicator_sound">사운드</string>
+    <string name="quickpanel_mute">소리 끄기</string>
+    <string name="quickpanel_speaker">스피커</string>
+    <string name="quickpanel_end">종료</string>
+    <string name="ticker_voicerecord">Ticker VR test</string>
+    <string name="ticker_call">Ticker CALL test</string>
+    <string name="ticker_radio">Ticker RADIO test</string>
+    <string name="ticker_music">Ticker MUSIC test</string>
+    <string name="quickpanel_unhold">중단해제</string>
+    <string name="no_missed_event">You have no missed events.</string>
+    <string name="phone_format" formatted="false">You have missed call from %s at %s.</string>
+    <string name="mms_format" formatted="false">You have new message from %s at %s.</string>
+    <string name="schedule_format">You have missed %s schedule.</string>
+    <string name="multi_format" formatted="false">%d missed call, %d new message, %d missed event.</string>
+    <string name="quickpanel_save">저장</string>
+    <string name="quickpanel_rec">녹음</string>
+    <string name="quickpanel_pause">일시 정지</string>
+    <string name="quickpanel_paused">일시 정지되었습니다</string>
+    <string name="quickpanel_standby">대기</string>
+    <string name="indicator_orientation">"자동
+회전"</string>
+    <string name="indicator_data">데이터</string>
+</resources>
