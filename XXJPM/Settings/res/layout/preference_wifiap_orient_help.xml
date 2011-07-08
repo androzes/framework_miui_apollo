@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/wifiap_help_orient_layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:isScrollContainer="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/mobileap_instruction_inactivate_oreint_title" android:paddingLeft="4.0px" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="19.0px" style="?android:attr/listSeparatorTextViewStyle" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/wifiap_help_orient_layout_second" android:layout_width="fill_parent" android:layout_height="fill_parent" android:isScrollContainer="false"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="@android:color/white" android:id="@android:attr/name" android:paddingLeft="14.0px" android:paddingTop="9.0px" android:scrollbars="none" android:layout_width="227.0px" android:layout_height="fill_parent" android:text="@string/mobileap_instruction_inactivate" />
+        <ImageView android:id="@id/mobileap_help_orient_image" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/mobileap_landscape_bg" android:scaleType="matrix" />
+    </LinearLayout>
+</LinearLayout>
