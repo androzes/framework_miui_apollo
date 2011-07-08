@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="emailAddressTypes">
+        <item>Дом</item>
+        <item>Служебен</item>
+        <item>Друго</item>
+        <item>По избор</item>
+    </string-array>
+    <string-array name="imProtocols">
+        <item>AIM</item>
+        <item>Windows Live</item>
+        <item>Yahoo!</item>
+        <item>Skype</item>
+        <item>QQ</item>
+        <item>Google Talk</item>
+        <item>ICQ</item>
+        <item>Jabber</item>
+    </string-array>
+    <string-array name="organizationTypes">
+        <item>Служебен</item>
+        <item>Друго</item>
+        <item>По избор</item>
+    </string-array>
+    <string-array name="phoneTypes">
+        <item>Дом</item>
+        <item>Мобилен</item>
+        <item>Служебен</item>
+        <item>Служебен факс</item>
+        <item>Домашен факс</item>
+        <item>Пейджър</item>
+        <item>Друго</item>
+        <item>По избор</item>
+    </string-array>
+    <string-array name="postalAddressTypes">
+        <item>Дом</item>
+        <item>Служебен</item>
+        <item>Друго</item>
+        <item>По избор</item>
+    </string-array>
+    <string-array name="zzz_UnlockClock_strArrWeek">
+        <item>ERR</item>
+        <item>Нед</item>
+        <item>Пон</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чтв</item>
+        <item>Пет</item>
+        <item>Съб</item>
+    </string-array>
+    <string-array name="zzz_UnlockClock_strArrMonth">
+        <item>ERR</item>
+        <item>Ян</item>
+        <item>Фев.</item>
+        <item>Март</item>
+        <item>Апр.</item>
+        <item>Май</item>
+        <item>Юни</item>
+        <item>Юли</item>
+        <item>Авг.</item>
+        <item>Сеп.</item>
+        <item>Окт.</item>
+        <item>Ное</item>
+        <item>Дек.</item>
+    </string-array>
+    <string-array name="zzz_UnlockClock_strArrAMPM">
+        <item>ERR</item>
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+    <string-array name="imAddressTypes">
+        <item>Дом</item>
+        <item>Служебен</item>
+        <item>Друго</item>
+        <item>По избор</item>
+    </string-array>
+    <array name="carrier_properties" />
+</resources>

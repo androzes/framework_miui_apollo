@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="status_bar_clear_all_button">Clear Notification</string>
+    <string name="status_bar_no_notifications_title">No notifications</string>
+    <string name="status_bar_ongoing_events_title">Ongoing</string>
+    <string name="status_bar_latest_events_title">Notifications</string>
+    <string name="indicator_wifi">Wi-Fi</string>
+    <string name="indicator_bt">Bluetooth</string>
+    <string name="indicator_vibration">Vibrasjon</string>
+    <string name="indicator_sound">Lyd</string>
+    <string name="quickpanel_mute">Demp</string>
+    <string name="quickpanel_speaker">Høyt.</string>
+    <string name="quickpanel_end">Avslutt</string>
+    <string name="ticker_voicerecord">Ticker VR test</string>
+    <string name="ticker_call">Ticker CALL test</string>
+    <string name="ticker_radio">Ticker RADIO test</string>
+    <string name="ticker_music">Ticker MUSIC test</string>
+    <string name="quickpanel_unhold">Opph vent</string>
+    <string name="no_missed_event">You have no missed events.</string>
+    <string name="phone_format" formatted="false">You have missed call from %s at %s.</string>
+    <string name="mms_format" formatted="false">You have new message from %s at %s.</string>
+    <string name="schedule_format">You have missed %s schedule.</string>
+    <string name="multi_format" formatted="false">%d missed call, %d new message, %d missed event.</string>
+    <string name="quickpanel_save">Lagre</string>
+    <string name="quickpanel_rec">REC</string>
+    <string name="quickpanel_pause">Pause</string>
+    <string name="quickpanel_paused">Pausemodus</string>
+    <string name="quickpanel_standby">Standby</string>
+    <string name="indicator_orientation">Autorotasjon</string>
+    <string name="indicator_data">Data</string>
+</resources>

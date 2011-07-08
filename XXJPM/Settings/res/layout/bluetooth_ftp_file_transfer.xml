@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textAppearance="?android:textAppearanceMedium" android:id="@id/line1_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:text="@string/bluetooth_ftp_server_sdcard_full1" />
+        <TextView android:textAppearance="?android:textAppearanceMedium" android:id="@id/line2_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:text="@string/bluetooth_ftp_server_sdcard_full2" />
+        <TextView android:textAppearance="?android:textAppearanceMedium" android:id="@id/line3_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:text="@string/bluetooth_ftp_server_sdcard_full3" />
+    </LinearLayout>
+</ScrollView>

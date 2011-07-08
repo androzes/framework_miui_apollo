@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.sec.android.touchwiz.widget.TwProgressBar android:gravity="center_vertical" android:id="@id/tw_progress" android:paddingBottom="1.3299866dip" android:layout_width="fill_parent" android:layout_height="12.0dip" android:layout_marginLeft="15.0dip" android:layout_marginRight="15.0dip" android:layout_weight="1.0" />
+    <TextView android:textColor="@color/tw_color001" android:id="@id/tw_progress_percent" android:paddingBottom="12.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginRight="15.0dip" android:layout_below="@id/tw_progress" android:layout_alignParentLeft="true" />
+    <TextView android:textColor="@color/tw_color001" android:id="@id/tw_progress_number" android:paddingBottom="12.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="55.0dip" android:layout_marginRight="15.0dip" android:layout_below="@id/tw_progress" android:layout_alignParentRight="true" />
+</RelativeLayout>

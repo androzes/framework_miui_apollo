@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/zzz_background01" android:layout_width="fill_parent" android:layout_height="fill_parent"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView android:textAppearance="?textAppearanceMedium" android:gravity="bottom|right|center" android:id="@id/carrier" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginRight="8.0dip" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+        <com.android.internal.widget.SmartUnlockCanvas android:id="@id/zzz_smart_unlock_canvas" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="9.339996dip" android:layout_marginTop="88.0dip" android:layout_marginRight="9.339996dip" android:layout_marginBottom="81.32999dip" android:layout_alignParentBottom="true" />
+        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/zzz_smart_unlock_help" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="85.32999dip" android:layout_alignParentBottom="true">
+            <TextView android:textSize="26.669983dip" android:typeface="sans" android:textColor="#ffffffff" android:id="@id/zzz_smart_draw_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="6.669983dip" android:shadowColor="#ff000000" android:shadowDx="3.0" android:shadowDy="3.0" />
+            <ImageView android:id="@id/zzz_smart_unlock_icon" android:background="@drawable/zzz_unlock_smarticon" android:layout_width="37.339996dip" android:layout_height="37.339996dip" />
+            <TextView android:textSize="26.669983dip" android:typeface="sans" android:textColor="#ffffffff" android:id="@id/zzz_smart_tounlock_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="6.669983dip" android:shadowColor="#ff000000" android:shadowDx="3.0" android:shadowDy="3.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/zzz_smart_unlock_sorry" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="85.32999dip" android:layout_alignParentBottom="true">
+            <TextView android:textSize="26.669983dip" android:typeface="sans" android:textColor="#ffffffff" android:id="@id/zzz_smart_sorry_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:shadowColor="#ff000000" android:shadowDx="3.0" android:shadowDy="3.0" />
+        </LinearLayout>
+        <LinearLayout android:id="@id/zzz_sweepglassfull01" android:background="@drawable/zzz_unlock_blackbg" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </RelativeLayout>
+</FrameLayout>

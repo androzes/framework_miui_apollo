@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="emailAddressTypes">
+        <item>Pessoal</item>
+        <item>Empresa</item>
+        <item>Outro</item>
+        <item>Personalizar</item>
+    </string-array>
+    <string-array name="imProtocols">
+        <item>AIM</item>
+        <item>Windows Live</item>
+        <item>Yahoo!</item>
+        <item>Skype</item>
+        <item>QQ</item>
+        <item>Google Talk</item>
+        <item>ICQ</item>
+        <item>Jabber</item>
+    </string-array>
+    <string-array name="organizationTypes">
+        <item>Empresa</item>
+        <item>Outro</item>
+        <item>Personalizar</item>
+    </string-array>
+    <string-array name="phoneTypes">
+        <item>Pessoal</item>
+        <item>Telemóvel</item>
+        <item>Empresa</item>
+        <item>Fax do trabalho</item>
+        <item>Fax de casa</item>
+        <item>Pager</item>
+        <item>Outro</item>
+        <item>Personalizar</item>
+    </string-array>
+    <string-array name="postalAddressTypes">
+        <item>Pessoal</item>
+        <item>Empresa</item>
+        <item>Outro</item>
+        <item>Personalizar</item>
+    </string-array>
+    <string-array name="zzz_UnlockClock_strArrWeek">
+        <item>ERR</item>
+        <item>Dom.</item>
+        <item>Seg.</item>
+        <item>Ter.</item>
+        <item>Qua.</item>
+        <item>Qui.</item>
+        <item>Sex.</item>
+        <item>Sáb.</item>
+    </string-array>
+    <string-array name="zzz_UnlockClock_strArrMonth">
+        <item>ERR</item>
+        <item>Jan.</item>
+        <item>Fev.</item>
+        <item>Mar.</item>
+        <item>Abr.</item>
+        <item>Mai.</item>
+        <item>Jun.</item>
+        <item>Jul.</item>
+        <item>Ago.</item>
+        <item>Set.</item>
+        <item>Out.</item>
+        <item>Nov.</item>
+        <item>Dez.</item>
+    </string-array>
+    <string-array name="zzz_UnlockClock_strArrAMPM">
+        <item>ERR</item>
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+    <string-array name="imAddressTypes">
+        <item>Pessoal</item>
+        <item>Empresa</item>
+        <item>Outro</item>
+        <item>Personalizar</item>
+    </string-array>
+    <array name="carrier_properties" />
+</resources>
